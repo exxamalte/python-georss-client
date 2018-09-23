@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns:georss="http://www.georss.org/georss"
+      xmlns="http://www.w3.org/2005/Atom">
+    <author>
+        <name>Queensland Fire and Emergency Services</name>
+    </author>
+    <generator uri="http://www.safe.com/products/fme/index.php"
+               version="2016.7.19.16177">FME(R) 2016.0.1.1
+    </generator>
+    <id>urn:uuid:f025c065-c6f1-4d61-aa66-0383b86ef007</id>
+    <link href="https://ruralfire.qld.gov.au"/>
+    <subtitle>QFES Bushfire Alerts updated regularly</subtitle>
+    <title>QFES Bushfire Alert Feed</title>
+    <updated>2018-09-23T17:37:02</updated>
+    <entry>
+        <category term="Notification"/>
+        <content>Alert Level: Notification
+            Reported (UTC): 2018-09-08T05:01:50
+            Current Status: Patrolled
+            Details: &lt;div&gt;Eurimbula – vegetation fire as at 5.10pm Sun 17
+            Sept&lt;/div&gt;&lt;div&gt;&lt;br /&gt;&lt;/div&gt;&lt;div&gt;Queensland
+            Fire and Emergency Services (QFES) crews are currently on scene at
+            a vegetation fire burning in the Eurimbula National Park,
+            Eurimbula. This fire is posing no threat to property at this time.
+            Firefighters are currently working to contain the blaze. Residents
+            in Eurimbula, as well as Baffle Creek, Deepwater and Taunton, may
+            be affected by a smoke haze throughout the evening. Residents are
+            asked to close windows and doors and if suffering from a
+            respiratory condition, keep medications close by. Motorists should
+            drive with caution and to conditions. If residents are concerned
+            their property is under threat they are advised to call Triple Zero
+            (000) immediately.&lt;/div&gt;&lt;div&gt;&lt;br /&gt;&lt;/div&gt;
+        </content>
+        <id>QF2-18-186203</id>
+        <published>2018-09-08T05:01:50</published>
+        <title>24°10'19.56"S &amp; 151°47'30.12"E, Eurimbula</title>
+        <updated>2018-09-21T04:25:41</updated>
+        <georss:point>-24.1721 151.7917</georss:point>
+    </entry>
+    <entry>
+        <category term="Notification"/>
+        <content>Alert Level: Notification
+            Reported (UTC): 2018-09-16T02:49:22
+            Current Status: Patrolled
+            Details: &lt;div&gt;&lt;p style="margin-top: 0px; margin-bottom:
+            6px; font-family: Helvetica, Arial, sans-serif; color: rgb(29, 33,
+            41); background-color: rgb(255, 255, 255);"&gt;WALLAMAN (north of
+            Mount Fox) – bushfire as at 9.38am Wed 19 Sept.&lt;/p&gt;&lt;p
+            style="margin-top: 6px; margin-bottom: 0px; display: inline;
+            font-family: Helvetica, Arial, sans-serif; color: rgb(29, 33, 41);
+            background-color: rgb(255, 255, 255);"&gt;Queensland Fire and
+            Emergency Services (QFES) crews are continuing to monitor and
+            patrol a bushfire burning near Oak Hill Road and Wallaman Falls
+            Road, Wallaman. This fire is expected to burn for several days but
+            is not posing any threat to property at this time. Nearby residents
+            may be affected by a smoke haze in the coming days. Residents are
+            asked to close windows and doors and if suffering from a
+            respiratory condition, keep medications close by. Smoke is
+            affecting the Bruce Highway between Bluewater and Ingham so
+            motorists should drive with caution and to conditions. If residents
+            are concerned their property is under threat they are advised to
+            call Triple Zero (000) immediately.&lt;/p&gt;&lt;br /&gt;&lt;/div&gt;&lt;div&gt;&lt;br
+            /&gt;&lt;/div&gt;
+        </content>
+        <id>QF1-18-189861</id>
+        <published>2018-09-16T02:49:22</published>
+        <title>Wallaman Falls Rd, Wallaman</title>
+        <updated>2018-09-20T04:40:25</updated>
+        <georss:point>-18.59919 145.802539</georss:point>
+    </entry>
+    <entry>
+        <category term="Notification"/>
+        <content>Alert Level: Notification
+            Reported (UTC): 2018-09-17T02:56:47
+            Current Status: Going
+            Details: &lt;p style="margin-top: 0px; margin-bottom: 6px;"&gt;&lt;font
+            color="#1d2129" face="Helvetica, Arial, sans-serif"&gt;WATSONVILLE
+            AND MOUNT NOLAN (formerly Watsonville and Herberton) – bushfires as
+            at 10.30am Sun 23 Sept&lt;/font&gt;&lt;/p&gt;&lt;p
+            style="margin-top: 0px; margin-bottom: 6px;"&gt;&lt;font
+            color="#1d2129" face="Helvetica, Arial, sans-serif"&gt;&lt;br /&gt;&lt;/font&gt;&lt;/p&gt;&lt;p
+            style="margin-top: 0px; margin-bottom: 6px;"&gt;&lt;font
+            color="#1d2129" face="Helvetica, Arial, sans-serif"&gt;Queensland
+            Fire and Emergency Services (QFES) crews are on scene at two
+            bushfires burning in the vicinity of the Watsonville area. One fire
+            is located near Bakerville, west of Watsonville and is burning
+            safely within containment lines. There is no threat to property at
+            this time. Crews will remain on scene today monitoring the area.
+            Crews are also on scene at a second fire burning in inaccessible
+            country near Silver Valley Road at Mount Nolan. Crews are
+            conducting backburning operations in the vicinity of Silver Valley
+            Road. There is no threat to property at this time. Smoke may affect
+            the area. Residents should close windows and doors and keep their
+            medication close by if they suffer from a respiratory condition.
+            People should call Triple Zero (000) immediately if they believe
+            their property is under threat.&lt;/font&gt;&lt;/p&gt;
+        </content>
+        <id>QF7-18-190453</id>
+        <published>2018-09-17T02:56:47</published>
+        <title>BISCHOFF MILL RD &amp; JAMES ST, Watsonville</title>
+        <updated>2018-09-23T07:31:43</updated>
+        <georss:point>-17.377197 145.312653</georss:point>
+    </entry>
+    <entry>
+        <category term="Notification"/>
+        <content>Alert Level: Notification
+            Reported (UTC): 2018-09-17T04:12:55
+            Current Status: Patrolled
+            Details: There is a vegetation fire at this location. Smoke may
+            affect residents and motorists in the area. Residents should close
+            their doors and windows and keep medication close by if suffering
+            from a respiratory condition. Motorists should use caution and
+            drive to conditions. If you believe your property is under threat,
+            you should call Triple Zero (000) immediately.
+        </content>
+        <id>QF2-18-190496</id>
+        <published>2018-09-17T04:12:55</published>
+        <title>3204 INVERNESS RD, Dumgree</title>
+        <updated>2018-09-20T01:22:04</updated>
+        <georss:point>-24.15127 150.677084</georss:point>
+    </entry>
+    <entry>
+        <category term="Notification"/>
+        <content>Alert Level: Notification
+            Reported (UTC): 2018-09-18T23:28:59
+            Current Status: Patrolled
+            Details: &lt;p style="margin-top: 0px; margin-bottom: 6px;"&gt;&lt;font
+            color="#1d2129" face="Helvetica, Arial, sans-serif"&gt;Woolooga/Sexton
+            (formerly Woolooga) bushfire as at 5.15pm Sat 22 Sept &lt;/font&gt;&lt;/p&gt;&lt;p
+            style="margin-top: 0px; margin-bottom: 6px;"&gt;&lt;font
+            color="#1d2129" face="Helvetica, Arial, sans-serif"&gt;The previous
+            bushfire warning has changed.&lt;/font&gt;&lt;/p&gt;&lt;p
+            style="margin-top: 0px; margin-bottom: 6px;"&gt;&lt;font
+            color="#1d2129" face="Helvetica, Arial, sans-serif"&gt;Queensland
+            Fire and Emergency Services (QFES) crews will continue to monitor a
+            bushfire burning near Miva Road, Bauple Woolooga Road, Edward Road,
+            Sexton Road, Lower Wide Bay Creek Road, Woolooga Road, Ormes Road,
+            Edwards Road, Smith Road, Pie Creek Road, Oakview Road and Cogzell
+            Road in the Woolooga and Sexton areas. This fire is burning safely
+            within containment lines and is posing no threat to property at
+            this time. Crews will remain in the area over the coming days to
+            monitor the fire.  Smoke may affect the area. Residents should
+            close their windows and doors and keep their medications close by
+            if they suffer from a respiratory condition. People should call
+            Triple Zero (000) immediately if they believe their property is
+            under threat.&lt;/font&gt;&lt;/p&gt;&lt;div&gt;&lt;br /&gt;&lt;/div&gt;
+        </content>
+        <id>QF4-18-191218</id>
+        <published>2018-09-18T23:28:59</published>
+        <title>Brooweena Woolooga Rd &amp; Bauple Woolooga Rd, Wooloo</title>
+        <updated>2018-09-23T05:41:45</updated>
+        <georss:point>-26.005324 152.378531</georss:point>
+    </entry>
+    <entry>
+        <category term="Notification"/>
+        <content>Alert Level: Notification
+            Reported (UTC): 2018-09-19T03:27:39
+            Current Status: Patrolled
+            Details: &lt;p style="margin-top: 0px; margin-bottom: 6px;"&gt;&lt;p
+            style="margin-top:0cm;margin-right:0cm;margin-bottom:4.5pt;margin-left:0cm;
+            background:white"&gt;&lt;span style="font-size:10.5pt;font-family:&amp;quot;Helvetica&amp;quot;,sans-serif;
+            color:#1D2129"&gt;COLOSSEUM - bushfire as at 5.20pm Fri 21 Sept&lt;o:p&gt;&lt;/o:p&gt;&lt;/span&gt;&lt;/p&gt;
+
+            &lt;p
+            style="margin-top:4.5pt;margin-right:0cm;margin-bottom:0cm;margin-left:0cm;
+            margin-bottom:.0001pt;background:white;font-variant-ligatures:
+            normal;
+            font-variant-caps: normal;orphans: 2;text-align:start;widows:
+            2;-webkit-text-stroke-width: 0px;
+            text-decoration-style: initial;text-decoration-color:
+            initial;word-spacing:
+            0px"&gt;&lt;span style="font-size:10.5pt;font-family:&amp;quot;Helvetica&amp;quot;,sans-serif;
+            color:#1D2129"&gt;Multiple Queensland Fire and Emergency Services
+            (QFES) crews are
+            on scene at a bushfire burning near Lowmead Road and the Bruce
+            Highway,
+            Colosseum. This fire broke out on Wednesday and is posing no threat
+            to property
+            at this time. Crews are monitoring and patrolling the blaze which
+            is currently
+            burning within containment lines. This fire is producing a large
+            amount of
+            smoke which may affect Colosseum, Miram Vale, Benaraby, Bororen and
+            Tannum
+            Sands. If affected, residents are asked to close windows and doors.
+            Those
+            suffering from a respiratory condition should keep their
+            medications close by.
+            Motorists are advised to drive with caution and to conditions. If
+            residents are
+            concerned their property is under threat they are advised to call
+            Triple Zero
+            (000) immediately.&lt;o:p&gt;&lt;/o:p&gt;&lt;/span&gt;&lt;/p&gt;&lt;br
+            /&gt;&lt;/p&gt;
+        </content>
+        <id>QF2-18-191303</id>
+        <published>2018-09-19T03:27:39</published>
+        <title>BRUCE HWY &amp; PROPOSED RD, Colosseum</title>
+        <updated>2018-09-23T07:06:14</updated>
+        <georss:point>-24.457903 151.588798</georss:point>
+    </entry>
+    <entry>
+        <category term="Notification"/>
+        <content>Alert Level: Notification
+            Reported (UTC): 2018-09-20T01:53:50
+            Current Status: Going
+            Details: &lt;div&gt;MOUNT BRITTON (south-west of Mackay) – bushfire
+            as at 3.15pm Sun 23 Sept&lt;/div&gt;&lt;div&gt;&lt;br /&gt;&lt;/div&gt;&lt;div&gt;The
+            previous bushfire warning has changed.&lt;/div&gt;&lt;div&gt;&lt;br
+            /&gt;&lt;/div&gt;&lt;div&gt;Queensland Parks and Wildlife Service
+            (QPWS) crews remain on scene at a bushfire burning in Homevale
+            National Park. Queensland Fire and Emergency Services (QFES) crews
+            are no longer required on scene at this incident. There is no
+            threat to property, but this fire may burn for some time and
+            generate smoke in the area. Residents should close windows and
+            doors and keep their medication close by if they suffer from a
+            respiratory condition. People should call Triple Zero (000)
+            immediately if they believe their property is under threat.&lt;/div&gt;
+        </content>
+        <id>QF2-18-191668</id>
+        <published>2018-09-20T01:53:50</published>
+        <title>#212345S/1483231E, Mount Britton</title>
+        <updated>2018-09-23T00:23:22</updated>
+        <georss:point>-21.396066 148.542074</georss:point>
+    </entry>
+    <entry>
+        <category term="Notification"/>
+        <content>Alert Level: Notification
+            Reported (UTC): 2018-09-20T04:32:02
+            Current Status: Patrolled
+            Details: &lt;div&gt;BOOIE (near Kingaroy) - bushfire as at 4.10pm
+            Sat 22 Sept&lt;/div&gt;&lt;div&gt;&lt;br /&gt;&lt;/div&gt;&lt;div&gt;Queensland
+            Fire and Emergency Services (QFES) crews are on scene at a bushfire
+            burning near Pates Road, Cooper Road and Coolabunia Malar Road,
+            Booie. This fire is burning safely within containment lines and is
+            posing no threat to property at this time. Crews will continue to
+            monitor this fire over the coming days. Smoke may affect the area.
+            Residents should close windows and doors and keep their medication
+            close by if they suffer from a respiratory condition. People should
+            call Triple Zero (000) immediately if they believe their property
+            is under threat.&lt;/div&gt;
+        </content>
+        <id>QF4-18-191765</id>
+        <published>2018-09-20T04:32:02</published>
+        <title>SMITH RD &amp; PATES RD, Booie</title>
+        <updated>2018-09-23T05:45:27</updated>
+        <georss:point>-26.613402 151.963581</georss:point>
+    </entry>
+    <entry>
+        <category term="Notification"/>
+        <content>Alert Level: Notification
+            Reported (UTC): 2018-09-21T02:45:30
+            Current Status: Patrolled
+            Details: There is a vegetation fire at this location. Smoke may
+            affect residents and motorists in the area. Residents should close
+            their doors and windows and keep medication close by if suffering
+            from a respiratory condition. Motorists should use caution and
+            drive to conditions. If you believe your property is under threat,
+            you should call Triple Zero (000) immediately.
+        </content>
+        <id>QF2-18-192294</id>
+        <published>2018-09-21T02:45:30</published>
+        <title>130 Olletts Rd, Eton</title>
+        <updated>2018-09-23T02:50:23</updated>
+        <georss:point>-21.273769 148.929633</georss:point>
+    </entry>
+    <entry>
+        <category term="Notification"/>
+        <content>Alert Level: Notification
+            Reported (UTC): 2018-09-21T03:15:54
+            Current Status: Going
+            Details: There is a vegetation fire at this location. Smoke may
+            affect residents and motorists in the area. Residents should close
+            their doors and windows and keep medication close by if suffering
+            from a respiratory condition. Motorists should use caution and
+            drive to conditions. If you believe your property is under threat,
+            you should call Triple Zero (000) immediately.
+        </content>
+        <id>QF7-18-192301</id>
+        <published>2018-09-21T03:15:54</published>
+        <title>4684-6460 MULLIGAN HWY, Lakeland</title>
+        <updated>2018-09-23T05:47:52</updated>
+        <georss:point>-15.720012 145.026457</georss:point>
+    </entry>
+    <entry>
+        <category term="Notification"/>
+        <content>Alert Level: Notification
+            Reported (UTC): 2018-09-23T01:44:56
+            Current Status: Going
+            Details: &lt;p style="margin-top: 0px; margin-bottom: 6px;"&gt;&lt;font
+            color="#1d2129" face="Helvetica, Arial, sans-serif"&gt;&lt;span
+            style="font-size: 14px;"&gt;MARBLE CREEK – bushfire as at 4.05pm
+            Sun 23 Sept&lt;/span&gt;&lt;/font&gt;&lt;/p&gt;&lt;p
+            style="margin-top: 0px; margin-bottom: 6px;"&gt;&lt;font
+            color="#1d2129" face="Helvetica, Arial, sans-serif"&gt;&lt;span
+            style="font-size: 14px;"&gt;&lt;br /&gt;&lt;/span&gt;&lt;/font&gt;&lt;/p&gt;&lt;p
+            style="margin-top: 0px; margin-bottom: 6px;"&gt;&lt;font
+            color="#1d2129" face="Helvetica, Arial, sans-serif"&gt;&lt;span
+            style="font-size: 14px;"&gt;Queensland Fire and Emergency Services
+            (QFES) crews are on scene at a bushfire burning in inaccessible
+            country near Marble Creek Road and Gladstone Monto Road at Marble
+            Creek. This fire broke out about 11.45am today. Crews are working
+            to contain the blaze. The fire may burn for some time and smoke may
+            affect the area, so residents should close windows and doors and
+            keep their medication close by if they suffer from a respiratory
+            condition. People should call Triple Zero (000) immediately if they
+            believe their property is under threat.&lt;/span&gt;&lt;/font&gt;&lt;/p&gt;
+        </content>
+        <id>QF2-18-193121</id>
+        <published>2018-09-23T01:44:56</published>
+        <title>Marble Creek Rd, Boynedale</title>
+        <updated>2018-09-23T07:23:06</updated>
+        <georss:point>-24.306255 151.233967</georss:point>
+    </entry>
+    <entry>
+        <category term="Notification"/>
+        <content>Alert Level: Notification
+            Reported (UTC): 2018-09-23T02:21:56
+            Current Status: Contained
+            Details: &lt;div&gt;ROSEDALE – bushfire as at 4.15pm Sun 23 Sept&lt;/div&gt;&lt;div&gt;&lt;br
+            /&gt;&lt;/div&gt;&lt;div&gt;Queensland Fire and Emergency Services
+            (QFES) crews are on scene at a bushfire burning near Barnetts Road
+            at Rosedale. This fire broke out about 12.30 today. Crews are
+            working to contain the blaze. There is no threat to property at
+            this time. Smoke may affect the area, so residents should close
+            windows and doors and keep their medication close by if they suffer
+            from a respiratory condition. People should call Triple Zero (000)
+            immediately if they believe their property is under threat&lt;/div&gt;
+        </content>
+        <id>QF2-18-193137</id>
+        <published>2018-09-23T02:21:56</published>
+        <title>Barnetts Rd, Rosedale</title>
+        <updated>2018-09-23T07:08:24</updated>
+        <georss:point>-24.562108 151.92468</georss:point>
+    </entry>
+    <entry>
+        <category term="Notification"/>
+        <content>Alert Level: Notification
+            Reported (UTC): 2018-09-23T02:35:58
+            Current Status: Contained
+            Details: &lt;div&gt;GRACEMERE – grass fire as at 2.50pm Sun 23 Sept&lt;/div&gt;&lt;div&gt;&lt;br
+            /&gt;&lt;/div&gt;&lt;div&gt;Queensland Fire and Emergency Services
+            (QFES) crews are on scene at a grass fire burning near Beck Street
+            and the Capricorn Highway at Gracemere. The fire broke out about
+            12.30pm and is posing no direct threat to property at this time.
+            The fire is contained, but smoke is affecting the area. Residents
+            should close windows and doors and keep their medication close by
+            if they suffer from a respiratory condition. Traffic restrictions
+            are in place on the Capricorn Highway between Gracemere township
+            and the Gracemere saleyards. Motorists travelling in the area
+            should drive with caution and to conditions and be mindful of fire
+            and emergency service personnel working in the area. People should
+            call Triple Zero (000) immediately if they believe their property
+            is under threat.&lt;/div&gt;
+        </content>
+        <id>QF2-18-193144</id>
+        <published>2018-09-23T02:35:58</published>
+        <title>3 Beck St, Gracemere</title>
+        <updated>2018-09-23T07:13:19</updated>
+        <georss:point>-23.43728 150.450138</georss:point>
+    </entry>
+    <entry>
+        <category term="Notification"/>
+        <content>Alert Level: Notification
+            Reported (UTC): 2018-09-23T03:16:11
+            Current Status: Going
+            Details: There is a vegetation fire at this location. Smoke may
+            affect residents and motorists in the area. Residents should close
+            their doors and windows and keep medication close by if suffering
+            from a respiratory condition. Motorists should use caution and
+            drive to conditions. If you believe your property is under threat,
+            you should call Triple Zero (000) immediately.
+        </content>
+        <id>QF6-18-193187</id>
+        <published>2018-09-23T03:16:11</published>
+        <title>2524 Nerang Murwillumbah Rd, Numinbah Valley</title>
+        <updated>2018-09-23T03:18:14</updated>
+        <georss:point>-28.16776 153.219991</georss:point>
+    </entry>
+    <entry>
+        <category term="Notification"/>
+        <content>Alert Level: Notification
+            Reported (UTC): 2018-09-23T04:18:45
+            Current Status: Going
+            Details: There is a vegetation fire at this location. Smoke may
+            affect residents and motorists in the area. Residents should close
+            their doors and windows and keep medication close by if suffering
+            from a respiratory condition. Motorists should use caution and
+            drive to conditions. If you believe your property is under threat,
+            you should call Triple Zero (000) immediately.
+        </content>
+        <id>QF3-18-193233</id>
+        <published>2018-09-23T04:18:45</published>
+        <title>Seibel Lane, Pratten</title>
+        <updated>2018-09-23T04:28:14</updated>
+        <georss:point>-28.095355 151.794968</georss:point>
+    </entry>
+    <entry>
+        <category term="Advice"/>
+        <content>Alert Level: Advice
+            Reported (UTC): 2018-09-23T04:36:57
+            Current Status: Going
+            Details: &lt;div&gt;STAY INFORMED: Fairymead (near Bundaberg) grass
+            fire as at 1.25pm Sun 23 Sept &lt;/div&gt;&lt;div&gt;&lt;br /&gt;&lt;/div&gt;&lt;div&gt;Bushfire
+            warning level: ADVICE&lt;/div&gt;&lt;div&gt;&lt;br /&gt;&lt;/div&gt;&lt;div&gt;Queensland
+            Fire and Emergency Services (QFES) advises there is a bushfire in
+            Fairymead.&lt;/div&gt;&lt;div&gt;&lt;br /&gt;&lt;/div&gt;&lt;div&gt;You
+            need to keep up to date and decide what actions you will take if
+            the situation changes.&lt;/div&gt;&lt;div&gt;&lt;br /&gt;&lt;/div&gt;&lt;div&gt;Currently
+            as at 1.25pm Sunday 23 September, a fast-moving grass fire is
+            travelling from Hills Road towards Gregory Terrace and Moore Park
+            Road at Fairymead.&lt;/div&gt;&lt;div&gt;&lt;br /&gt;&lt;/div&gt;&lt;div&gt;People
+            in the immediate and surrounding area will be affected by smoke,
+            which will reduce visibility and air quality.&lt;/div&gt;&lt;div&gt;&lt;br
+            /&gt;&lt;/div&gt;&lt;div&gt;Properties are not under direct threat
+            at this time. Call Triple Zero (000) immediately if you believe you
+            or your property is under threat.&lt;/div&gt;&lt;div&gt;&lt;br /&gt;&lt;/div&gt;&lt;div&gt;Read
+            more: https://bit.ly/2zp6Qbl&lt;/div&gt;
+        </content>
+        <id>QF4-18-193247</id>
+        <published>2018-09-23T04:36:57</published>
+        <title>Bush Paddock Rd N &amp; Fairymead Rd, Fairymead</title>
+        <updated>2018-09-23T07:30:26</updated>
+        <georss:point>-24.812712 152.355704</georss:point>
+    </entry>
+    <entry>
+        <category term="Advice"/>
+        <content>Alert Level: Advice
+            Reported (UTC): 2018-09-23T04:53:32
+            Current Status: Going
+            Details: &lt;div&gt;STAY INFORMED: Brooweena grass fire as at
+            4.10pm Sun 23 Sept&lt;/div&gt;&lt;div&gt;&lt;br /&gt;&lt;/div&gt;&lt;div&gt;Bushfire
+            warning level: ADVICE&lt;/div&gt;&lt;div&gt;&lt;br /&gt;&lt;/div&gt;&lt;div&gt;Queensland
+            Fire and Emergency Services (QFES) advises there is a grass fire in
+            Brooweena.&lt;/div&gt;&lt;div&gt;&lt;br /&gt;&lt;/div&gt;&lt;div&gt;You
+            need to keep up to date and decide what actions you will take if
+            the situation changes.&lt;/div&gt;&lt;div&gt;&lt;br /&gt;&lt;/div&gt;&lt;div&gt;Currently
+            as at 4.10pm Sunday 23 September, a grass fire is in the vicinity
+            of Clifton Creek Left Road and Clifton Creek Right Road at
+            Brooweena.&lt;/div&gt;&lt;div&gt;&lt;br /&gt;&lt;/div&gt;&lt;div&gt;Crews
+            are conducting backburning operations to contain the blaze and
+            working to protect properties in the area.&lt;/div&gt;&lt;div&gt;&lt;br
+            /&gt;&lt;/div&gt;&lt;div&gt;People in the area will be affected by
+            smoke, which will reduce visibility and air quality.&lt;/div&gt;&lt;div&gt;&lt;br
+            /&gt;&lt;/div&gt;&lt;div&gt;Call Triple Zero (000) immediately if
+            you believe you or your property is under threat.&lt;/div&gt;&lt;div&gt;&lt;br
+            /&gt;&lt;/div&gt;&lt;div&gt;&lt;a href="https://bit.ly/2xF0ljx"
+            target="_blank"&gt;Read more&lt;/a&gt;&lt;br /&gt;&lt;/div&gt;
+        </content>
+        <id>QF4-18-193253</id>
+        <published>2018-09-23T04:53:32</published>
+        <title>CLIFTON CREEK LEFT RD &amp; CLIFTON CREEK RIGHT RD, Br</title>
+        <updated>2018-09-23T07:33:38</updated>
+        <georss:point>-25.593236 152.262822</georss:point>
+    </entry>
+    <entry>
+        <category term="Notification"/>
+        <content>Alert Level: Notification
+            Reported (UTC): 2018-09-23T05:55:48
+            Current Status: Going
+            Details: There is a vegetation fire at this location. Smoke may
+            affect residents and motorists in the area. Residents should close
+            their doors and windows and keep medication close by if suffering
+            from a respiratory condition. Motorists should use caution and
+            drive to conditions. If you believe your property is under threat,
+            you should call Triple Zero (000) immediately.
+        </content>
+        <id>QF6-18-193283</id>
+        <published>2018-09-23T05:55:48</published>
+        <title>CONLAN ST, Boronia Heights</title>
+        <updated>2018-09-23T06:44:25</updated>
+        <georss:point>-27.690636 153.026588</georss:point>
+    </entry>
+    <entry>
+        <category term="Notification"/>
+        <content>Alert Level: Notification
+            Reported (UTC): 2018-09-23T06:06:16
+            Current Status: Going
+            Details: There is a vegetation fire at this location. Smoke may
+            affect residents and motorists in the area. Residents should close
+            their doors and windows and keep medication close by if suffering
+            from a respiratory condition. Motorists should use caution and
+            drive to conditions. If you believe your property is under threat,
+            you should call Triple Zero (000) immediately.
+        </content>
+        <id>QF5N-18-193290</id>
+        <published>2018-09-23T06:06:16</published>
+        <title>119 Costelloe Rd, Laceys Creek</title>
+        <updated>2018-09-23T06:57:29</updated>
+        <georss:point>-27.183188 152.74087</georss:point>
+    </entry>
+    <entry>
+        <category term="Notification"/>
+        <content>Alert Level: Notification
+            Reported (UTC): 2018-09-23T06:17:13
+            Current Status: Contained
+            Details: There is a vegetation fire at this location. Smoke may
+            affect residents and motorists in the area. Residents should close
+            their doors and windows and keep medication close by if suffering
+            from a respiratory condition. Motorists should use caution and
+            drive to conditions. If you believe your property is under threat,
+            you should call Triple Zero (000) immediately.
+        </content>
+        <id>QF1-18-193296</id>
+        <published>2018-09-23T06:17:13</published>
+        <title>South Beck Dr &amp; Allambie Lane, Rasmussen</title>
+        <updated>2018-09-23T07:20:08</updated>
+        <georss:point>-19.36475 146.720829</georss:point>
+    </entry>
+    <entry>
+        <category term="Notification"/>
+        <content>Alert Level: Notification
+            Reported (UTC): 2018-09-23T06:32:29
+            Current Status: Going
+            Details: There is a vegetation fire at this location. Smoke may
+            affect residents and motorists in the area. Residents should close
+            their doors and windows and keep medication close by if suffering
+            from a respiratory condition. Motorists should use caution and
+            drive to conditions. If you believe your property is under threat,
+            you should call Triple Zero (000) immediately.
+        </content>
+        <id>QF2-18-193315</id>
+        <published>2018-09-23T06:32:29</published>
+        <title>BROKENWOOD ST &amp; STEPHAN ST, Emerald</title>
+        <updated>2018-09-23T07:33:12</updated>
+        <georss:point>-23.546638 148.159052</georss:point>
+    </entry>
+    <entry>
+        <category term="Notification"/>
+        <content>Alert Level: Notification
+            Reported (UTC): 2018-09-23T06:53:49
+            Current Status: Going
+            Details: There is a vegetation fire at this location. Smoke may
+            affect residents and motorists in the area. Residents should close
+            their doors and windows and keep medication close by if suffering
+            from a respiratory condition. Motorists should use caution and
+            drive to conditions. If you believe your property is under threat,
+            you should call Triple Zero (000) immediately.
+        </content>
+        <id>QF5N-18-193327</id>
+        <published>2018-09-23T06:53:49</published>
+        <title>William Berry Dr, Morayfield</title>
+        <updated>2018-09-23T07:30:33</updated>
+        <georss:point>-27.100013 152.949919</georss:point>
+    </entry>
+    <entry>
+        <category term="Notification"/>
+        <content>Alert Level: Notification
+            Reported (UTC): 2018-09-23T07:02:55
+            Current Status: Going
+            Details: There is a vegetation fire at this location. Smoke may
+            affect residents and motorists in the area. Residents should close
+            their doors and windows and keep medication close by if suffering
+            from a respiratory condition. Motorists should use caution and
+            drive to conditions. If you believe your property is under threat,
+            you should call Triple Zero (000) immediately.
+        </content>
+        <id>QF4-18-193378</id>
+        <published>2018-09-23T07:02:55</published>
+        <title>Kilkivan Tansey Rd, Kilkivan</title>
+        <updated>2018-09-23T07:32:24</updated>
+        <georss:point>-26.093658 152.185864</georss:point>
+    </entry>
+    <entry>
+        <category term="Notification"/>
+        <content>Alert Level: Notification
+            Reported (UTC): 2018-09-23T07:04:47
+            Current Status: Going
+            Details: There is a vegetation fire at this location. Smoke may
+            affect residents and motorists in the area. Residents should close
+            their doors and windows and keep medication close by if suffering
+            from a respiratory condition. Motorists should use caution and
+            drive to conditions. If you believe your property is under threat,
+            you should call Triple Zero (000) immediately.
+        </content>
+        <id>QF7-18-193369</id>
+        <published>2018-09-23T07:04:47</published>
+        <title>82 Baira Yabu, Badu Island</title>
+        <updated>2018-09-23T07:18:25</updated>
+        <georss:point>-10.159229 142.165946</georss:point>
+    </entry>
+    <entry>
+        <category term="Notification"/>
+        <content>Alert Level: Notification
+            Reported (UTC): 2018-09-23T07:05:07
+            Current Status: Going
+            Details: There is a vegetation fire at this location. Smoke may
+            affect residents and motorists in the area. Residents should close
+            their doors and windows and keep medication close by if suffering
+            from a respiratory condition. Motorists should use caution and
+            drive to conditions. If you believe your property is under threat,
+            you should call Triple Zero (000) immediately.
+        </content>
+        <id>QF3-18-193367</id>
+        <published>2018-09-23T07:05:07</published>
+        <title>38 Yeats Rd, Broadwater</title>
+        <updated>2018-09-23T07:07:28</updated>
+        <georss:point>-28.665492 151.882355</georss:point>
+    </entry>
+    <entry>
+        <category term="Notification"/>
+        <content>Alert Level: Notification
+            Reported (UTC): 2018-09-23T07:11:21
+            Current Status: Contained
+            Details: There is a vegetation fire at this location. Smoke may
+            affect residents and motorists in the area. Residents should close
+            their doors and windows and keep medication close by if suffering
+            from a respiratory condition. Motorists should use caution and
+            drive to conditions. If you believe your property is under threat,
+            you should call Triple Zero (000) immediately.
+        </content>
+        <id>QF1-18-193381</id>
+        <published>2018-09-23T07:11:21</published>
+        <title>Cooper St &amp; Miles St, Ingham</title>
+        <updated>2018-09-23T07:31:03</updated>
+        <georss:point>-18.656944 146.162778</georss:point>
+    </entry>
+    <entry>
+        <category term="Notification"/>
+        <content>Alert Level: Notification
+            Reported (UTC): 2018-09-23T07:29:24
+            Current Status: Going
+            Details: There is a vegetation fire at this location. Smoke may
+            affect residents and motorists in the area. Residents should close
+            their doors and windows and keep medication close by if suffering
+            from a respiratory condition. Motorists should use caution and
+            drive to conditions. If you believe your property is under threat,
+            you should call Triple Zero (000) immediately.
+        </content>
+        <id>QF3-18-193386</id>
+        <published>2018-09-23T07:29:24</published>
+        <title>New England Hwy, Rosenthal Heights</title>
+        <updated>2018-09-23T07:33:25</updated>
+        <georss:point>-28.244775 152.013809</georss:point>
+    </entry>
+</feed>
