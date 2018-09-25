@@ -30,7 +30,14 @@ class GeoRssFeed:
         """Initialise this service."""
         self._home_coordinates = home_coordinates
         self._filter_radius = filter_radius
+        self._url = url
         self._request = requests.Request(method="GET", url=url).prepare()
+
+    def __repr__(self):
+        """Return string representation of this feed."""
+        return '<{}(home={}, url={}, radius={})>'.format(
+            self.__class__.__name__, self._home_coordinates, self._url,
+            self._filter_radius)
 
     def _new_entry(self, home_coordinates, rss_entry, global_data):
         """Generate a new entry."""
@@ -100,6 +107,10 @@ class FeedEntry:
         """Initialise this feed entry."""
         self._home_coordinates = home_coordinates
         self._rss_entry = rss_entry
+
+    def __repr__(self):
+        """Return string representation of this entry."""
+        return '<{}(id={})>'.format(self.__class__.__name__, self.external_id)
 
     @property
     def geometry(self):

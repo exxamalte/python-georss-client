@@ -33,6 +33,12 @@ class QfesBushfireAlertFeed(GeoRssFeed):
         super().__init__(home_coordinates, URL, filter_radius=filter_radius)
         self._filter_categories = filter_categories
 
+    def __repr__(self):
+        """Return string representation of this feed."""
+        return '<{}(home={}, url={}, radius={}, categories={})>'.format(
+            self.__class__.__name__, self._home_coordinates, self._url,
+            self._filter_radius, self._filter_categories)
+
     def _new_entry(self, home_coordinates, rss_entry, global_data):
         """Generate a new entry."""
         attribution = None if not global_data and ATTR_ATTRIBUTION not in \
@@ -76,7 +82,7 @@ class QfesBushfireAlertFeedEntry(FeedEntry):
             if published_date:
                 # Parse the date. Example: 15/09/2018 9:31:00 AM
                 date_struct = strptime(published_date, "%Y-%m-%dT%I:%M:%S")
-                return datetime.datetime.fromtimestamp(calendar.timegm(
+                return datetime.fromtimestamp(calendar.timegm(
                     date_struct), tz=pytz.utc)
         return None
 
