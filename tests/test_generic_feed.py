@@ -22,6 +22,8 @@ class TestGenericFeed(unittest.TestCase):
             .return_value.text = load_fixture('generic_feed_1.xml')
 
         feed = GenericFeed(home_coordinates, None)
+        assert repr(feed) == "<GenericFeed(home=(-31.0, 151.0), url=None, " \
+                             "radius=None, categories=None)>"
         status, entries = feed.update()
         assert status == UPDATE_OK
         self.assertIsNotNone(entries)
@@ -41,6 +43,8 @@ class TestGenericFeed(unittest.TestCase):
         feed_entry = entries[1]
         assert feed_entry.title == "Title 2"
         assert feed_entry.external_id == "2345"
+        assert feed_entry.attribution == "Attribution 1"
+        assert repr(feed_entry) == "<GenericFeedEntry(id=2345)>"
 
         feed_entry = entries[2]
         assert feed_entry.title == "Title 3"
@@ -79,7 +83,7 @@ class TestGenericFeed(unittest.TestCase):
 
     @mock.patch("requests.Request")
     @mock.patch("requests.Session")
-    def test_update_ok_with_filtering(self, mock_session, mock_request):
+    def test_update_ok_with_radius_filtering(self, mock_session, mock_request):
         """Test updating feed is ok."""
         home_coordinates = (-37.0, 150.0)
         mock_session.return_value.__enter__.return_value.send\
@@ -95,6 +99,32 @@ class TestGenericFeed(unittest.TestCase):
         self.assertAlmostEqual(entries[0].distance_to_home, 82.0, 1)
         self.assertAlmostEqual(entries[1].distance_to_home, 77.0, 1)
         self.assertAlmostEqual(entries[2].distance_to_home, 84.6, 1)
+
+    @mock.patch("requests.Request")
+    @mock.patch("requests.Session")
+    def test_update_ok_with_radius_and_category_filtering(self, mock_session,
+                                                          mock_request):
+        """Test updating feed is ok."""
+        home_coordinates = (-37.0, 150.0)
+        mock_session.return_value.__enter__.return_value.send\
+            .return_value.ok = True
+        mock_session.return_value.__enter__.return_value.send\
+            .return_value.text = load_fixture('generic_feed_1.xml')
+
+        feed = GenericFeed(home_coordinates, None, filter_radius=90.0,
+                           filter_categories=['Category 2'])
+        status, entries = feed.update()
+        assert status == UPDATE_OK
+        self.assertIsNotNone(entries)
+        assert len(entries) == 1
+        self.assertAlmostEqual(entries[0].distance_to_home, 77.0, 1)
+
+        feed = GenericFeed(home_coordinates, None, filter_radius=90.0,
+                           filter_categories=['Category 4'])
+        status, entries = feed.update()
+        assert status == UPDATE_OK
+        self.assertIsNotNone(entries)
+        assert len(entries) == 0
 
     @mock.patch("requests.Request")
     @mock.patch("requests.Session")

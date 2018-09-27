@@ -33,12 +33,6 @@ class QfesBushfireAlertFeed(GeoRssFeed):
         super().__init__(home_coordinates, URL, filter_radius=filter_radius)
         self._filter_categories = filter_categories
 
-    def __repr__(self):
-        """Return string representation of this feed."""
-        return '<{}(home={}, url={}, radius={}, categories={})>'.format(
-            self.__class__.__name__, self._home_coordinates, self._url,
-            self._filter_radius, self._filter_categories)
-
     def _new_entry(self, home_coordinates, rss_entry, global_data):
         """Generate a new entry."""
         attribution = None if not global_data and ATTR_ATTRIBUTION not in \

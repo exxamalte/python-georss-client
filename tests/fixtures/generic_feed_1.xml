@@ -2,7 +2,7 @@
 <feed xmlns:georss="http://www.georss.org/georss"
       xmlns="http://www.w3.org/2005/Atom">
     <author>
-        <name>Queensland Fire and Emergency Services</name>
+        <name>Attribution 1</name>
     </author>
     <entry>
         <category term="Category 1"/>

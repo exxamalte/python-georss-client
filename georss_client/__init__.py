@@ -26,18 +26,20 @@ UPDATE_ERROR = 'ERROR'
 class GeoRssFeed:
     """GeoRSS feed base class."""
 
-    def __init__(self, home_coordinates, url, filter_radius=None):
+    def __init__(self, home_coordinates, url, filter_radius=None,
+                 filter_categories=None):
         """Initialise this service."""
         self._home_coordinates = home_coordinates
         self._filter_radius = filter_radius
+        self._filter_categories = filter_categories
         self._url = url
         self._request = requests.Request(method="GET", url=url).prepare()
 
     def __repr__(self):
         """Return string representation of this feed."""
-        return '<{}(home={}, url={}, radius={})>'.format(
+        return '<{}(home={}, url={}, radius={}, categories={})>'.format(
             self.__class__.__name__, self._home_coordinates, self._url,
-            self._filter_radius)
+            self._filter_radius, self._filter_categories)
 
     def _new_entry(self, home_coordinates, rss_entry, global_data):
         """Generate a new entry."""
@@ -85,11 +87,18 @@ class GeoRssFeed:
 
     def _filter_entries(self, entries):
         """Filter the provided entries."""
+        filtered_entries = entries
         if self._filter_radius:
-            return list(filter(lambda entry:
-                               entry.distance_to_home <= self._filter_radius,
-                               entries))
-        return entries
+            filtered_entries = list(
+                filter(lambda entry:
+                       entry.distance_to_home <= self._filter_radius,
+                       filtered_entries))
+        if self._filter_categories:
+            filtered_entries = list(
+                filter(lambda entry:
+                       entry.category in self._filter_categories,
+                       filtered_entries))
+        return filtered_entries
 
     def _extract_from_feed(self, feed):
         """Extract global metadata from feed."""
