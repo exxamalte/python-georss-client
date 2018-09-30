@@ -48,6 +48,11 @@ class TestQfesBushfireAlertFeed(unittest.TestCase):
         assert feed_entry.attribution == "Author 1"
         assert repr(feed_entry) == "<QfesBushfireAlertFeedEntry(id=1234)>"
 
+        feed_entry = entries[1]
+        assert feed_entry.title == "Title 2"
+        self.assertIsNone(feed_entry.published)
+        self.assertIsNone(feed_entry.updated)
+
     @mock.patch("requests.Request")
     @mock.patch("requests.Session")
     def test_update_ok_with_category(self, mock_session, mock_request):
