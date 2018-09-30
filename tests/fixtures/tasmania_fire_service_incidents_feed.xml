@@ -1,0 +1,31 @@
+<rss version="2.0" xmlns:georss="http://www.georss.org/georss"
+     xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+
+        <item>
+            <title>Title 1</title>
+            <category>Category 1</category>
+            <guid isPermaLink="false">
+                1234
+            </guid>
+            <pubDate>Sun, 30 Sep 2018 01:30:00 +1000</pubDate>
+            <description><![CDATA[
+                    ALERT LEVEL: Alert Level 1<br /> Region: Region 1<br /> LOCATION: Location 1<br /> STATUS: Status 1<br /> TYPE: Type 1<br /> SIZE: Size 1<br /> Number of Vehicles: 1<br /> More Info: <a href="http://www.fire.tas.gov.au/i/18031118">http://www.fire.tas.gov.au/i/18031118</a><br /> RESPONSIBLE AGENCY: Agency 1<br /> UPDATED: Sun, 30 Sep 2018 01:30:00 +1000<br />
+                    ]]>
+            </description>
+            <georss:point>-42.123456 147.234567</georss:point>
+        </item>
+        <item>
+            <title>Title 2</title>
+            <category>Category 2</category>
+            <guid isPermaLink="false">
+                2345
+            </guid>
+            <description><![CDATA[
+                    ALERT LEVEL: Alert Level 2<br /> Region: Region 2<br /> LOCATION: Location 2<br /> STATUS: Status 2<br /> TYPE: Type 2<br /> SIZE: Size 2<br /> Number of Vehicles: 1<br /> More Info: <a href="http://www.fire.tas.gov.au/i/18031118">http://www.fire.tas.gov.au/i/18031118</a><br /> RESPONSIBLE AGENCY: Agency 2<br /> UPDATED: Sun, 30 Sep 2018 02:30:00 +1000<br />
+                    ]]>
+            </description>
+            <georss:point>-42.345678 147.456789</georss:point>
+        </item>
+    </channel>
+</rss>

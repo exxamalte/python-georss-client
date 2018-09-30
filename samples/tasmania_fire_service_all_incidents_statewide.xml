@@ -10,12 +10,204 @@
             unless significant fire activity occurs.
         </description>
         <language>en-us</language>
-        <pubDate>Mon, 24 Sep 2018 00:53:12 +1000</pubDate>
+        <pubDate>Sun, 30 Sep 2018 21:36:48 +1000</pubDate>
         <webMaster>tfsonline@fire.tas.gov.au</webMaster>
         <docs>http://www.fire.tas.gov.au/Show?pageId=xmlFeedsHome</docs>
         <ttl>60</ttl>
+
         <item>
-            <title></title>
+            <title>Grices Road, TEA TREE</title>
+            <link>http://www.fire.tas.gov.au/i/18031118</link>
+            <category>No Alert Level</category>
+            <guid isPermaLink="false">
+                tag:www.fire.tas.gov.au,2018-09-30:18031118
+            </guid>
+            <pubDate>Sun, 30 Sep 2018 01:30:34 +1000</pubDate>
+            <description><![CDATA[
+                    ALERT LEVEL: No Alert Level<br /> Region: S<br /> LOCATION: Grices Road, TEA TREE<br /> STATUS: Going<br /> TYPE: VEGETATION FIRE<br /> SIZE: Not Available<br /> Number of Vehicles: 1<br /> More Info: <a href="http://www.fire.tas.gov.au/i/18031118">http://www.fire.tas.gov.au/i/18031118</a><br /> RESPONSIBLE AGENCY: Tasmania Fire Service<br /> UPDATED: Sun, 30 Sep 2018 01:30:34 +1000<br />
+                    ]]>
+            </description>
+            <georss:point>-42.65670347360882 147.35926975302638</georss:point>
+        </item>
+
+        <item>
+            <title>Dalgarth Road, HARFORD</title>
+            <link>http://www.fire.tas.gov.au/i/18031112</link>
+            <category>No Alert Level</category>
+            <guid isPermaLink="false">
+                tag:www.fire.tas.gov.au,2018-09-29:18031112
+            </guid>
+            <pubDate>Sat, 29 Sep 2018 22:17:04 +1000</pubDate>
+            <description><![CDATA[
+                    ALERT LEVEL: No Alert Level<br /> Region: N<br /> LOCATION: Dalgarth Road, HARFORD<br /> STATUS: Going<br /> TYPE: VEHICLE FIRE<br /> SIZE: Not Available<br /> Number of Vehicles: <br /> More Info: <a href="http://www.fire.tas.gov.au/i/18031112">http://www.fire.tas.gov.au/i/18031112</a><br /> RESPONSIBLE AGENCY: Tasmania Fire Service<br /> UPDATED: Sat, 29 Sep 2018 22:17:04 +1000<br />
+                    ]]>
+            </description>
+            <georss:point>-41.2592473884138 146.67039984485783</georss:point>
+        </item>
+
+        <item>
+            <title>Peters Road, GOULDS COUNTRY</title>
+            <link>http://www.fire.tas.gov.au/i/18031054</link>
+            <category>No Alert Level</category>
+            <guid isPermaLink="false">
+                tag:www.fire.tas.gov.au,2018-09-29:18031054
+            </guid>
+            <pubDate>Sat, 29 Sep 2018 07:44:34 +1000</pubDate>
+            <description><![CDATA[
+                    ALERT LEVEL: No Alert Level<br /> Region: N<br /> LOCATION: Peters Road, GOULDS COUNTRY<br /> STATUS: Going<br /> TYPE: VEGETATION FIRE<br /> SIZE: Not Available<br /> Number of Vehicles: 2<br /> More Info: <a href="http://www.fire.tas.gov.au/i/18031054">http://www.fire.tas.gov.au/i/18031054</a><br /> RESPONSIBLE AGENCY: Tasmania Fire Service<br /> UPDATED: Sat, 29 Sep 2018 07:44:34 +1000<br />
+                    ]]>
+            </description>
+            <georss:point>-41.11433873684907 148.14994853350893</georss:point>
+        </item>
+
+        <item>
+            <title>Black River</title>
+            <link>http://www.fire.tas.gov.au/a/59003</link>
+            <category>No Alert Level</category>
+            <guid isPermaLink="false">
+                tag:www.fire.tas.gov.au,2018-09-28:18031018
+            </guid>
+            <pubDate>Sun, 30 Sep 2018 07:20:46 +1000</pubDate>
+            <description><![CDATA[
+                    ALERT LEVEL: No Alert Level<br /> Region: NW<br /> LOCATION: Black River<br /> STATUS: Going<br /> TYPE: FUEL REDUCTION BURN<br /> SIZE: 4 ha<br /> Number of Vehicles: <br /> More Info: <a href="http://www.fire.tas.gov.au/a/59003">http://www.fire.tas.gov.au/a/59003</a><br /> RESPONSIBLE AGENCY: Tasmania Fire Service<br /> UPDATED: Sun, 30 Sep 2018 07:20:46 +1000<br />
+                    ]]>
+            </description>
+            <georss:point>-40.84281939637212 145.32055353145867</georss:point>
+            <georss:polygon>-40.841167642185624 145.31847207875362
+                -40.8413969058045 145.318750953137 -40.84156989445058
+                145.31887705488415 -40.84196505987154 145.31879589940968
+                -40.842432089133304 145.31870106496598 -40.84266586299848
+                145.3186714328674 -40.84299175707454 145.31878181032232
+                -40.8432170448874 145.31878797742323 -40.84326932638893
+                145.31928484256687 -40.84351659739231 145.31956327338415
+                -40.843618412155486 145.31975048741563 -40.843639357926
+                145.31995160638309 -40.84392281849974 145.32024098892214
+                -40.844157085061426 145.32086374499562 -40.8444311631029
+                145.3217464602577 -40.84456188599233 145.3220634308504
+                -40.84421346618154 145.32226200895226 -40.84371127762765
+                145.32241701654013 -40.843178453046576 145.32232370124194
+                -40.84235748067555 145.3222376555163 -40.842240281669625
+                145.32161195721693 -40.84191994311268 145.3212641998378
+                -40.84173450009224 145.3209011792797 -40.841548537973345
+                145.3205025900036 -40.84134318361908 145.320009602752
+                -40.84131843760104 145.31954763942298 -40.84131411816258
+                145.31925121759755 -40.841167642185624 145.31847207875362
+                -40.841167642185624 145.31847207875362
+            </georss:polygon>
+        </item>
+
+        <item>
+            <title>SISTERS BEACH</title>
+            <link>http://www.fire.tas.gov.au/i/18030651</link>
+            <category>No Alert Level</category>
+            <guid isPermaLink="false">
+                tag:www.fire.tas.gov.au,2018-09-25:18030651
+            </guid>
+            <pubDate>Tue, 25 Sep 2018 09:23:12 +1000</pubDate>
+            <description><![CDATA[
+                    ALERT LEVEL: No Alert Level<br /> Region: NW<br /> LOCATION: SISTERS BEACH<br /> STATUS: Going<br /> TYPE: FUEL REDUCTION BURN<br /> SIZE: Not Available<br /> Number of Vehicles: <br /> More Info: <a href="http://www.fire.tas.gov.au/i/18030651">http://www.fire.tas.gov.au/i/18030651</a><br /> RESPONSIBLE AGENCY: Tasmania Fire Service<br /> UPDATED: Tue, 25 Sep 2018 09:23:12 +1000<br />
+                    ]]>
+            </description>
+            <georss:point>-40.92145011712287 145.54600685746666</georss:point>
+        </item>
+
+        <item>
+            <title>Mount Edgecombe, Nunamara</title>
+            <link>http://www.fire.tas.gov.au/a/58949</link>
+            <category>No Alert Level</category>
+            <guid isPermaLink="false">
+                tag:www.fire.tas.gov.au,2018-09-25:18030648
+            </guid>
+            <pubDate>Tue, 25 Sep 2018 12:25:58 +1000</pubDate>
+            <description><![CDATA[
+                    ALERT LEVEL: No Alert Level<br /> Region: N<br /> LOCATION: Mount Edgecombe, Nunamara<br /> STATUS: Going<br /> TYPE: FUEL REDUCTION BURN<br /> SIZE: 533 Hectares<br /> Number of Vehicles: <br /> More Info: <a href="http://www.fire.tas.gov.au/a/58949">http://www.fire.tas.gov.au/a/58949</a><br /> RESPONSIBLE AGENCY: Tasmania Fire Service<br /> UPDATED: Tue, 25 Sep 2018 12:25:58 +1000<br />
+                    ]]>
+            </description>
+            <georss:point>-41.377458274552 147.27363086249576</georss:point>
+        </item>
+
+        <item>
+            <title>Boobyalla Drive, Hellyer</title>
+            <link>http://www.fire.tas.gov.au/a/58961</link>
+            <category>No Alert Level</category>
+            <guid isPermaLink="false">
+                tag:www.fire.tas.gov.au,2018-09-25:18030646
+            </guid>
+            <pubDate>Sun, 30 Sep 2018 07:20:19 +1000</pubDate>
+            <description><![CDATA[
+                    ALERT LEVEL: No Alert Level<br /> Region: NW<br /> LOCATION: Boobyalla Drive, Hellyer<br /> STATUS: Going<br /> TYPE: FUEL REDUCTION BURN<br /> SIZE: 2.1 Hectares<br /> Number of Vehicles: <br /> More Info: <a href="http://www.fire.tas.gov.au/a/58961">http://www.fire.tas.gov.au/a/58961</a><br /> RESPONSIBLE AGENCY: Parks And Wildlife<br /> UPDATED: Sun, 30 Sep 2018 07:20:19 +1000<br />
+                    ]]>
+            </description>
+            <georss:point>-40.874730767843346 145.4448992615851</georss:point>
+            <georss:polygon>-40.87359376734724 145.44408330813098
+                -40.87367129157242 145.44382041606056 -40.87418842461622
+                145.44409311736078 -40.8746684163045 145.44428362128775
+                -40.875050151636884 145.44453576510418 -40.87554122770819
+                145.4448802919864 -40.87587085063681 145.44527607218205
+                -40.8759084705216 145.44539386708183 -40.875875648598225
+                145.4456319854367 -40.875672048808724 145.44589783330593
+                -40.87548581915771 145.44611580349905 -40.875349943116326
+                145.44605964420816 -40.8751655239722 145.44574353792015
+                -40.87491146192539 145.4456070730439 -40.87482785714696
+                145.44541915168458 -40.874389533520954 145.44497845178316
+                -40.87363554936494 145.44450954591733 -40.873373601040896
+                145.4444563428568 -40.872949880751726 145.44443066149984
+                -40.87296517032068 145.44422856461202 -40.87313594730948
+                145.44420083194652 -40.87330848482179 145.44430359553834
+                -40.87357831802415 145.44427354360215 -40.87359376734724
+                145.44408330813098 -40.87359376734724 145.44408330813098
+            </georss:polygon>
+        </item>
+
+        <item>
+            <title>River And Rocks Road, Coles Bay</title>
+            <link>http://www.fire.tas.gov.au/a/58952</link>
+            <category>No Alert Level</category>
+            <guid isPermaLink="false">
+                tag:www.fire.tas.gov.au,2018-09-25:18030645
+            </guid>
+            <pubDate>Sun, 30 Sep 2018 07:20:01 +1000</pubDate>
+            <description><![CDATA[
+                    ALERT LEVEL: No Alert Level<br /> Region: S<br /> LOCATION: River And Rocks Road, Coles Bay<br /> STATUS: Patrol<br /> TYPE: FUEL REDUCTION BURN<br /> SIZE: 46 Hectares<br /> Number of Vehicles: <br /> More Info: <a href="http://www.fire.tas.gov.au/a/58952">http://www.fire.tas.gov.au/a/58952</a><br /> RESPONSIBLE AGENCY: Parks And Wildlife<br /> UPDATED: Sun, 30 Sep 2018 07:20:01 +1000<br />
+                    ]]>
+            </description>
+            <georss:point>-42.07664944683015 148.2152255137056</georss:point>
+            <georss:polygon>-42.080071670783035 148.21863964022327
+                -42.07739002270085 148.22266235245274 -42.07715243803964
+                148.22213796199867 -42.07694803773956 148.2218801703245
+                -42.07624388423472 148.22034346191796 -42.07535908496277
+                148.2180054755268 -42.07507966141231 148.2171781029424
+                -42.07458421180332 148.21548832374054 -42.074244680324526
+                148.21438179037276 -42.07386681947422 148.2134921305083
+                -42.07359962296527 148.21320900718172 -42.07325923966302
+                148.21303328747413 -42.07310897310494 148.21276448340777
+                -42.07303885271551 148.21258182417643 -42.07292498625108
+                148.21227745013152 -42.07299108199001 148.21198858962217
+                -42.073066053921146 148.21171198564622 -42.073151688341845
+                148.21127843591552 -42.07338177632273 148.21081136601083
+                -42.073636581200844 148.21056235346697 -42.07400920939022
+                148.21024304703454 -42.07439920858756 148.20998450957597
+                -42.07485300347221 148.20965464894826 -42.07493480876121
+                148.20958367077134 -42.07534510817113 148.2091079141856
+                -42.07562755970225 148.2087989681982 -42.07570125111004
+                148.20864321260123 -42.07587361038352 148.20852559526105
+                -42.0760723467347 148.2084689220308 -42.076403732539866
+                148.20864445473848 -42.076581913552324 148.20882917041524
+                -42.07685052166335 148.20897933673544 -42.07704386532061
+                148.2102886231821 -42.07726803557405 148.211235831555
+                -42.07774062125202 148.21253836077418 -42.07813011459656
+                148.21232817013313 -42.07860243178971 148.2136548987457
+                -42.078874794455686 148.21430082670264 -42.079040890795554
+                148.21477548102447 -42.07924829485466 148.21560152029193
+                -42.07961264759234 148.2169141438508 -42.07966411063898
+                148.2171569179394 -42.07983868640923 148.21768010599237
+                -42.079993967449305 148.21832382376488 -42.080071670783035
+                148.21863964022327 -42.080071670783035 148.21863964022327
+            </georss:polygon>
+        </item>
+
+        <item>
+            <title>Mount Horror Road, WARRENTINNA</title>
             <link>http://www.fire.tas.gov.au/i/18030504</link>
             <category>No Alert Level</category>
             <guid isPermaLink="false">
@@ -23,10 +215,11 @@
             </guid>
             <pubDate>Sun, 23 Sep 2018 22:34:33 +1000</pubDate>
             <description><![CDATA[
-                    ALERT LEVEL: No Alert Level<br /> Region: N<br /> LOCATION: <br /> STATUS: Going<br /> TYPE: VEGETATION FIRE<br /> SIZE: Not Available<br /> Number of Vehicles: <br /> More Info: <a href="http://www.fire.tas.gov.au/i/18030504">http://www.fire.tas.gov.au/i/18030504</a><br /> RESPONSIBLE AGENCY: FORESTRY<br /> UPDATED: Sun, 23 Sep 2018 22:34:33 +1000<br /> 
+                    ALERT LEVEL: No Alert Level<br /> Region: N<br /> LOCATION: Mount Horror Road, WARRENTINNA<br /> STATUS: Going<br /> TYPE: VEGETATION FIRE<br /> SIZE: Not Available<br /> Number of Vehicles: <br /> More Info: <a href="http://www.fire.tas.gov.au/i/18030504">http://www.fire.tas.gov.au/i/18030504</a><br /> RESPONSIBLE AGENCY: FORESTRY<br /> UPDATED: Sun, 23 Sep 2018 22:34:33 +1000<br />
                     ]]>
             </description>
-            <georss:point>-41.0706379782254 147.73244301382314</georss:point>
+            <georss:point>-41.07557029306993 147.7231056130095</georss:point>
         </item>
+
     </channel>
 </rss>
