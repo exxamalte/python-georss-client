@@ -10,10 +10,9 @@ from datetime import datetime
 from typing import Optional
 
 from georss_client import GeoRssFeed, FeedEntry
+from georss_client.consts import CUSTOM_ATTRIBUTE
 
 ATTRIBUTION = "Tasmania Fire Service"
-
-CUSTOM_ATTRIBUTE = 'custom_attribute'
 
 REGEXP_ATTR_LOCATION = 'LOCATION: (?P<{}>[^<]+)<br />'\
     .format(CUSTOM_ATTRIBUTE)

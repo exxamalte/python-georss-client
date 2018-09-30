@@ -3,7 +3,6 @@ QFES Bushfire Alert Feed.
 
 Fetches GeoRSS feed from QFES Bushfire Alert Feed.
 """
-from time import strptime
 
 import calendar
 import pytz
@@ -12,8 +11,7 @@ from datetime import datetime
 from typing import Optional
 
 from georss_client import GeoRssFeed, FeedEntry, ATTR_ATTRIBUTION
-
-CUSTOM_ATTRIBUTE = 'custom_attribute'
+from georss_client.consts import CUSTOM_ATTRIBUTE
 
 REGEXP_ATTR_STATUS = 'Current Status: (?P<{}>[^<]+)[\n\r]'\
     .format(CUSTOM_ATTRIBUTE)
@@ -72,22 +70,18 @@ class QfesBushfireAlertFeedEntry(FeedEntry):
     def published(self) -> Optional[datetime]:
         """Return the published date of this entry."""
         if self._rss_entry:
-            published_date = self._rss_entry.get('published', None)
+            published_date = self._rss_entry.get('published_parsed', None)
             if published_date:
-                # Parse the date. Example: 15/09/2018 9:31:00 AM
-                date_struct = strptime(published_date, "%Y-%m-%dT%I:%M:%S")
                 return datetime.fromtimestamp(calendar.timegm(
-                    date_struct), tz=pytz.utc)
+                    published_date), tz=pytz.utc)
         return None
 
     @property
     def updated(self) -> Optional[datetime]:
         """Return the updated date of this entry."""
         if self._rss_entry:
-            updated_date = self._rss_entry.get('updated', None)
+            updated_date = self._rss_entry.get('updated_parsed', None)
             if updated_date:
-                # Parse the date. Example: 15/09/2018 9:31:00 AM
-                date_struct = strptime(updated_date, "%Y-%m-%dT%I:%M:%S")
                 return datetime.fromtimestamp(calendar.timegm(
-                    date_struct), tz=pytz.utc)
+                    updated_date), tz=pytz.utc)
         return None

@@ -12,11 +12,9 @@ from collections import namedtuple
 from haversine import haversine
 from typing import Optional
 
-from georss_client.consts import ATTR_ATTRIBUTION
+from georss_client.consts import ATTR_ATTRIBUTION, CUSTOM_ATTRIBUTE
 
 _LOGGER = logging.getLogger(__name__)
-
-CUSTOM_ATTRIBUTE = 'custom_attribute'
 
 UPDATE_OK = 'OK'
 UPDATE_OK_NO_DATA = 'OK_NO_DATA'
