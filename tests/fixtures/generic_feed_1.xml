@@ -41,4 +41,11 @@
         <updated>2018-09-23T09:15:00</updated>
         <georss:point>-37.6789, 149.5678</georss:point>
     </entry>
+    <entry>
+        <category term="Category 6"/>
+        <id>6789</id>
+        <title>Title 6</title>
+        <published>2018-09-23T09:20:00</published>
+        <updated>2018-09-23T09:25:00</updated>
+    </entry>
 </feed>
