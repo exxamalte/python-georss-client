@@ -86,11 +86,18 @@ class GeoRssFeed:
     def _filter_entries(self, entries):
         """Filter the provided entries."""
         filtered_entries = entries
+        # Always remove entries without geometry
+        filtered_entries = list(
+            filter(lambda entry:
+                   entry.geometry is not None,
+                   filtered_entries))
+        # Filter by distance.
         if self._filter_radius:
             filtered_entries = list(
                 filter(lambda entry:
                        entry.distance_to_home <= self._filter_radius,
                        filtered_entries))
+        # Filter by category.
         if self._filter_categories:
             filtered_entries = list(
                 filter(lambda entry:
