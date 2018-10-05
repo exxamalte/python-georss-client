@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:fn="http://www.w3.org/2005/xpath-functions"
+     xmlns:datetime="http://exslt.org/dates-and-times"
+     xmlns:dfes="http://emergency.wa.gov.au/xmlns/dfes"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" version="2.0">
+    <channel>
+        <title>DFES Warnings (All Regions)</title>
+        <item>
+            <title>Title 1</title>
+            <description><![CDATA[
+<div>
+<b>Category: </b>Category 1</div>
+<div>
+]]></description>
+            <dfes:region>Region 1</dfes:region>
+            <pubDate>Sun, 30 Sep 2018 08:30:00 GMT</pubDate>
+            <guid>1234</guid>
+            <geo:long>121.30196</geo:long>
+            <geo:lat>-30.97304</geo:lat>
+        </item>
+        <item>
+            <title>Title 2</title>
+            <description><![CDATA[
+<div>
+<b>Category: </b>Category 2</div>
+<div>
+]]></description>
+            <dfes:region>Region 2</dfes:region>
+            <guid>130805106</guid>
+            <geo:long>128.98376</geo:long>
+            <geo:lat>-15.62504</geo:lat>
+        </item>
+    </channel>
+</rss>

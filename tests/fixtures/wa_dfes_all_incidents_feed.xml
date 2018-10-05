@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" version="2.0">
+    <channel>
+        <title>DFES Incidents (All Regions)</title>
+        <item>
+            <title>Title 1</title>
+            <description>Category 1 <![CDATA[<region>Region 1</region>
+<incidentNumber>402250</incidentNumber>
+<publicationTime>30/09/2018 08:30:00</publicationTime>]]></description>
+            <pubDate>2018-09-30 08:30:00</pubDate>
+            <guid>1234</guid>
+            <geo:long>119.94800</geo:long>
+            <geo:lat>-23.12641</geo:lat>
+        </item>
+        <item>
+            <title>Title 2</title>
+            <description>Category 2 <![CDATA[<region>Region 2</region>
+<incidentNumber>402242</incidentNumber>
+<publicationTime>30/09/2018 09:00:00</publicationTime>]]></description>
+            <guid>2345</guid>
+            <geo:long>128.72871</geo:long>
+            <geo:lat>-15.62951</geo:lat>
+        </item>
+    </channel>
+</rss>
