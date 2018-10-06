@@ -96,7 +96,36 @@ status, entries = feed.update()
 ```python
 from georss_client.wa_dfes_feed import WaDfesFeed
 # Home Coordinates: Latitude: -31.0, Longitude: 121.0
+# Feed: Warnings
 # Filter radius: 50 km
 feed = WaDfesFeed((-31.0, 121.0), 'warnings', filter_radius=50)
+status, entries = feed.update()
+```
+
+### [Natural Resources Canada Earthquakes Feed](http://www.earthquakescanada.nrcan.gc.ca/index-en.php)
+
+**Supported Languages**
+
+| Language | Feed |
+|----------|------|
+| English  | `en` |
+| Français | `fr` |
+
+**Supported Filters**
+
+| Filter     |                     | Description |
+|------------|---------------------|-------------|
+| Radius     | `filter_radius`     | Radius in kilometers around the home coordinates in which events from feed are included. |
+| Categories | `filter_categories` | Array of category names. Only events with a category matching any of these is included. |
+
+**Example**
+```python
+from georss_client.natural_resources_canada_earthquakes_feed import \
+    NaturalResourcesCanadaEarthquakesFeed
+# Home Coordinates: Latitude: 49.25, Longitude: -123.1
+# Language: English
+# Filter radius: 200 km
+feed = NaturalResourcesCanadaEarthquakesFeed((49.25, -123.1), 'en', 
+                                             filter_radius=200)
 status, entries = feed.update()
 ```
