@@ -29,7 +29,7 @@ class TestNaturalResourcesCanadaEarthquakesFeed(unittest.TestCase):
                              "home=(49.25, -123.1), url=http://www." \
                              "earthquakescanada.nrcan.gc.ca/index-en.php?" \
                              "tpl_region=canada&tpl_output=rss, " \
-                             "radius=None, categories=None)>"
+                             "radius=None, magnitude=None)>"
         status, entries = feed.update()
         assert status == UPDATE_OK
         self.assertIsNotNone(entries)
@@ -55,7 +55,7 @@ class TestNaturalResourcesCanadaEarthquakesFeed(unittest.TestCase):
 
     @mock.patch("requests.Request")
     @mock.patch("requests.Session")
-    def test_update_ok_en_with_category(self, mock_session, mock_request):
+    def test_update_ok_en_with_magnitude(self, mock_session, mock_request):
         """Test updating feed is ok."""
         home_coordinates = (49.25, -123.1)
         mock_session.return_value.__enter__.return_value.send\
@@ -64,8 +64,13 @@ class TestNaturalResourcesCanadaEarthquakesFeed(unittest.TestCase):
             .return_value.text = \
             load_fixture('natural_resources_canada_earthquakes_en_feed.xml')
 
-        feed = NaturalResourcesCanadaEarthquakesFeed(home_coordinates, 'en',
-                          filter_categories=['Category 1'])
+        feed = NaturalResourcesCanadaEarthquakesFeed(
+            home_coordinates, 'en', filter_minimum_magnitude=4.0)
+        assert repr(feed) == "<NaturalResourcesCanadaEarthquakesFeed(" \
+                             "home=(49.25, -123.1), url=http://www." \
+                             "earthquakescanada.nrcan.gc.ca/index-en.php?" \
+                             "tpl_region=canada&tpl_output=rss, " \
+                             "radius=None, magnitude=4.0)>"
         status, entries = feed.update()
         assert status == UPDATE_OK
         self.assertIsNotNone(entries)
@@ -91,7 +96,7 @@ class TestNaturalResourcesCanadaEarthquakesFeed(unittest.TestCase):
                              "home=(49.25, -123.1), url=http://www." \
                              "earthquakescanada.nrcan.gc.ca/index-fr.php?" \
                              "tpl_region=canada&tpl_output=rss, " \
-                             "radius=None, categories=None)>"
+                             "radius=None, magnitude=None)>"
         status, entries = feed.update()
         assert status == UPDATE_OK
         self.assertIsNotNone(entries)
@@ -117,7 +122,7 @@ class TestNaturalResourcesCanadaEarthquakesFeed(unittest.TestCase):
 
     @mock.patch("requests.Request")
     @mock.patch("requests.Session")
-    def test_update_ok_fr_with_category(self, mock_session, mock_request):
+    def test_update_ok_fr_with_magnitude(self, mock_session, mock_request):
         """Test updating feed is ok."""
         home_coordinates = (49.25, -123.1)
         mock_session.return_value.__enter__.return_value.send\
@@ -127,7 +132,12 @@ class TestNaturalResourcesCanadaEarthquakesFeed(unittest.TestCase):
             load_fixture('natural_resources_canada_earthquakes_fr_feed.xml')
 
         feed = NaturalResourcesCanadaEarthquakesFeed(
-            home_coordinates, 'fr', filter_categories=['Category 1'])
+            home_coordinates, 'fr', filter_minimum_magnitude=4.0)
+        assert repr(feed) == "<NaturalResourcesCanadaEarthquakesFeed(" \
+                             "home=(49.25, -123.1), url=http://www." \
+                             "earthquakescanada.nrcan.gc.ca/index-fr.php?" \
+                             "tpl_region=canada&tpl_output=rss, " \
+                             "radius=None, magnitude=4.0)>"
         status, entries = feed.update()
         assert status == UPDATE_OK
         self.assertIsNotNone(entries)
