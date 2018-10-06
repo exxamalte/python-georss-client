@@ -170,6 +170,14 @@ class FeedEntry:
             return self._rss_entry.get('title', None)
         return None
 
+    def _search_in_title(self, regexp):
+        """Find a sub-string in the entry's title."""
+        if self.title:
+            match = re.search(regexp, self.title)
+            if match:
+                return match.group(CUSTOM_ATTRIBUTE)
+        return None
+
     @property
     def category(self) -> Optional[str]:
         """Return the category of this entry."""
