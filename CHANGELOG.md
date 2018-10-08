@@ -1,5 +1,10 @@
 # Changes
 
+## 0.3 (08/10/2018)
+* Filter out entries without any geo location data
+* Support for Natural Resources Canada Earthquakes feed
+* Support for INGV Centro Nazionale Terremoti (Earthquakes) feed
+
 ## 0.2 (05/10/2018)
 * Support for Tasmania Fire Service Incidents feed
 * Support for Western Australia Department of Fire and Emergency Services feed
