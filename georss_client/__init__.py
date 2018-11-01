@@ -3,7 +3,7 @@ Base class for GeoRSS services.
 
 Fetches GeoRSS feed from URL to be defined by sub-class.
 """
-import feedparser
+#import feedparser
 import logging
 import re
 
@@ -13,6 +13,7 @@ from haversine import haversine
 from typing import Optional
 
 from georss_client.consts import ATTR_ATTRIBUTION, CUSTOM_ATTRIBUTE
+from georss_client.xml_parser import XmlParser
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -71,7 +72,12 @@ class GeoRssFeed:
             with requests.Session() as session:
                 response = session.send(self._request, timeout=10)
             if response.ok:
-                feed_data = feedparser.parse(response.text)
+                encoding = response.encoding
+                parser = XmlParser(encoding)
+                feed_data = parser.parse(response.text)
+                self.parser = parser
+                self.feed_data = feed_data
+                # feed_data = feedparser.parse(response.text)
                 return UPDATE_OK, feed_data
             else:
                 _LOGGER.warning(
