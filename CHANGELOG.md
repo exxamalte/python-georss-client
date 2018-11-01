@@ -1,5 +1,8 @@
 # Changes
 
+## 0.4 (01/11/2018)
+* Third-party library updates.
+
 ## 0.3 (08/10/2018)
 * Filter out entries without any geo location data
 * Support for Natural Resources Canada Earthquakes feed
