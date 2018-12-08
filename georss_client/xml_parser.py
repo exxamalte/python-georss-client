@@ -9,9 +9,6 @@ from typing import Optional
 
 _LOGGER = logging.getLogger(__name__)
 
-KEYS_DATES = ['dc:date', 'lastBuildDate', 'pubDate', 'published', 'updated']
-KEYS_INT = ['ttl']
-
 DEFAULT_NAMESPACES = {
     'http://www.w3.org/2005/Atom': None,
     'http://purl.org/dc/elements/1.1/': 'dc',
@@ -21,52 +18,50 @@ DEFAULT_NAMESPACES = {
     'http://www.gdacs.org/': 'gdacs',
 }
 
+KEYS_DATE = ['dc:date', 'lastBuildDate', 'pubDate', 'published', 'updated']
+KEYS_INT = ['ttl']
+
 
 class XmlParser:
     """Built-in XML parser."""
 
     def __init__(self, additional_namespaces=None):
         """Initialise the XML parser."""
-        # self._namespaces = {**DEFAULT_NAMESPACES, **additional_namespaces}
         self._namespaces = DEFAULT_NAMESPACES
         if additional_namespaces:
             self._namespaces.update(additional_namespaces)
-        self.parsed_xmltodict = None
-        self.feed = None
 
     def parse(self, xml):
         """Parse the provided xml."""
         if xml:
-            # Retain full control over namespaces.
 
             def postprocessor(path, key, value):
                 """Conduct type conversion for selected keys."""
                 try:
-                    if key in KEYS_DATES:
+                    if key in KEYS_DATE:
                         return key, dateparser.parse(value)
                     if key in KEYS_INT:
                         return key, int(value)
-                except (ValueError, TypeError):
-                    # TODO: handle error
-                    _LOGGER.warning("error")
+                except (ValueError, TypeError) as error:
+                    _LOGGER.warning("Unable to process (%s/%s): %s",
+                                    key, value, error)
                 return key, value
 
-            self.parsed_xmltodict = xmltodict.parse(
+            parsed_dict = xmltodict.parse(
                 xml, process_namespaces=True, namespaces=self._namespaces,
                 postprocessor=postprocessor)
 
-            data = self.parsed_xmltodict
-            if 'rss' in self.parsed_xmltodict:
-                rss = self.parsed_xmltodict.get('rss')
+            data = parsed_dict
+            if 'rss' in parsed_dict:
+                rss = parsed_dict.get('rss')
                 if 'channel' in rss:
                     channel = rss.get('channel')
                     data = channel
-            if 'feed' in self.parsed_xmltodict:
-                feed = self.parsed_xmltodict.get('feed')
+            if 'feed' in parsed_dict:
+                feed = parsed_dict.get('feed')
                 data = feed
 
-            self.feed = Feed(data)
-            return self.feed
+            return Feed(data)
         return None
 
 
@@ -89,10 +84,12 @@ class Point(Geometry):
 
     @property
     def latitude(self) -> Optional[float]:
+        """Return the latitude of this point."""
         return self._latitude
 
     @property
     def longitude(self) -> Optional[float]:
+        """Return the longitude of this point."""
         return self._longitude
 
 
@@ -105,11 +102,12 @@ class Polygon(Geometry):
 
     @property
     def points(self) -> Optional[list]:
+        """Return the points of this polygon."""
         return self._points
 
     @property
     def centroid(self) -> Point:
-        # Find the polygon's centroid as a best approximation.
+        """Find the polygon's centroid as a best approximation."""
         longitudes_list = [point.longitude for point in self.points]
         latitudes_list = [point.latitude for point in self.points]
         number_of_points = len(self.points)
@@ -131,6 +129,7 @@ class FeedDictSource:
             self.__class__.__name__, self.link)
 
     def _attribute(self, names):
+        """Get an attribute from this feed or feed item."""
         if self._source and names:
             # Try each name, and return the first value that is not None.
             for name in names:
@@ -141,22 +140,27 @@ class FeedDictSource:
 
     @property
     def title(self) -> Optional[str]:
+        """Return the title of this feed or feed item."""
         return self._attribute(['title'])
 
     @property
     def description(self) -> Optional[str]:
+        """Return the description of this feed or feed item."""
         return self._attribute(['description', 'summary', 'content'])
 
     @property
     def link(self) -> Optional[str]:
+        """Return the link of this feed or feed item."""
         return self._attribute(['link'])
 
     @property
     def published_date(self) -> Optional[datetime.datetime]:
+        """Return the published date of this feed or feed item."""
         return self._attribute(['pubDate', 'published', 'dc:date'])
 
     @property
     def updated_date(self) -> Optional[datetime.datetime]:
+        """Return the updated date of this feed or feed item."""
         return self._attribute(['updated'])
 
     def get_additional_attribute(self, name):
@@ -166,10 +170,10 @@ class FeedDictSource:
 
 class Feed(FeedDictSource):
     """Represents a feed."""
-    # 'publisher'
 
     @property
     def author(self) -> Optional[str]:
+        """Return the author of this feed."""
         # <author>
         #   <name>Istituto Nazionale di Geofisica e Vulcanologia</name>
         #   <uri>http://www.ingv.it</uri>
@@ -182,26 +186,32 @@ class Feed(FeedDictSource):
 
     @property
     def copyright(self) -> Optional[str]:
+        """Return the copyright of this feed."""
         return self._attribute(['copyright'])
 
     @property
     def generator(self) -> Optional[str]:
+        """Return the generator of this feed."""
         return self._attribute(['generator'])
 
     @property
     def language(self) -> Optional[str]:
+        """Return the language of this feed."""
         return self._attribute(['language'])
 
     @property
     def last_build_date(self) -> Optional[datetime.datetime]:
+        """Return the last build date of this feed."""
         return self._attribute(['lastBuildDate'])
 
     @property
     def ttl(self) -> Optional[int]:
+        """Return the ttl of this feed."""
         return self._attribute(['ttl'])
 
     @property
     def entries(self):
+        """Return the entries of this feed."""
         items = self._attribute(['item', 'entry'])
         entries = []
         if items and isinstance(items, list):
@@ -223,6 +233,7 @@ class FeedItem(FeedDictSource):
 
     @property
     def guid(self) -> Optional[str]:
+        """Return the guid of this feed item."""
         guid = self._attribute(['guid', 'id'])
         if guid and isinstance(guid, dict) and '#text' in guid:
             # <guid isPermaLink="false">
@@ -233,10 +244,12 @@ class FeedItem(FeedDictSource):
 
     @property
     def source(self) -> Optional[str]:
+        """Return the source of this feed item."""
         return self._attribute(['source'])
 
     @property
     def category(self) -> Optional[str]:
+        """Return the category of this feed item."""
         category = self._attribute(['category'])
         if category and '@term' in category:
             # <category term="Category 1"/>
@@ -245,6 +258,7 @@ class FeedItem(FeedDictSource):
 
     @property
     def geometry(self) -> Optional[Geometry]:
+        """Return the geometry of this feed item."""
         # <georss:point>-0.5 119.8</georss:point>
         point = self._attribute(['georss:point'])
         if point:
