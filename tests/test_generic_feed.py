@@ -83,6 +83,39 @@ class TestGenericFeed(unittest.TestCase):
 
     @mock.patch("requests.Request")
     @mock.patch("requests.Session")
+    def test_update_ok_feed_3(self, mock_session, mock_request):
+        """Test updating feed is ok."""
+        home_coordinates = (-31.0, 151.0)
+        mock_session.return_value.__enter__.return_value.send\
+            .return_value.ok = True
+        mock_session.return_value.__enter__.return_value.send\
+            .return_value.text = load_fixture('generic_feed_3.xml')
+
+        feed = GenericFeed(home_coordinates, None)
+        status, entries = feed.update()
+        assert status == UPDATE_OK
+        self.assertIsNotNone(entries)
+        assert len(entries) == 3
+
+        feed_entry = entries[0]
+        assert feed_entry.external_id == "1234"
+        assert feed_entry.coordinates == (-34.93728111547821,
+                                          148.59710883878262)
+        self.assertAlmostEqual(feed_entry.distance_to_home, 491.7, 1)
+
+        feed_entry = entries[1]
+        assert feed_entry.external_id == "2345"
+        assert feed_entry.coordinates == (-34.937170989, 148.597182317)
+        self.assertAlmostEqual(feed_entry.distance_to_home, 491.8, 1)
+
+        feed_entry = entries[2]
+        assert feed_entry.external_id == "3456"
+        assert feed_entry.coordinates == (-29.962746645660683,
+                                          152.43090880416074)
+        self.assertAlmostEqual(feed_entry.distance_to_home, 176.5, 1)
+
+    @mock.patch("requests.Request")
+    @mock.patch("requests.Session")
     def test_update_ok_with_radius_filtering(self, mock_session, mock_request):
         """Test updating feed is ok."""
         home_coordinates = (-37.0, 150.0)

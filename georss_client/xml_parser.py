@@ -56,7 +56,6 @@ class XmlParser:
                 postprocessor=postprocessor)
 
             data = self.parsed_xmltodict
-            _LOGGER.warning('data 1 = %s', data)
             if 'rss' in self.parsed_xmltodict:
                 rss = self.parsed_xmltodict.get('rss')
                 if 'channel' in rss:
@@ -65,14 +64,17 @@ class XmlParser:
             if 'feed' in self.parsed_xmltodict:
                 feed = self.parsed_xmltodict.get('feed')
                 data = feed
-            _LOGGER.warning('data 2 = %s', data)
 
             self.feed = Feed(data)
             return self.feed
         return None
 
 
-class Point:
+class Geometry:
+    """Represents a geometry."""
+
+
+class Point(Geometry):
     """Represents a point."""
 
     def __init__(self, latitude, longitude):
@@ -92,6 +94,28 @@ class Point:
     @property
     def longitude(self) -> Optional[float]:
         return self._longitude
+
+
+class Polygon(Geometry):
+    """Represents a polygon."""
+
+    def __init__(self, points):
+        """Initialise polygon."""
+        self._points = points
+
+    @property
+    def points(self) -> Optional[list]:
+        return self._points
+
+    @property
+    def centroid(self) -> Point:
+        # Find the polygon's centroid as a best approximation.
+        longitudes_list = [point.longitude for point in self.points]
+        latitudes_list = [point.latitude for point in self.points]
+        number_of_points = len(self.points)
+        longitude = sum(longitudes_list) / number_of_points
+        latitude = sum(latitudes_list) / number_of_points
+        return Point(latitude, longitude)
 
 
 class FeedDictSource:
@@ -126,15 +150,6 @@ class FeedDictSource:
     @property
     def link(self) -> Optional[str]:
         return self._attribute(['link'])
-
-    @property
-    def category(self) -> Optional[str]:
-        # TODO: handle lists
-        category = self._attribute(['category'])
-        if category and '@term' in category:
-            # <category term="Category 1"/>
-            category = category.get('@term')
-        return category
 
     @property
     def published_date(self) -> Optional[datetime.datetime]:
@@ -221,12 +236,20 @@ class FeedItem(FeedDictSource):
         return self._attribute(['source'])
 
     @property
-    def geometry(self) -> Optional[Point]:
+    def category(self) -> Optional[str]:
+        category = self._attribute(['category'])
+        if category and '@term' in category:
+            # <category term="Category 1"/>
+            category = category.get('@term')
+        return category
+
+    @property
+    def geometry(self) -> Optional[Geometry]:
         # <georss:point>-0.5 119.8</georss:point>
         point = self._attribute(['georss:point'])
         if point:
-            longitude = float(point.split(' ')[1])
             latitude = float(point.split(' ')[0])
+            longitude = float(point.split(' ')[1])
             return Point(latitude, longitude)
         # <georss:where>
         #   <gml:Point>
@@ -239,8 +262,8 @@ class FeedItem(FeedDictSource):
             if point:
                 pos = point.get('gml:pos')
                 if pos:
-                    longitude = float(pos.split(' ')[1])
                     latitude = float(pos.split(' ')[0])
+                    longitude = float(pos.split(' ')[1])
                     return Point(latitude, longitude)
         # <geo:Point xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#">
         #   <geo:lat>38.3728</geo:lat>
@@ -259,5 +282,26 @@ class FeedItem(FeedDictSource):
             longitude = float(long)
             latitude = float(lat)
             return Point(latitude, longitude)
+        # <georss:polygon>
+        #   -34.937663524 148.597260613
+        #   -34.9377026399999 148.597169138
+        #   -34.9377002169999 148.59708737
+        #   -34.9376945989999 148.59705595
+        #   -34.9376863529999 148.596955098
+        #   -34.937663524 148.597260613
+        # </georss:polygon>
+        polygon = self._attribute(['georss:polygon'])
+        if polygon:
+            # For now, only supporting the first polygon.
+            if isinstance(polygon, list):
+                polygon = polygon[0]
+            # Extract coordinate pairs.
+            coordinate_values = polygon.split(' ')
+            points = []
+            for i in range(0, len(coordinate_values), 2):
+                latitude = float(coordinate_values[i])
+                longitude = float(coordinate_values[i+1])
+                points.append(Point(latitude, longitude))
+            return Polygon(points)
         # None of the above
         return None

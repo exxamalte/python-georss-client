@@ -11,7 +11,7 @@ from haversine import haversine
 from typing import Optional
 
 from georss_client.consts import ATTR_ATTRIBUTION, CUSTOM_ATTRIBUTE
-from georss_client.xml_parser import XmlParser, Point
+from georss_client.xml_parser import XmlParser, Point, Polygon
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -221,14 +221,10 @@ class GeoRssDistanceHelper:
         if isinstance(geometry, Point):
             # Just extract latitude and longitude directly.
             latitude, longitude = geometry.latitude, geometry.longitude
-        elif geometry.type == 'Polygon':
-            # Find the polygon's centroid as a best approximation for the map.
-            longitudes_list = [point[0] for point in geometry.coordinates[0]]
-            latitudes_list = [point[1] for point in geometry.coordinates[0]]
-            number_of_points = len(geometry.coordinates[0])
-            longitude = sum(longitudes_list) / number_of_points
-            latitude = sum(latitudes_list) / number_of_points
-            _LOGGER.debug("Centroid of %s is %s", geometry.coordinates[0],
+        elif isinstance(geometry, Polygon):
+            centroid = geometry.centroid
+            latitude, longitude = centroid.latitude, centroid.longitude
+            _LOGGER.debug("Centroid of %s is %s", geometry,
                           (latitude, longitude))
         else:
             _LOGGER.debug("Not implemented: %s", type(geometry))
@@ -241,9 +237,9 @@ class GeoRssDistanceHelper:
         if isinstance(geometry, Point):
             distance = GeoRssDistanceHelper._distance_to_point(
                 home_coordinates, geometry)
-        elif geometry.type == 'Polygon':
+        elif isinstance(geometry, Polygon):
             distance = GeoRssDistanceHelper._distance_to_polygon(
-                home_coordinates, geometry.coordinates[0])
+                home_coordinates, geometry)
         else:
             _LOGGER.debug("Not implemented: %s", type(geometry))
         return distance
@@ -262,11 +258,11 @@ class GeoRssDistanceHelper:
         # Calculate distance from polygon by calculating the distance
         # to each point of the polygon but not to each edge of the
         # polygon; should be good enough
-        for polygon_point in polygon:
+        for point in polygon.points:
             distance = min(distance,
                            GeoRssDistanceHelper._distance_to_coordinates(
                                home_coordinates,
-                               (polygon_point[1], polygon_point[0])))
+                               (point.latitude, point.longitude)))
         return distance
 
     @staticmethod
