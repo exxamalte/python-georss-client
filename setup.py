@@ -7,8 +7,9 @@ REQUIRES = [
     'feedparser>=5.2.1',
     'haversine>=1.0.1',
     'xmltodict==0.11.0',
-    'pytz>=2018.04',
     'requests>=2.20.0',
+    'pytz>=2018.04',
+    'dateparser',
 ]
 
 setup(

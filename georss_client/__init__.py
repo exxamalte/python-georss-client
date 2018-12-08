@@ -3,7 +3,6 @@ Base class for GeoRSS services.
 
 Fetches GeoRSS feed from URL to be defined by sub-class.
 """
-#import feedparser
 import logging
 import re
 
@@ -33,6 +32,8 @@ class GeoRssFeed:
         self._filter_categories = filter_categories
         self._url = url
         self._request = requests.Request(method="GET", url=url).prepare()
+        # TODO: remove after debugging
+        self.parser = None
 
     def __repr__(self):
         """Return string representation of this feed."""
@@ -50,7 +51,7 @@ class GeoRssFeed:
         if status == UPDATE_OK:
             if data:
                 entries = []
-                global_data = self._extract_from_feed(data.feed)
+                global_data = self._extract_from_feed(data)
                 # Extract data from feed entries.
                 for rss_entry in data.entries:
                     entries.append(self._new_entry(self._home_coordinates,
@@ -114,7 +115,8 @@ class GeoRssFeed:
     def _extract_from_feed(self, feed):
         """Extract global metadata from feed."""
         global_data = {}
-        author = feed.get('author', None)
+        author = feed.author
+        # author = feed.get('author', None)
         if author:
             global_data[ATTR_ATTRIBUTION] = author
         return global_data
