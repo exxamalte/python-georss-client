@@ -7,12 +7,11 @@ import logging
 import re
 
 import requests
-from collections import namedtuple
 from haversine import haversine
 from typing import Optional
 
 from georss_client.consts import ATTR_ATTRIBUTION, CUSTOM_ATTRIBUTE
-from georss_client.xml_parser import XmlParser
+from georss_client.xml_parser import XmlParser, Point
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -32,8 +31,6 @@ class GeoRssFeed:
         self._filter_categories = filter_categories
         self._url = url
         self._request = requests.Request(method="GET", url=url).prepare()
-        # TODO: remove after debugging
-        self.parser = None
 
     def __repr__(self):
         """Return string representation of this feed."""
@@ -43,6 +40,10 @@ class GeoRssFeed:
 
     def _new_entry(self, home_coordinates, rss_entry, global_data):
         """Generate a new entry."""
+        pass
+
+    def _additional_namespaces(self):
+        """Provide additional namespaces, relevant for this feed."""
         pass
 
     def update(self):
@@ -73,12 +74,10 @@ class GeoRssFeed:
             with requests.Session() as session:
                 response = session.send(self._request, timeout=10)
             if response.ok:
-                encoding = response.encoding
-                parser = XmlParser(encoding)
+                parser = XmlParser(self._additional_namespaces())
                 feed_data = parser.parse(response.text)
                 self.parser = parser
                 self.feed_data = feed_data
-                # feed_data = feedparser.parse(response.text)
                 return UPDATE_OK, feed_data
             else:
                 _LOGGER.warning(
@@ -137,21 +136,9 @@ class FeedEntry:
     @property
     def geometry(self):
         """Return all geometry details of this entry."""
-        # if self._rss_entry:
-        #     return self._rss_entry.geometry
-        # return None
-        geometry = None
-        if hasattr(self._rss_entry, 'where'):
-            geometry = self._rss_entry.where
-        elif hasattr(self._rss_entry, 'geo_lat') and \
-                hasattr(self._rss_entry, 'geo_long'):
-            coordinates = (float(self._rss_entry.geo_long),
-                           float(self._rss_entry.geo_lat))
-            point = namedtuple('Point', ['type', 'coordinates'])
-            geometry = point('Point', coordinates)
-        if geometry:
-            return geometry
-        return geometry
+        if self._rss_entry:
+            return self._rss_entry.geometry
+        return None
 
     @property
     def coordinates(self):
@@ -163,7 +150,7 @@ class FeedEntry:
     @property
     def external_id(self) -> str:
         """Return the external id of this entry."""
-        external_id = self._rss_entry.get('id', None)
+        external_id = self._rss_entry.guid
         if not external_id:
             external_id = self.title
         if not external_id:
@@ -175,7 +162,7 @@ class FeedEntry:
     def title(self) -> Optional[str]:
         """Return the title of this entry."""
         if self._rss_entry:
-            return self._rss_entry.get('title', None)
+            return self._rss_entry.title
         return None
 
     def _search_in_title(self, regexp):
@@ -190,7 +177,7 @@ class FeedEntry:
     def category(self) -> Optional[str]:
         """Return the category of this entry."""
         if self._rss_entry:
-            return self._rss_entry.get('category', None)
+            return self._rss_entry.category
         return None
 
     @property
@@ -205,16 +192,16 @@ class FeedEntry:
             self._home_coordinates, self.geometry)
 
     @property
-    def summary(self) -> Optional[str]:
+    def description(self) -> Optional[str]:
         """Return the description of this entry."""
-        if self._rss_entry and self._rss_entry.summary:
-            return self._rss_entry.summary
+        if self._rss_entry and self._rss_entry.description:
+            return self._rss_entry.description
         return None
 
-    def _search_in_summary(self, regexp):
-        """Find a sub-string in the entry's summary."""
-        if self.summary:
-            match = re.search(regexp, self.summary)
+    def _search_in_description(self, regexp):
+        """Find a sub-string in the entry's description."""
+        if self.description:
+            match = re.search(regexp, self.description)
             if match:
                 return match.group(CUSTOM_ATTRIBUTE)
         return None
@@ -231,10 +218,9 @@ class GeoRssDistanceHelper:
     def extract_coordinates(geometry):
         """Extract the best coordinates from the feature for display."""
         latitude = longitude = None
-        if geometry.type == 'Point':
+        if isinstance(geometry, Point):
             # Just extract latitude and longitude directly.
-            latitude, longitude = geometry.coordinates[1], \
-                                  geometry.coordinates[0]
+            latitude, longitude = geometry.latitude, geometry.longitude
         elif geometry.type == 'Polygon':
             # Find the polygon's centroid as a best approximation for the map.
             longitudes_list = [point[0] for point in geometry.coordinates[0]]
@@ -252,7 +238,7 @@ class GeoRssDistanceHelper:
     def distance_to_geometry(home_coordinates, geometry):
         """Calculate the distance between home coordinates and geometry."""
         distance = float("inf")
-        if geometry.type == 'Point':
+        if isinstance(geometry, Point):
             distance = GeoRssDistanceHelper._distance_to_point(
                 home_coordinates, geometry)
         elif geometry.type == 'Polygon':
@@ -267,7 +253,7 @@ class GeoRssDistanceHelper:
         """Calculate the distance between home coordinates and the point."""
         # Swap coordinates to match: (latitude, longitude).
         return GeoRssDistanceHelper._distance_to_coordinates(
-            home_coordinates, (point.coordinates[1], point.coordinates[0]))
+            home_coordinates, (point.latitude, point.longitude))
 
     @staticmethod
     def _distance_to_polygon(home_coordinates, polygon):

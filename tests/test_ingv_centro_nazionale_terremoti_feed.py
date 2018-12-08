@@ -44,7 +44,7 @@ class TestIngvCentroNazionaleTerremotiFeed(unittest.TestCase):
             == datetime.datetime(2018, 10, 6, 8, 0,
                                  tzinfo=datetime.timezone.utc)
         assert feed_entry.updated \
-            == datetime.datetime(2018, 10, 6, 8, 0,
+            == datetime.datetime(2018, 10, 6, 8, 30,
                                  tzinfo=datetime.timezone.utc)
         assert feed_entry.region == "1 km NE Biancavilla (CT)"
         assert feed_entry.magnitude == 2.3

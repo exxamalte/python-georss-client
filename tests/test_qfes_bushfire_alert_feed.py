@@ -38,12 +38,8 @@ class TestQfesBushfireAlertFeed(unittest.TestCase):
         assert feed_entry.external_id == "1234"
         assert feed_entry.coordinates == (-32.2345, 149.1234)
         self.assertAlmostEqual(feed_entry.distance_to_home, 224.5, 1)
-        assert feed_entry.published \
-            == datetime.datetime(2018, 9, 27, 8, 0,
-                                 tzinfo=datetime.timezone.utc)
-        assert feed_entry.updated \
-            == datetime.datetime(2018, 9, 27, 8, 30,
-                                 tzinfo=datetime.timezone.utc)
+        assert feed_entry.published == datetime.datetime(2018, 9, 27, 8, 0)
+        assert feed_entry.updated == datetime.datetime(2018, 9, 27, 8, 30)
         assert feed_entry.status == "Status 1"
         assert feed_entry.attribution == "Author 1"
         assert repr(feed_entry) == "<QfesBushfireAlertFeedEntry(id=1234)>"

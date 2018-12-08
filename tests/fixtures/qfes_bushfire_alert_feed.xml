@@ -16,7 +16,7 @@
         <published>2018-09-27T08:00:00</published>
         <title>Title 1</title>
         <updated>2018-09-27T08:30:00</updated>
-        <georss:point>-32.2345, 149.1234</georss:point>
+        <georss:point>-32.2345 149.1234</georss:point>
     </entry>
     <entry>
         <category term="Category 2"/>
@@ -27,6 +27,6 @@
         </content>
         <id>2345</id>
         <title>Title 2</title>
-        <georss:point>-32.3456, 149.2345</georss:point>
+        <georss:point>-32.3456 149.2345</georss:point>
     </entry>
 </feed>

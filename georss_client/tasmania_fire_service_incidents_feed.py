@@ -71,39 +71,36 @@ class TfsIncidentsFeedEntry(FeedEntry):
     @property
     def location(self) -> str:
         """Return the location of this entry."""
-        return self._search_in_summary(REGEXP_ATTR_LOCATION)
+        return self._search_in_description(REGEXP_ATTR_LOCATION)
 
     @property
     def region(self) -> str:
         """Return the region of this entry."""
-        return self._search_in_summary(REGEXP_ATTR_REGION)
+        return self._search_in_description(REGEXP_ATTR_REGION)
 
     @property
     def responsible_agency(self) -> str:
         """Return the responsible agency of this entry."""
-        return self._search_in_summary(REGEXP_ATTR_RESPONSIBLE_AGENCY)
+        return self._search_in_description(REGEXP_ATTR_RESPONSIBLE_AGENCY)
 
     @property
     def status(self) -> str:
         """Return the status of this entry."""
-        return self._search_in_summary(REGEXP_ATTR_STATUS)
+        return self._search_in_description(REGEXP_ATTR_STATUS)
 
     @property
     def size(self) -> str:
         """Return the size of this entry."""
-        return self._search_in_summary(REGEXP_ATTR_SIZE)
+        return self._search_in_description(REGEXP_ATTR_SIZE)
 
     @property
     def type(self) -> str:
         """Return the type of this entry."""
-        return self._search_in_summary(REGEXP_ATTR_TYPE)
+        return self._search_in_description(REGEXP_ATTR_TYPE)
 
     @property
     def published(self) -> Optional[datetime]:
         """Return the published date of this entry."""
         if self._rss_entry:
-            published_date = self._rss_entry.get('published_parsed', None)
-            if published_date:
-                return datetime.fromtimestamp(calendar.timegm(
-                    published_date), tz=pytz.utc)
+            return self._rss_entry.published_date
         return None

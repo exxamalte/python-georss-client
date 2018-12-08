@@ -9,10 +9,10 @@ from typing import Optional
 
 _LOGGER = logging.getLogger(__name__)
 
-KEYS_DATES = ['lastBuildDate', 'pubDate']
+KEYS_DATES = ['dc:date', 'lastBuildDate', 'pubDate', 'published', 'updated']
 KEYS_INT = ['ttl']
 
-NAMESPACES = {
+DEFAULT_NAMESPACES = {
     'http://www.w3.org/2005/Atom': None,
     'http://purl.org/dc/elements/1.1/': 'dc',
     'http://www.georss.org/georss': 'georss',
@@ -25,9 +25,12 @@ NAMESPACES = {
 class XmlParser:
     """Built-in XML parser."""
 
-    def __init__(self, encoding):
+    def __init__(self, additional_namespaces=None):
         """Initialise the XML parser."""
-        self._encoding = encoding
+        # self._namespaces = {**DEFAULT_NAMESPACES, **additional_namespaces}
+        self._namespaces = DEFAULT_NAMESPACES
+        if additional_namespaces:
+            self._namespaces.update(additional_namespaces)
         self.parsed_xmltodict = None
         self.feed = None
 
@@ -49,15 +52,20 @@ class XmlParser:
                 return key, value
 
             self.parsed_xmltodict = xmltodict.parse(
-                xml, process_namespaces=True, namespaces=NAMESPACES,
+                xml, process_namespaces=True, namespaces=self._namespaces,
                 postprocessor=postprocessor)
 
             data = self.parsed_xmltodict
+            _LOGGER.warning('data 1 = %s', data)
             if 'rss' in self.parsed_xmltodict:
                 rss = self.parsed_xmltodict.get('rss')
                 if 'channel' in rss:
                     channel = rss.get('channel')
                     data = channel
+            if 'feed' in self.parsed_xmltodict:
+                feed = self.parsed_xmltodict.get('feed')
+                data = feed
+            _LOGGER.warning('data 2 = %s', data)
 
             self.feed = Feed(data)
             return self.feed
@@ -84,6 +92,7 @@ class Point:
     @property
     def longitude(self) -> Optional[float]:
         return self._longitude
+
 
 class FeedDictSource:
     """Represents a subset of a feed based on a dict."""
@@ -112,7 +121,7 @@ class FeedDictSource:
 
     @property
     def description(self) -> Optional[str]:
-        return self._attribute(['description', 'summary'])
+        return self._attribute(['description', 'summary', 'content'])
 
     @property
     def link(self) -> Optional[str]:
@@ -121,11 +130,23 @@ class FeedDictSource:
     @property
     def category(self) -> Optional[str]:
         # TODO: handle lists
-        return self._attribute(['category'])
+        category = self._attribute(['category'])
+        if category and '@term' in category:
+            # <category term="Category 1"/>
+            category = category.get('@term')
+        return category
 
     @property
-    def pub_date(self) -> Optional[datetime.datetime]:
-        return self._attribute(['pubDate'])
+    def published_date(self) -> Optional[datetime.datetime]:
+        return self._attribute(['pubDate', 'published', 'dc:date'])
+
+    @property
+    def updated_date(self) -> Optional[datetime.datetime]:
+        return self._attribute(['updated'])
+
+    def get_additional_attribute(self, name):
+        """Get an additional attribute not provided as property."""
+        return self._attribute([name])
 
 
 class Feed(FeedDictSource):
@@ -166,20 +187,19 @@ class Feed(FeedDictSource):
 
     @property
     def entries(self):
-        items = self._attribute(['item'])
+        items = self._attribute(['item', 'entry'])
         entries = []
-        if items:
+        if items and isinstance(items, list):
             for item in items:
                 entries.append(FeedItem(item))
+        else:
+            # A single item in the feed is not represented as an array.
+            entries.append(FeedItem(items))
         return entries
 
 
 class FeedItem(FeedDictSource):
     """Represents a feed item."""
-
-    # 'dc:date' - <dc:date xmlns:dc="http://purl.org/dc/elements/1.1/">
-    #               2018-10-01T13:19:56+00:00
-    #             </dc:date>
 
     def __repr__(self):
         """Return string representation of this feed item."""
@@ -188,7 +208,13 @@ class FeedItem(FeedDictSource):
 
     @property
     def guid(self) -> Optional[str]:
-        return self._attribute(['guid'])
+        guid = self._attribute(['guid', 'id'])
+        if guid and isinstance(guid, dict) and '#text' in guid:
+            # <guid isPermaLink="false">
+            #   1234
+            # </guid>
+            guid = guid.get('#text')
+        return guid
 
     @property
     def source(self) -> Optional[str]:
@@ -199,8 +225,8 @@ class FeedItem(FeedDictSource):
         # <georss:point>-0.5 119.8</georss:point>
         point = self._attribute(['georss:point'])
         if point:
-            longitude = float(point.split(' ')[0])
-            latitude = float(point.split(' ')[1])
+            longitude = float(point.split(' ')[1])
+            latitude = float(point.split(' ')[0])
             return Point(latitude, longitude)
         # <georss:where>
         #   <gml:Point>
@@ -211,10 +237,10 @@ class FeedItem(FeedDictSource):
         if where:
             point = where.get('gml:Point')
             if point:
-                pos = where.get('gml:pos')
+                pos = point.get('gml:pos')
                 if pos:
-                    longitude = float(pos.split(' ')[0])
-                    latitude = float(pos.split(' ')[1])
+                    longitude = float(pos.split(' ')[1])
+                    latitude = float(pos.split(' ')[0])
                     return Point(latitude, longitude)
         # <geo:Point xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#">
         #   <geo:lat>38.3728</geo:lat>

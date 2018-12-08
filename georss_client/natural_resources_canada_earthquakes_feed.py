@@ -88,16 +88,13 @@ class NaturalResourcesCanadaEarthquakesFeedEntry(FeedEntry):
     def published(self) -> Optional[datetime]:
         """Return the published date of this entry."""
         if self._rss_entry:
-            published_date = self._rss_entry.get('published_parsed', None)
-            if published_date:
-                return datetime.fromtimestamp(calendar.timegm(
-                    published_date), tz=pytz.utc)
+            return self._rss_entry.published_date
         return None
 
     @property
     def magnitude(self) -> Optional[float]:
         """Return the type of this entry."""
-        magnitude = self._search_in_summary(REGEXP_ATTR_MAGNITUDE)
+        magnitude = self._search_in_description(REGEXP_ATTR_MAGNITUDE)
         if magnitude:
             # Convert to float. In the 'fr' version of the feed, the
             # magnitude value uses comma as decimal separator, hence replacing

@@ -4,7 +4,6 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 REQUIRES = [
-    'feedparser>=5.2.1',
     'haversine>=1.0.1',
     'xmltodict==0.11.0',
     'requests>=2.20.0',
