@@ -7,7 +7,6 @@ REQUIRES = [
     'haversine>=1.0.1',
     'xmltodict>=0.11.0',
     'requests>=2.20.0',
-    'pytz>=2018.04',
     'dateparser>=0.7.0',
 ]
 
