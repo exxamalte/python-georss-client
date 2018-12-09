@@ -7,7 +7,7 @@ import logging
 import xmltodict
 from typing import Optional
 
-from georss_client.consts import XML_TAG_GEORSS_POLYGON, XML_TAG_GEO_LON, \
+from georss_client.consts import XML_TAG_GEORSS_POLYGON, XML_TAG_GEO_LONG, \
     XML_TAG_GEO_LAT, XML_TAG_GEO_POINT, XML_TAG_GML_POS, XML_TAG_GML_POINT, \
     XML_TAG_GEORSS_WHERE, XML_TAG_GEORSS_POINT, XML_ATTR_TERM, \
     XML_TAG_CATEGORY, XML_TAG_SOURCE, XML_ATTR_TEXT, XML_TAG_ID, \
@@ -63,17 +63,15 @@ class XmlParser:
                 xml, process_namespaces=True, namespaces=self._namespaces,
                 postprocessor=postprocessor)
 
-            data = parsed_dict
             if XML_TAG_RSS in parsed_dict:
                 rss = parsed_dict.get(XML_TAG_RSS)
                 if XML_TAG_CHANNEL in rss:
                     channel = rss.get(XML_TAG_CHANNEL)
-                    data = channel
+                    return Feed(channel)
             if XML_TAG_FEED in parsed_dict:
                 feed = parsed_dict.get(XML_TAG_FEED)
-                data = feed
+                return Feed(feed)
 
-            return Feed(data)
         return None
 
 
@@ -91,7 +89,7 @@ class Point(Geometry):
 
     def __repr__(self):
         """Return string representation of this point."""
-        return '<{}(latitude={},longitude={})>'.format(
+        return '<{}(latitude={}, longitude={})>'.format(
             self.__class__.__name__, self.latitude, self.longitude)
 
     @property
@@ -111,6 +109,11 @@ class Polygon(Geometry):
     def __init__(self, points):
         """Initialise polygon."""
         self._points = points
+
+    def __repr__(self):
+        """Return string representation of this polygon."""
+        return '<{}(centroid={})>'.format(
+            self.__class__.__name__, self.centroid)
 
     @property
     def points(self) -> Optional[list]:
@@ -302,12 +305,12 @@ class FeedItem(FeedDictSource):
         point = self._attribute([XML_TAG_GEO_POINT])
         if point:
             latitude = float(point.get(XML_TAG_GEO_LAT))
-            longitude = float(point.get(XML_TAG_GEO_LON))
+            longitude = float(point.get(XML_TAG_GEO_LONG))
             return Point(latitude, longitude)
         # <geo:long>119.948006</geo:long>
         # <geo:lat>-23.126413</geo:lat>
         lat = self._attribute([XML_TAG_GEO_LAT])
-        long = self._attribute([XML_TAG_GEO_LON])
+        long = self._attribute([XML_TAG_GEO_LONG])
         if long and lat:
             longitude = float(long)
             latitude = float(lat)
@@ -326,7 +329,7 @@ class FeedItem(FeedDictSource):
             if isinstance(polygon, list):
                 polygon = polygon[0]
             # Extract coordinate pairs.
-            coordinate_values = polygon.split(' ')
+            coordinate_values = polygon.split()
             points = []
             for i in range(0, len(coordinate_values), 2):
                 latitude = float(coordinate_values[i])

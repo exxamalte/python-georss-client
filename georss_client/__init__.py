@@ -92,6 +92,7 @@ class GeoRssFeed:
     def _filter_entries(self, entries):
         """Filter the provided entries."""
         filtered_entries = entries
+        _LOGGER.debug("Entries before filtering %s", filtered_entries)
         # Always remove entries without geometry
         filtered_entries = list(
             filter(lambda entry:
@@ -109,6 +110,7 @@ class GeoRssFeed:
                 filter(lambda entry:
                        entry.category in self._filter_categories,
                        filtered_entries))
+        _LOGGER.debug("Entries after filtering %s", filtered_entries)
         return filtered_entries
 
     def _extract_from_feed(self, feed):

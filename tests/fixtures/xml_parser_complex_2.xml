@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:georss="http://www.georss.org/georss"
+     xmlns:gml='http://www.opengis.net/gml'
+     xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+     xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+    <channel>
+        <title>Feed Title 1</title>
+        <ttl>INVALID</ttl>
+        <item>
+            <title>Title 6</title>
+            <published>INVALID DATE</published>
+            <georss:point>-37.4567 149.3456</georss:point>
+        </item>
+    </channel>
+</rss>
