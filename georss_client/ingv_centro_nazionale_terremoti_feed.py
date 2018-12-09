@@ -3,8 +3,6 @@ INGV Centro Nazionale Terremoti (Earthquakes) Feed.
 
 Fetches GeoRSS feed from INGV Centro Nazionale Terremoti.
 """
-import calendar
-import pytz
 from datetime import datetime
 
 from typing import Optional
@@ -83,18 +81,13 @@ class IngvCentroNazionaleTerremotiFeedEntry(FeedEntry):
     @property
     def published(self) -> Optional[datetime]:
         """Return the published date of this entry."""
-        # The feed actually contains the original date of the event in a
-        # "dc:date" tag, and the update in an "updated" tag. However, the
-        # feedparser library reads the "dc:date" as updated and ignores the
-        # "updated" tag.
-        return self.updated
+        if self._rss_entry:
+            return self._rss_entry.published_date
+        return None
 
     @property
     def updated(self) -> Optional[datetime]:
         """Return the updated date of this entry."""
         if self._rss_entry:
-            published_date = self._rss_entry.get('updated_parsed', None)
-            if published_date:
-                return datetime.fromtimestamp(calendar.timegm(
-                    published_date), tz=pytz.utc)
+            return self._rss_entry.updated_date
         return None

@@ -3,6 +3,7 @@ import unittest
 from unittest.mock import MagicMock
 
 from georss_client import GeoRssDistanceHelper
+from georss_client.xml_parser import Point, Polygon
 
 
 class TestGeoRssDistanceHelper(unittest.TestCase):
@@ -10,8 +11,7 @@ class TestGeoRssDistanceHelper(unittest.TestCase):
 
     def test_extract_coordinates_from_point(self):
         """Test extracting coordinates from point."""
-        mock_point = MagicMock(type='Point')
-        mock_point.coordinates = [151.0, -30.0]
+        mock_point = Point(-30.0, 151.0)
         latitude, longitude = GeoRssDistanceHelper.\
             extract_coordinates(mock_point)
         assert latitude == -30.0
@@ -19,11 +19,11 @@ class TestGeoRssDistanceHelper(unittest.TestCase):
 
     def test_extract_coordinates_from_polygon(self):
         """Test extracting coordinates from polygon."""
-        mock_polygon = MagicMock(type='Polygon')
-        mock_polygon.coordinates = [[
-            [151.0, -30.0], [151.5, -30.0], [151.5, -30.5], [151.0, -30.5],
-            [151.0, -30.0]
-        ]]
+        mock_polygon = Polygon([Point(-30.0, 151.0),
+                                Point(-30.0, 151.5),
+                                Point(-30.5, 151.5),
+                                Point(-30.5, 151.0),
+                                Point(-30.0, 151.0)])
         latitude, longitude = GeoRssDistanceHelper.\
             extract_coordinates(mock_polygon)
         self.assertAlmostEqual(latitude, -30.2, 1)
@@ -40,8 +40,7 @@ class TestGeoRssDistanceHelper(unittest.TestCase):
     def test_distance_to_point(self):
         """Test calculating distance to point."""
         home_coordinates = [-31.0, 150.0]
-        mock_point = MagicMock(type='Point')
-        mock_point.coordinates = [151.0, -30.0]
+        mock_point = Point(-30.0, 151.0)
         distance = GeoRssDistanceHelper.\
             distance_to_geometry(home_coordinates, mock_point)
         self.assertAlmostEqual(distance, 146.8, 1)
@@ -49,11 +48,11 @@ class TestGeoRssDistanceHelper(unittest.TestCase):
     def test_distance_to_polygon(self):
         """Test calculating distance to point."""
         home_coordinates = [-31.0, 150.0]
-        mock_polygon = MagicMock(type='Polygon')
-        mock_polygon.coordinates = [[
-            [151.0, -30.0], [151.5, -30.0], [151.5, -30.5], [151.0, -30.5],
-            [151.0, -30.0]
-        ]]
+        mock_polygon = Polygon([Point(-30.0, 151.0),
+                                Point(-30.0, 151.5),
+                                Point(-30.5, 151.5),
+                                Point(-30.5, 151.0),
+                                Point(-30.0, 151.0)])
         distance = GeoRssDistanceHelper.\
             distance_to_geometry(home_coordinates, mock_polygon)
         self.assertAlmostEqual(distance, 110.6, 1)

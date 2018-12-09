@@ -101,8 +101,7 @@ class TestWaDfesFeed(unittest.TestCase):
         assert feed_entry.coordinates == (-23.12641, 119.94800)
         self.assertAlmostEqual(feed_entry.distance_to_home, 881.7, 1)
         assert feed_entry.published \
-            == datetime.datetime(2018, 9, 30, 8, 30,
-                                 tzinfo=datetime.timezone.utc)
+            == datetime.datetime(2018, 9, 30, 8, 30)
         assert feed_entry.category == "Category 1"
         assert feed_entry.region == "Region 1"
         assert feed_entry.attribution == "Department of Fire and Emergency " \

@@ -3,16 +3,15 @@ Base class for GeoRSS services.
 
 Fetches GeoRSS feed from URL to be defined by sub-class.
 """
-import feedparser
 import logging
 import re
 
 import requests
-from collections import namedtuple
 from haversine import haversine
 from typing import Optional
 
 from georss_client.consts import ATTR_ATTRIBUTION, CUSTOM_ATTRIBUTE
+from georss_client.xml_parser import XmlParser, Point, Polygon
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -43,13 +42,17 @@ class GeoRssFeed:
         """Generate a new entry."""
         pass
 
+    def _additional_namespaces(self):
+        """Provide additional namespaces, relevant for this feed."""
+        pass
+
     def update(self):
         """Update from external source and return filtered entries."""
         status, data = self._fetch()
         if status == UPDATE_OK:
             if data:
                 entries = []
-                global_data = self._extract_from_feed(data.feed)
+                global_data = self._extract_from_feed(data)
                 # Extract data from feed entries.
                 for rss_entry in data.entries:
                     entries.append(self._new_entry(self._home_coordinates,
@@ -71,7 +74,10 @@ class GeoRssFeed:
             with requests.Session() as session:
                 response = session.send(self._request, timeout=10)
             if response.ok:
-                feed_data = feedparser.parse(response.text)
+                parser = XmlParser(self._additional_namespaces())
+                feed_data = parser.parse(response.text)
+                self.parser = parser
+                self.feed_data = feed_data
                 return UPDATE_OK, feed_data
             else:
                 _LOGGER.warning(
@@ -86,6 +92,7 @@ class GeoRssFeed:
     def _filter_entries(self, entries):
         """Filter the provided entries."""
         filtered_entries = entries
+        _LOGGER.debug("Entries before filtering %s", filtered_entries)
         # Always remove entries without geometry
         filtered_entries = list(
             filter(lambda entry:
@@ -103,12 +110,14 @@ class GeoRssFeed:
                 filter(lambda entry:
                        entry.category in self._filter_categories,
                        filtered_entries))
+        _LOGGER.debug("Entries after filtering %s", filtered_entries)
         return filtered_entries
 
     def _extract_from_feed(self, feed):
         """Extract global metadata from feed."""
         global_data = {}
-        author = feed.get('author', None)
+        author = feed.author
+        # author = feed.get('author', None)
         if author:
             global_data[ATTR_ATTRIBUTION] = author
         return global_data
@@ -129,21 +138,9 @@ class FeedEntry:
     @property
     def geometry(self):
         """Return all geometry details of this entry."""
-        # if self._rss_entry:
-        #     return self._rss_entry.geometry
-        # return None
-        geometry = None
-        if hasattr(self._rss_entry, 'where'):
-            geometry = self._rss_entry.where
-        elif hasattr(self._rss_entry, 'geo_lat') and \
-                hasattr(self._rss_entry, 'geo_long'):
-            coordinates = (float(self._rss_entry.geo_long),
-                           float(self._rss_entry.geo_lat))
-            point = namedtuple('Point', ['type', 'coordinates'])
-            geometry = point('Point', coordinates)
-        if geometry:
-            return geometry
-        return geometry
+        if self._rss_entry:
+            return self._rss_entry.geometry
+        return None
 
     @property
     def coordinates(self):
@@ -155,7 +152,7 @@ class FeedEntry:
     @property
     def external_id(self) -> str:
         """Return the external id of this entry."""
-        external_id = self._rss_entry.get('id', None)
+        external_id = self._rss_entry.guid
         if not external_id:
             external_id = self.title
         if not external_id:
@@ -167,7 +164,7 @@ class FeedEntry:
     def title(self) -> Optional[str]:
         """Return the title of this entry."""
         if self._rss_entry:
-            return self._rss_entry.get('title', None)
+            return self._rss_entry.title
         return None
 
     def _search_in_title(self, regexp):
@@ -182,7 +179,7 @@ class FeedEntry:
     def category(self) -> Optional[str]:
         """Return the category of this entry."""
         if self._rss_entry:
-            return self._rss_entry.get('category', None)
+            return self._rss_entry.category
         return None
 
     @property
@@ -197,16 +194,16 @@ class FeedEntry:
             self._home_coordinates, self.geometry)
 
     @property
-    def summary(self) -> Optional[str]:
+    def description(self) -> Optional[str]:
         """Return the description of this entry."""
-        if self._rss_entry and self._rss_entry.summary:
-            return self._rss_entry.summary
+        if self._rss_entry and self._rss_entry.description:
+            return self._rss_entry.description
         return None
 
-    def _search_in_summary(self, regexp):
-        """Find a sub-string in the entry's summary."""
-        if self.summary:
-            match = re.search(regexp, self.summary)
+    def _search_in_description(self, regexp):
+        """Find a sub-string in the entry's description."""
+        if self.description:
+            match = re.search(regexp, self.description)
             if match:
                 return match.group(CUSTOM_ATTRIBUTE)
         return None
@@ -223,18 +220,13 @@ class GeoRssDistanceHelper:
     def extract_coordinates(geometry):
         """Extract the best coordinates from the feature for display."""
         latitude = longitude = None
-        if geometry.type == 'Point':
+        if isinstance(geometry, Point):
             # Just extract latitude and longitude directly.
-            latitude, longitude = geometry.coordinates[1], \
-                                  geometry.coordinates[0]
-        elif geometry.type == 'Polygon':
-            # Find the polygon's centroid as a best approximation for the map.
-            longitudes_list = [point[0] for point in geometry.coordinates[0]]
-            latitudes_list = [point[1] for point in geometry.coordinates[0]]
-            number_of_points = len(geometry.coordinates[0])
-            longitude = sum(longitudes_list) / number_of_points
-            latitude = sum(latitudes_list) / number_of_points
-            _LOGGER.debug("Centroid of %s is %s", geometry.coordinates[0],
+            latitude, longitude = geometry.latitude, geometry.longitude
+        elif isinstance(geometry, Polygon):
+            centroid = geometry.centroid
+            latitude, longitude = centroid.latitude, centroid.longitude
+            _LOGGER.debug("Centroid of %s is %s", geometry,
                           (latitude, longitude))
         else:
             _LOGGER.debug("Not implemented: %s", type(geometry))
@@ -244,12 +236,12 @@ class GeoRssDistanceHelper:
     def distance_to_geometry(home_coordinates, geometry):
         """Calculate the distance between home coordinates and geometry."""
         distance = float("inf")
-        if geometry.type == 'Point':
+        if isinstance(geometry, Point):
             distance = GeoRssDistanceHelper._distance_to_point(
                 home_coordinates, geometry)
-        elif geometry.type == 'Polygon':
+        elif isinstance(geometry, Polygon):
             distance = GeoRssDistanceHelper._distance_to_polygon(
-                home_coordinates, geometry.coordinates[0])
+                home_coordinates, geometry)
         else:
             _LOGGER.debug("Not implemented: %s", type(geometry))
         return distance
@@ -259,7 +251,7 @@ class GeoRssDistanceHelper:
         """Calculate the distance between home coordinates and the point."""
         # Swap coordinates to match: (latitude, longitude).
         return GeoRssDistanceHelper._distance_to_coordinates(
-            home_coordinates, (point.coordinates[1], point.coordinates[0]))
+            home_coordinates, (point.latitude, point.longitude))
 
     @staticmethod
     def _distance_to_polygon(home_coordinates, polygon):
@@ -268,11 +260,11 @@ class GeoRssDistanceHelper:
         # Calculate distance from polygon by calculating the distance
         # to each point of the polygon but not to each edge of the
         # polygon; should be good enough
-        for polygon_point in polygon:
+        for point in polygon.points:
             distance = min(distance,
                            GeoRssDistanceHelper._distance_to_coordinates(
                                home_coordinates,
-                               (polygon_point[1], polygon_point[0])))
+                               (point.latitude, point.longitude)))
         return distance
 
     @staticmethod

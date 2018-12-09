@@ -4,9 +4,7 @@ WA Department of Fire and Emergency Services (DFES) Feed.
 Fetches GeoRSS feed from WA Department of Fire and Emergency Services (DFES)
 Feed.
 """
-import calendar
 import logging
-import pytz
 from datetime import datetime
 
 from typing import Optional
@@ -16,6 +14,10 @@ from georss_client.consts import CUSTOM_ATTRIBUTE
 from georss_client.exceptions import GeoRssException
 
 _LOGGER = logging.getLogger(__name__)
+
+ADDITIONAL_NAMESPACES = {
+    'http://emergency.wa.gov.au/xmlns/dfes': 'dfes'
+}
 
 ATTRIBUTION = "Department of Fire and Emergency Services"
 
@@ -31,6 +33,8 @@ URLS = {
     'warnings': URL_PREFIX + 'message.rss',
     'all_incidents': URL_PREFIX + 'incident_FCAD.rss',
 }
+
+XML_TAG_DFES_REGION = 'dfes:region'
 
 
 class WaDfesFeed(GeoRssFeed):
@@ -55,6 +59,10 @@ class WaDfesFeed(GeoRssFeed):
             return WaDfesWarningsFeedEntry(home_coordinates, rss_entry)
         if self._feed == 'all_incidents':
             return WaDfesAllIncidentsFeedEntry(home_coordinates, rss_entry)
+
+    def _additional_namespaces(self):
+        """Provide additional namespaces, relevant for this feed."""
+        return ADDITIONAL_NAMESPACES
 
     def _filter_entries(self, entries):
         """Filter the provided entries."""
@@ -82,10 +90,7 @@ class WaDfesFeedEntry(FeedEntry):
     def published(self) -> Optional[datetime]:
         """Return the published date of this entry."""
         if self._rss_entry:
-            published_date = self._rss_entry.get('published_parsed', None)
-            if published_date:
-                return datetime.fromtimestamp(calendar.timegm(
-                    published_date), tz=pytz.utc)
+            return self._rss_entry.published_date
         return None
 
 
@@ -95,13 +100,14 @@ class WaDfesWarningsFeedEntry(WaDfesFeedEntry):
     @property
     def category(self) -> str:
         """Return the type of this entry."""
-        return self._search_in_summary(REGEXP_ATTR_CATEGORY_WARNINGS)
+        return self._search_in_description(REGEXP_ATTR_CATEGORY_WARNINGS)
 
     @property
     def region(self) -> Optional[str]:
         """Return the region of this entry."""
         if self._rss_entry:
-            return self._rss_entry.get('dfes_region', None)
+            return self._rss_entry.get_additional_attribute(
+                XML_TAG_DFES_REGION)
         return None
 
 
@@ -112,9 +118,9 @@ class WaDfesAllIncidentsFeedEntry(WaDfesFeedEntry):
     @property
     def category(self) -> str:
         """Return the type of this entry."""
-        return self._search_in_summary(REGEXP_ATTR_CATEGORY_ALL_INCIDENTS)
+        return self._search_in_description(REGEXP_ATTR_CATEGORY_ALL_INCIDENTS)
 
     @property
     def region(self) -> str:
         """Return the region of this entry."""
-        return self._search_in_summary(REGEXP_ATTR_REGION)
+        return self._search_in_description(REGEXP_ATTR_REGION)

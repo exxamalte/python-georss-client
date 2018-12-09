@@ -4,8 +4,6 @@ import unittest
 from unittest import mock
 
 from georss_client import UPDATE_OK
-from georss_client.qfes_bushfire_alert_feed import \
-    QfesBushfireAlertFeed
 from georss_client.tasmania_fire_service_incidents_feed import TfsIncidentsFeed
 from tests.utils import load_fixture
 

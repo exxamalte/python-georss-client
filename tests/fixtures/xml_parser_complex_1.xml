@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:georss="http://www.georss.org/georss"
+     xmlns:gml='http://www.opengis.net/gml'
+     xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+     xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+    <channel>
+        <title>Feed Title 1</title>
+        <description>Feed Description 1</description>
+        <link>Feed Link 1</link>
+        <pubDate>Sun, 09 Dec 2018 08:30:00 GMT</pubDate>
+        <updated>2018-12-09T08:45:00+00:00</updated>
+        <copyright>Feed Copyright 1</copyright>
+        <generator>Feed Generator 1</generator>
+        <language>Feed Language 1</language>
+        <lastBuildDate>2018-12-09T09:00:00+00:00</lastBuildDate>
+        <ttl>42</ttl>
+        <author>
+            <name>Feed Author 1</name>
+        </author>
+        <random>Feed Random 1</random>
+        <item>
+            <title>Title 1</title>
+            <description>Description 1</description>
+            <link>Link 1</link>
+            <pubDate>Sun, 09 Dec 2018 07:30:00 GMT</pubDate>
+            <updated>2018-12-09T07:45:00+00:00</updated>
+            <guid>GUID 1</guid>
+            <source>Source 1</source>
+            <category>Category 1</category>
+            <random>Random 1</random>
+            <georss:point>-37.4567 149.3456</georss:point>
+        </item>
+        <item>
+            <title>Title 2</title>
+            <summary>Description 2</summary>
+            <published>Sun, 09 Dec 2018 07:35:00 GMT</published>
+            <updated>2018-12-09T07:50:00+00:00</updated>
+            <id>GUID 2</id>
+            <category term="Category 2"/>
+            <georss:where>
+                <gml:Point>
+                    <gml:pos>-37.5678 149.4567</gml:pos>
+                </gml:Point>
+            </georss:where>
+        </item>
+        <item>
+            <title>Title 3</title>
+            <content>Description 3</content>
+            <dc:date>Sun, 09 Dec 2018 07:40:00 GMT</dc:date>
+            <updated>2018-12-09T07:55:00+00:00</updated>
+            <guid isPermaLink="false">
+                GUID 3
+            </guid>
+            <geo:Point>
+                <geo:lat>-37.6789</geo:lat>
+                <geo:long>149.5678</geo:long>
+            </geo:Point>
+        </item>
+        <item>
+            <title>Title 4</title>
+            <geo:lat>-37.7890</geo:lat>
+            <geo:long>149.6789</geo:long>
+        </item>
+        <item>
+            <title>Title 5</title>
+            <georss:polygon>
+                -30.1 150.1
+                -30.2 150.2
+                -30.4 150.4
+                -30.8 150.8
+                -30.1 150.1
+            </georss:polygon>
+        </item>
+    </channel>
+</rss>
