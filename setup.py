@@ -5,10 +5,10 @@ with open("README.md", "r") as fh:
 
 REQUIRES = [
     'haversine>=1.0.1',
-    'xmltodict==0.11.0',
+    'xmltodict>=0.11.0',
     'requests>=2.20.0',
     'pytz>=2018.04',
-    'dateparser',
+    'dateparser>=0.7.0',
 ]
 
 setup(
