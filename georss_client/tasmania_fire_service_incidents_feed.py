@@ -3,8 +3,6 @@ Tasmania Fire Service Incidents Feed.
 
 Fetches GeoRSS feed from Tasmania Fire Service Incidents Feed.
 """
-import calendar
-import pytz
 from datetime import datetime
 
 from typing import Optional

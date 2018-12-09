@@ -3,9 +3,6 @@ QFES Bushfire Alert Feed.
 
 Fetches GeoRSS feed from QFES Bushfire Alert Feed.
 """
-
-import calendar
-import pytz
 from datetime import datetime
 
 from typing import Optional

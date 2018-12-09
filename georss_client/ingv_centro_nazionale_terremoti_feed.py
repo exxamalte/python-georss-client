@@ -3,8 +3,6 @@ INGV Centro Nazionale Terremoti (Earthquakes) Feed.
 
 Fetches GeoRSS feed from INGV Centro Nazionale Terremoti.
 """
-import calendar
-import pytz
 from datetime import datetime
 
 from typing import Optional

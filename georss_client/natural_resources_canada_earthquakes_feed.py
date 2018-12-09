@@ -3,9 +3,7 @@ Natural Resources Canada Earthquakes Feed.
 
 Fetches GeoRSS feed from Natural Resources Canada Earthquakes.
 """
-import calendar
 import logging
-import pytz
 from datetime import datetime
 
 from typing import Optional
