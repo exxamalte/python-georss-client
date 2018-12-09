@@ -7,6 +7,17 @@ import logging
 import xmltodict
 from typing import Optional
 
+from georss_client.consts import XML_TAG_GEORSS_POLYGON, XML_TAG_GEO_LON, \
+    XML_TAG_GEO_LAT, XML_TAG_GEO_POINT, XML_TAG_GML_POS, XML_TAG_GML_POINT, \
+    XML_TAG_GEORSS_WHERE, XML_TAG_GEORSS_POINT, XML_ATTR_TERM, \
+    XML_TAG_CATEGORY, XML_TAG_SOURCE, XML_ATTR_TEXT, XML_TAG_ID, \
+    XML_TAG_GUID, XML_TAG_ENTRY, XML_TAG_ITEM, XML_TAG_NAME, XML_TAG_AUTHOR, \
+    XML_TAG_LAST_BUILD_DATE, XML_TAG_TTL, XML_TAG_LANGUAGE, \
+    XML_TAG_GENERATOR, XML_TAG_COPYRIGHT, XML_TAG_DC_DATE, XML_TAG_PUB_DATE, \
+    XML_TAG_PUBLISHED, XML_TAG_UPDATED, XML_TAG_LINK, XML_TAG_CONTENT, \
+    XML_TAG_SUMMARY, XML_TAG_DESCRIPTION, XML_TAG_TITLE, XML_TAG_FEED, \
+    XML_TAG_CHANNEL, XML_TAG_RSS
+
 _LOGGER = logging.getLogger(__name__)
 
 DEFAULT_NAMESPACES = {
@@ -18,8 +29,9 @@ DEFAULT_NAMESPACES = {
     'http://www.gdacs.org/': 'gdacs',
 }
 
-KEYS_DATE = ['dc:date', 'lastBuildDate', 'pubDate', 'published', 'updated']
-KEYS_INT = ['ttl']
+KEYS_DATE = [XML_TAG_DC_DATE, XML_TAG_LAST_BUILD_DATE, XML_TAG_PUB_DATE,
+             XML_TAG_PUBLISHED, XML_TAG_UPDATED]
+KEYS_INT = [XML_TAG_TTL]
 
 
 class XmlParser:
@@ -52,13 +64,13 @@ class XmlParser:
                 postprocessor=postprocessor)
 
             data = parsed_dict
-            if 'rss' in parsed_dict:
-                rss = parsed_dict.get('rss')
-                if 'channel' in rss:
-                    channel = rss.get('channel')
+            if XML_TAG_RSS in parsed_dict:
+                rss = parsed_dict.get(XML_TAG_RSS)
+                if XML_TAG_CHANNEL in rss:
+                    channel = rss.get(XML_TAG_CHANNEL)
                     data = channel
-            if 'feed' in parsed_dict:
-                feed = parsed_dict.get('feed')
+            if XML_TAG_FEED in parsed_dict:
+                feed = parsed_dict.get(XML_TAG_FEED)
                 data = feed
 
             return Feed(data)
@@ -141,27 +153,31 @@ class FeedDictSource:
     @property
     def title(self) -> Optional[str]:
         """Return the title of this feed or feed item."""
-        return self._attribute(['title'])
+        return self._attribute([XML_TAG_TITLE])
 
     @property
     def description(self) -> Optional[str]:
         """Return the description of this feed or feed item."""
-        return self._attribute(['description', 'summary', 'content'])
+        return self._attribute([XML_TAG_DESCRIPTION,
+                                XML_TAG_SUMMARY,
+                                XML_TAG_CONTENT])
 
     @property
     def link(self) -> Optional[str]:
         """Return the link of this feed or feed item."""
-        return self._attribute(['link'])
+        return self._attribute([XML_TAG_LINK])
 
     @property
     def published_date(self) -> Optional[datetime.datetime]:
         """Return the published date of this feed or feed item."""
-        return self._attribute(['pubDate', 'published', 'dc:date'])
+        return self._attribute([XML_TAG_PUB_DATE,
+                                XML_TAG_PUBLISHED,
+                                XML_TAG_DC_DATE])
 
     @property
     def updated_date(self) -> Optional[datetime.datetime]:
         """Return the updated date of this feed or feed item."""
-        return self._attribute(['updated'])
+        return self._attribute([XML_TAG_UPDATED])
 
     def get_additional_attribute(self, name):
         """Get an additional attribute not provided as property."""
@@ -178,41 +194,41 @@ class Feed(FeedDictSource):
         #   <name>Istituto Nazionale di Geofisica e Vulcanologia</name>
         #   <uri>http://www.ingv.it</uri>
         # </author>
-        author = self._attribute(['author'])
+        author = self._attribute([XML_TAG_AUTHOR])
         if author:
-            name = author.get('name', None)
+            name = author.get(XML_TAG_NAME, None)
             return name
         return None
 
     @property
     def copyright(self) -> Optional[str]:
         """Return the copyright of this feed."""
-        return self._attribute(['copyright'])
+        return self._attribute([XML_TAG_COPYRIGHT])
 
     @property
     def generator(self) -> Optional[str]:
         """Return the generator of this feed."""
-        return self._attribute(['generator'])
+        return self._attribute([XML_TAG_GENERATOR])
 
     @property
     def language(self) -> Optional[str]:
         """Return the language of this feed."""
-        return self._attribute(['language'])
+        return self._attribute([XML_TAG_LANGUAGE])
 
     @property
     def last_build_date(self) -> Optional[datetime.datetime]:
         """Return the last build date of this feed."""
-        return self._attribute(['lastBuildDate'])
+        return self._attribute([XML_TAG_LAST_BUILD_DATE])
 
     @property
     def ttl(self) -> Optional[int]:
         """Return the ttl of this feed."""
-        return self._attribute(['ttl'])
+        return self._attribute([XML_TAG_TTL])
 
     @property
     def entries(self):
         """Return the entries of this feed."""
-        items = self._attribute(['item', 'entry'])
+        items = self._attribute([XML_TAG_ITEM, XML_TAG_ENTRY])
         entries = []
         if items and isinstance(items, list):
             for item in items:
@@ -234,33 +250,33 @@ class FeedItem(FeedDictSource):
     @property
     def guid(self) -> Optional[str]:
         """Return the guid of this feed item."""
-        guid = self._attribute(['guid', 'id'])
-        if guid and isinstance(guid, dict) and '#text' in guid:
+        guid = self._attribute([XML_TAG_GUID, XML_TAG_ID])
+        if guid and isinstance(guid, dict) and XML_ATTR_TEXT in guid:
             # <guid isPermaLink="false">
             #   1234
             # </guid>
-            guid = guid.get('#text')
+            guid = guid.get(XML_ATTR_TEXT)
         return guid
 
     @property
     def source(self) -> Optional[str]:
         """Return the source of this feed item."""
-        return self._attribute(['source'])
+        return self._attribute([XML_TAG_SOURCE])
 
     @property
     def category(self) -> Optional[str]:
         """Return the category of this feed item."""
-        category = self._attribute(['category'])
-        if category and '@term' in category:
+        category = self._attribute([XML_TAG_CATEGORY])
+        if category and XML_ATTR_TERM in category:
             # <category term="Category 1"/>
-            category = category.get('@term')
+            category = category.get(XML_ATTR_TERM)
         return category
 
     @property
     def geometry(self) -> Optional[Geometry]:
         """Return the geometry of this feed item."""
         # <georss:point>-0.5 119.8</georss:point>
-        point = self._attribute(['georss:point'])
+        point = self._attribute([XML_TAG_GEORSS_POINT])
         if point:
             latitude = float(point.split(' ')[0])
             longitude = float(point.split(' ')[1])
@@ -270,11 +286,11 @@ class FeedItem(FeedDictSource):
         #     <gml:pos>44.11 -66.23</gml:pos>
         #   </gml:Point>
         # </georss:where>
-        where = self._attribute(['georss:where'])
+        where = self._attribute([XML_TAG_GEORSS_WHERE])
         if where:
-            point = where.get('gml:Point')
+            point = where.get(XML_TAG_GML_POINT)
             if point:
-                pos = point.get('gml:pos')
+                pos = point.get(XML_TAG_GML_POS)
                 if pos:
                     latitude = float(pos.split(' ')[0])
                     longitude = float(pos.split(' ')[1])
@@ -283,15 +299,15 @@ class FeedItem(FeedDictSource):
         #   <geo:lat>38.3728</geo:lat>
         #   <geo:long>15.7213</geo:long>
         # </geo:Point>
-        point = self._attribute(['geo:Point'])
+        point = self._attribute([XML_TAG_GEO_POINT])
         if point:
-            latitude = float(point.get('geo:lat'))
-            longitude = float(point.get('geo:lon'))
+            latitude = float(point.get(XML_TAG_GEO_LAT))
+            longitude = float(point.get(XML_TAG_GEO_LON))
             return Point(latitude, longitude)
         # <geo:long>119.948006</geo:long>
         # <geo:lat>-23.126413</geo:lat>
-        long = self._attribute(['geo:long'])
-        lat = self._attribute(['geo:lat'])
+        lat = self._attribute([XML_TAG_GEO_LAT])
+        long = self._attribute([XML_TAG_GEO_LON])
         if long and lat:
             longitude = float(long)
             latitude = float(lat)
@@ -304,7 +320,7 @@ class FeedItem(FeedDictSource):
         #   -34.9376863529999 148.596955098
         #   -34.937663524 148.597260613
         # </georss:polygon>
-        polygon = self._attribute(['georss:polygon'])
+        polygon = self._attribute([XML_TAG_GEORSS_POLYGON])
         if polygon:
             # For now, only supporting the first polygon.
             if isinstance(polygon, list):

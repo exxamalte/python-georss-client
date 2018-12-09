@@ -34,6 +34,8 @@ URLS = {
     'all_incidents': URL_PREFIX + 'incident_FCAD.rss',
 }
 
+XML_TAG_DFES_REGION = 'dfes:region'
+
 
 class WaDfesFeed(GeoRssFeed):
     """Department of Fire and Emergency Services (DFES) feed."""
@@ -104,7 +106,8 @@ class WaDfesWarningsFeedEntry(WaDfesFeedEntry):
     def region(self) -> Optional[str]:
         """Return the region of this entry."""
         if self._rss_entry:
-            return self._rss_entry.get_additional_attribute('dfes:region')
+            return self._rss_entry.get_additional_attribute(
+                XML_TAG_DFES_REGION)
         return None
 
 
