@@ -10,9 +10,9 @@ from typing import Optional
 from georss_client import GeoRssFeed, FeedEntry
 from georss_client.consts import CUSTOM_ATTRIBUTE, ATTR_ATTRIBUTION
 
-REGEXP_ATTR_MAGNITUDE = 'Magnitude\(M.{{0,3}}\) (?P<{}>[^ ]+) '\
+REGEXP_ATTR_MAGNITUDE = r'Magnitude\(M.{{0,3}}\) (?P<{}>[^ ]+) '\
     .format(CUSTOM_ATTRIBUTE)
-REGEXP_ATTR_REGION = 'Magnitude\(M.{{0,3}}\) [^ ]+[ ]+-[ ]+(?P<{}>.+)$'\
+REGEXP_ATTR_REGION = r'Magnitude\(M.{{0,3}}\) [^ ]+[ ]+-[ ]+(?P<{}>.+)$'\
     .format(CUSTOM_ATTRIBUTE)
 
 URL = "http://cnt.rm.ingv.it/feed/atom/all_week"
