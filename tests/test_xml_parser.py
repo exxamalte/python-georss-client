@@ -10,6 +10,7 @@ class TestXmlParser(unittest.TestCase):
     """Test the XML parser."""
 
     def test_simple_1(self):
+        """Test parsing various actual XML files."""
         xml_parser = XmlParser()
         xml = load_fixture('xml_parser_simple_1.xml')
         feed = xml_parser.parse(xml)
@@ -18,6 +19,7 @@ class TestXmlParser(unittest.TestCase):
         assert len(feed.entries) == 1
 
     def test_simple_2(self):
+        """Test parsing various actual XML files."""
         xml_parser = XmlParser()
         xml = load_fixture('xml_parser_simple_2.xml')
         feed = xml_parser.parse(xml)
@@ -26,12 +28,14 @@ class TestXmlParser(unittest.TestCase):
         assert len(feed.entries) == 1
 
     def test_simple_3(self):
+        """Test parsing various actual XML files."""
         xml_parser = XmlParser()
         xml = load_fixture('xml_parser_simple_3.xml')
         feed = xml_parser.parse(xml)
         self.assertIsNone(feed)
 
     def test_complex_1(self):
+        """Test parsing various actual XML files."""
         xml_parser = XmlParser()
         xml = load_fixture('xml_parser_complex_1.xml')
         feed = xml_parser.parse(xml)
@@ -121,6 +125,7 @@ class TestXmlParser(unittest.TestCase):
         assert feed_entry.geometry.centroid.longitude == 150.32
 
     def test_complex_2(self):
+        """Test parsing various actual XML files."""
         xml_parser = XmlParser()
         xml = load_fixture('xml_parser_complex_2.xml')
         feed = xml_parser.parse(xml)
@@ -135,6 +140,25 @@ class TestXmlParser(unittest.TestCase):
         feed_entry = feed.entries[0]
         assert feed_entry.title == "Title 6"
         self.assertIsNone(feed_entry.published_date)
+
+    def test_complex_3(self):
+        """Test parsing various actual XML files."""
+        xml_parser = XmlParser()
+        xml = load_fixture('xml_parser_complex_3.xml')
+        feed = xml_parser.parse(xml)
+        self.assertIsNotNone(feed)
+
+        self.assertIsNone(feed.title)
+        self.assertIsNone(feed.description)
+        self.assertIsNone(feed.language)
+        self.assertIsNone(feed.published_date)
+        self.assertIsNone(feed.last_build_date)
+        self.assertIsNone(feed.ttl)
+
+        feed_entry = feed.entries[0]
+        self.assertIsNone(feed_entry.title)
+        self.assertIsNone(feed_entry.published_date)
+        self.assertIsNone(feed_entry.geometry)
 
 
 class TestGeometries(unittest.TestCase):

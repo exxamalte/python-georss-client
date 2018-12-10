@@ -50,9 +50,9 @@ class XmlParser:
             def postprocessor(path, key, value):
                 """Conduct type conversion for selected keys."""
                 try:
-                    if key in KEYS_DATE:
+                    if key in KEYS_DATE and value:
                         return key, dateparser.parse(value)
-                    if key in KEYS_INT:
+                    if key in KEYS_INT and value:
                         return key, int(value)
                 except (ValueError, TypeError) as error:
                     _LOGGER.warning("Unable to process (%s/%s): %s",
