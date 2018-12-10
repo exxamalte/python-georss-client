@@ -2,7 +2,7 @@
 import unittest
 from unittest.mock import MagicMock
 
-from georss_client import GeoRssDistanceHelper
+from georss_client import GeoRssDistanceHelper, FeedEntry
 from georss_client.xml_parser import Point, Polygon
 
 
@@ -64,3 +64,15 @@ class TestGeoRssDistanceHelper(unittest.TestCase):
         distance = GeoRssDistanceHelper.\
             distance_to_geometry(home_coordinates, mock_unsupported_geometry)
         assert distance == float("inf")
+
+
+class TestFeedEntry(unittest.TestCase):
+
+    def test_feed_entry(self):
+        """Test feed entry behaviour."""
+        feed_entry = FeedEntry(None, None)
+        assert repr(feed_entry) == "<FeedEntry(id=None)>"
+
+        mock_rss_entry = dict()
+        feed_entry = FeedEntry(None, mock_rss_entry)
+        assert repr(feed_entry) == "<FeedEntry(id=None)>"

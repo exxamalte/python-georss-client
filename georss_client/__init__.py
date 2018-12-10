@@ -117,7 +117,6 @@ class GeoRssFeed:
         """Extract global metadata from feed."""
         global_data = {}
         author = feed.author
-        # author = feed.get('author', None)
         if author:
             global_data[ATTR_ATTRIBUTION] = author
         return global_data
@@ -150,15 +149,17 @@ class FeedEntry:
         return None
 
     @property
-    def external_id(self) -> str:
+    def external_id(self) -> Optional[str]:
         """Return the external id of this entry."""
-        external_id = self._rss_entry.guid
-        if not external_id:
-            external_id = self.title
-        if not external_id:
-            # Use geometry as ID as a fallback.
-            external_id = hash(self.coordinates)
-        return external_id
+        if self._rss_entry:
+            external_id = self._rss_entry.guid
+            if not external_id:
+                external_id = self.title
+            if not external_id:
+                # Use geometry as ID as a fallback.
+                external_id = hash(self.coordinates)
+            return external_id
+        return None
 
     @property
     def title(self) -> Optional[str]:
