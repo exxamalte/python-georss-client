@@ -72,6 +72,12 @@ class TestFeedEntry(unittest.TestCase):
         """Test feed entry behaviour."""
         feed_entry = FeedEntry(None, None)
         assert repr(feed_entry) == "<FeedEntry(id=None)>"
+        self.assertIsNone(feed_entry.geometry)
+        self.assertIsNone(feed_entry.coordinates)
+        self.assertIsNone(feed_entry.title)
+        self.assertIsNone(feed_entry.category)
+        self.assertIsNone(feed_entry.attribution)
+        self.assertIsNone(feed_entry.description)
 
         mock_rss_entry = dict()
         feed_entry = FeedEntry(None, mock_rss_entry)
