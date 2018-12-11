@@ -15,5 +15,11 @@
             <published/>
             <georss:point/>
         </item>
+        <item>
+            <title/>
+            <geo:Point>
+                <random/>
+            </geo:Point>
+        </item>
     </channel>
 </rss>

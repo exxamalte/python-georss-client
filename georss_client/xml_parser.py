@@ -337,9 +337,12 @@ class FeedItem(FeedDictSource):
         # </geo:Point>
         point = self._attribute([XML_TAG_GEO_POINT])
         if point:
-            latitude = float(point.get(XML_TAG_GEO_LAT))
-            longitude = float(point.get(XML_TAG_GEO_LONG))
-            return Point(latitude, longitude)
+            lat = point.get(XML_TAG_GEO_LAT)
+            long = point.get(XML_TAG_GEO_LONG)
+            if long and lat:
+                longitude = float(long)
+                latitude = float(lat)
+                return Point(latitude, longitude)
         # <geo:long>119.948006</geo:long>
         # <geo:lat>-23.126413</geo:lat>
         lat = self._attribute([XML_TAG_GEO_LAT])

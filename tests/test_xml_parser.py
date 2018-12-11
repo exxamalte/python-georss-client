@@ -161,9 +161,16 @@ class TestXmlParser(unittest.TestCase):
         self.assertIsNone(feed.last_build_date)
         self.assertIsNone(feed.ttl)
 
+        self.assertIsNotNone(feed.entries)
+        assert len(feed.entries) == 2
+
         feed_entry = feed.entries[0]
         self.assertIsNone(feed_entry.title)
         self.assertIsNone(feed_entry.published_date)
+        self.assertIsNone(feed_entry.geometry)
+
+        feed_entry = feed.entries[1]
+        self.assertIsNone(feed_entry.title)
         self.assertIsNone(feed_entry.geometry)
 
 
