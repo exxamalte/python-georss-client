@@ -17,7 +17,7 @@ from georss_client.consts import XML_TAG_GEORSS_POLYGON, XML_TAG_GEO_LONG, \
     XML_TAG_PUBLISHED, XML_TAG_UPDATED, XML_TAG_LINK, XML_TAG_CONTENT, \
     XML_TAG_SUMMARY, XML_TAG_DESCRIPTION, XML_TAG_TITLE, XML_TAG_FEED, \
     XML_TAG_CHANNEL, XML_TAG_RSS, XML_TAG_GML_POLYGON, XML_TAG_GML_EXTERIOR, \
-    XML_TAG_GML_LINEAR_RING, XML_TAG_GML_POS_LIST
+    XML_TAG_GML_LINEAR_RING, XML_TAG_GML_POS_LIST, XML_TAG_MANAGING_EDITOR
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -201,6 +201,10 @@ class Feed(FeedDictSource):
     @property
     def author(self) -> Optional[str]:
         """Return the author of this feed."""
+        # <managingEditor>jrc-ems@ec.europa.eu</managingEditor>
+        managing_editor = self._attribute([XML_TAG_MANAGING_EDITOR])
+        if managing_editor:
+            return managing_editor
         # <author>
         #   <name>Istituto Nazionale di Geofisica e Vulcanologia</name>
         #   <uri>http://www.ingv.it</uri>

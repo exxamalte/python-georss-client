@@ -6,6 +6,7 @@
     <channel>
         <title>Feed Title 1</title>
         <ttl>INVALID</ttl>
+        <managingEditor>Author 1</managingEditor>
         <item>
             <title>Title 6</title>
             <published>INVALID DATE</published>

@@ -139,6 +139,7 @@ class TestXmlParser(unittest.TestCase):
 
         assert feed.title == "Feed Title 1"
         assert feed.ttl == "INVALID"
+        assert feed.author == "Author 1"
 
         self.assertIsNotNone(feed.entries)
         assert len(feed.entries) == 1
