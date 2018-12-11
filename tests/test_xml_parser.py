@@ -62,7 +62,7 @@ class TestXmlParser(unittest.TestCase):
         assert repr(feed) == "<Feed(Feed Link 1)>"
 
         self.assertIsNotNone(feed.entries)
-        assert len(feed.entries) == 5
+        assert len(feed.entries) == 6
 
         feed_entry = feed.entries[0]
         assert feed_entry.title == "Title 1"
@@ -120,6 +120,12 @@ class TestXmlParser(unittest.TestCase):
 
         feed_entry = feed.entries[4]
         assert feed_entry.title == "Title 5"
+        self.assertIsInstance(feed_entry.geometry, Polygon)
+        assert feed_entry.geometry.centroid.latitude == -30.32
+        assert feed_entry.geometry.centroid.longitude == 150.32
+
+        feed_entry = feed.entries[5]
+        assert feed_entry.title == "Title 6"
         self.assertIsInstance(feed_entry.geometry, Polygon)
         assert feed_entry.geometry.centroid.latitude == -30.32
         assert feed_entry.geometry.centroid.longitude == 150.32

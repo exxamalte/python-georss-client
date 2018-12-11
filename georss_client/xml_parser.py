@@ -16,7 +16,8 @@ from georss_client.consts import XML_TAG_GEORSS_POLYGON, XML_TAG_GEO_LONG, \
     XML_TAG_GENERATOR, XML_TAG_COPYRIGHT, XML_TAG_DC_DATE, XML_TAG_PUB_DATE, \
     XML_TAG_PUBLISHED, XML_TAG_UPDATED, XML_TAG_LINK, XML_TAG_CONTENT, \
     XML_TAG_SUMMARY, XML_TAG_DESCRIPTION, XML_TAG_TITLE, XML_TAG_FEED, \
-    XML_TAG_CHANNEL, XML_TAG_RSS
+    XML_TAG_CHANNEL, XML_TAG_RSS, XML_TAG_GML_POLYGON, XML_TAG_GML_EXTERIOR, \
+    XML_TAG_GML_LINEAR_RING, XML_TAG_GML_POS_LIST
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -153,6 +154,13 @@ class FeedDictSource:
                     return value
         return None
 
+    @staticmethod
+    def _key_exists(obj, keys):
+        key = keys.pop(0)
+        if key in obj:
+            return FeedDictSource._key_exists(obj[key], keys) if keys \
+                else obj[key]
+
     @property
     def title(self) -> Optional[str]:
         """Return the title of this feed or feed item."""
@@ -284,20 +292,45 @@ class FeedItem(FeedDictSource):
             latitude = float(point.split(' ')[0])
             longitude = float(point.split(' ')[1])
             return Point(latitude, longitude)
-        # <georss:where>
-        #   <gml:Point>
-        #     <gml:pos>44.11 -66.23</gml:pos>
-        #   </gml:Point>
-        # </georss:where>
+        # GML
         where = self._attribute([XML_TAG_GEORSS_WHERE])
         if where:
-            point = where.get(XML_TAG_GML_POINT)
-            if point:
-                pos = point.get(XML_TAG_GML_POS)
-                if pos:
-                    latitude = float(pos.split(' ')[0])
-                    longitude = float(pos.split(' ')[1])
-                    return Point(latitude, longitude)
+            # Point:
+            # <georss:where>
+            #   <gml:Point>
+            #     <gml:pos>44.11 -66.23</gml:pos>
+            #   </gml:Point>
+            # </georss:where>
+            pos = self._key_exists(where, [XML_TAG_GML_POINT, XML_TAG_GML_POS])
+            if pos:
+                latitude = float(pos.split(' ')[0])
+                longitude = float(pos.split(' ')[1])
+                return Point(latitude, longitude)
+            # Polygon:
+            # <georss:where>
+            #   <gml:Polygon>
+            #     <gml:exterior>
+            #       <gml:LinearRing>
+            #         <gml:posList>
+            #           -71.106216 42.366661
+            #           -71.105576 42.367104
+            #           -71.104378 42.367134
+            #           -71.103729 42.366249
+            #           -71.098793 42.363331
+            #           -71.101028 42.362541
+            #           -71.106865 42.366123
+            #           -71.106216 42.366661
+            #         </gml:posList>
+            #       </gml:LinearRing>
+            #     </gml:exterior>
+            #   </gml:Polygon>
+            # </georss:where>
+            pos_list = self._key_exists(where, [XML_TAG_GML_POLYGON,
+                                                XML_TAG_GML_EXTERIOR,
+                                                XML_TAG_GML_LINEAR_RING,
+                                                XML_TAG_GML_POS_LIST])
+            if pos_list:
+                return self._create_polygon(pos_list)
         # <geo:Point xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#">
         #   <geo:lat>38.3728</geo:lat>
         #   <geo:long>15.7213</geo:long>
@@ -328,13 +361,21 @@ class FeedItem(FeedDictSource):
             # For now, only supporting the first polygon.
             if isinstance(polygon, list):
                 polygon = polygon[0]
-            # Extract coordinate pairs.
-            coordinate_values = polygon.split()
+            return self._create_polygon(polygon)
+        # None of the above
+        return None
+
+    @staticmethod
+    def _create_polygon(coordinates):
+        """Create a polygon from the provided coordinates."""
+        if coordinates:
+            # The coordinates must be in latitude-longitude order and
+            # whitespace separated.
+            coordinate_values = coordinates.split()
             points = []
             for i in range(0, len(coordinate_values), 2):
                 latitude = float(coordinate_values[i])
-                longitude = float(coordinate_values[i+1])
+                longitude = float(coordinate_values[i + 1])
                 points.append(Point(latitude, longitude))
             return Polygon(points)
-        # None of the above
         return None
