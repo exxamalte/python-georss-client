@@ -43,21 +43,29 @@ class TestXmlParser(unittest.TestCase):
 
         assert feed.title == "Feed Title 1"
         assert feed.description == "Feed Description 1"
+        assert feed.summary == "Feed Description 1"
+        assert feed.content == "Feed Description 1"
         assert feed.link == "Feed Link 1"
         assert feed.published_date \
+            == datetime.datetime(2018, 12, 9, 8, 30,
+                                 tzinfo=datetime.timezone.utc)
+        assert feed.pub_date \
             == datetime.datetime(2018, 12, 9, 8, 30,
                                  tzinfo=datetime.timezone.utc)
         assert feed.updated_date \
             == datetime.datetime(2018, 12, 9, 8, 45,
                                  tzinfo=datetime.timezone.utc)
+        assert feed.last_build_date \
+            == datetime.datetime(2018, 12, 9, 8, 45,
+                                 tzinfo=datetime.timezone.utc)
         assert feed.copyright == "Feed Copyright 1"
+        assert feed.rights == "Feed Copyright 1"
         assert feed.generator == "Feed Generator 1"
         assert feed.language == "Feed Language 1"
-        assert feed.last_build_date \
-            == datetime.datetime(2018, 12, 9, 9, 0,
-                                 tzinfo=datetime.timezone.utc)
         assert feed.ttl == 42
         assert feed.author == "Feed Author 1"
+        assert feed.contributor == "Feed Author 1"
+        assert feed.managing_editor == "Feed Author 1"
         assert feed.get_additional_attribute('random') == "Feed Random 1"
         assert repr(feed) == "<Feed(Feed Link 1)>"
 
@@ -75,6 +83,7 @@ class TestXmlParser(unittest.TestCase):
             == datetime.datetime(2018, 12, 9, 7, 45,
                                  tzinfo=datetime.timezone.utc)
         assert feed_entry.guid == "GUID 1"
+        assert feed_entry.id == "GUID 1"
         assert feed_entry.source == "Source 1"
         assert feed_entry.category == "Category 1"
         self.assertIsInstance(feed_entry.geometry, Point)
@@ -114,6 +123,8 @@ class TestXmlParser(unittest.TestCase):
 
         feed_entry = feed.entries[3]
         assert feed_entry.title == "Title 4"
+        assert feed_entry.author == "Author 4"
+        assert feed_entry.contributor == "Author 4"
         self.assertIsInstance(feed_entry.geometry, Point)
         assert feed_entry.geometry.latitude == -37.789
         assert feed_entry.geometry.longitude == 149.6789
@@ -140,6 +151,14 @@ class TestXmlParser(unittest.TestCase):
         assert feed.title == "Feed Title 1"
         assert feed.ttl == "INVALID"
         assert feed.author == "Author 1"
+        assert feed.last_build_date \
+            == datetime.datetime(2018, 12, 9, 9, 0,
+                                 tzinfo=datetime.timezone.utc)
+        assert feed.updated_date \
+            == datetime.datetime(2018, 12, 9, 9, 0,
+                                 tzinfo=datetime.timezone.utc)
+        assert feed.copyright == "Feed Rights 1"
+        assert feed.rights == "Feed Rights 1"
 
         self.assertIsNotNone(feed.entries)
         assert len(feed.entries) == 1

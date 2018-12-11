@@ -7,6 +7,8 @@
         <title>Feed Title 1</title>
         <ttl>INVALID</ttl>
         <managingEditor>Author 1</managingEditor>
+        <lastBuildDate>2018-12-09T09:00:00+00:00</lastBuildDate>
+        <rights>Feed Rights 1</rights>
         <item>
             <title>Title 6</title>
             <published>INVALID DATE</published>

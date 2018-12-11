@@ -17,7 +17,8 @@ from georss_client.consts import XML_TAG_GEORSS_POLYGON, XML_TAG_GEO_LONG, \
     XML_TAG_PUBLISHED, XML_TAG_UPDATED, XML_TAG_LINK, XML_TAG_CONTENT, \
     XML_TAG_SUMMARY, XML_TAG_DESCRIPTION, XML_TAG_TITLE, XML_TAG_FEED, \
     XML_TAG_CHANNEL, XML_TAG_RSS, XML_TAG_GML_POLYGON, XML_TAG_GML_EXTERIOR, \
-    XML_TAG_GML_LINEAR_RING, XML_TAG_GML_POS_LIST, XML_TAG_MANAGING_EDITOR
+    XML_TAG_GML_LINEAR_RING, XML_TAG_GML_POS_LIST, XML_TAG_MANAGING_EDITOR, \
+    XML_TAG_CONTRIBUTOR, XML_TAG_RIGHTS
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -174,6 +175,16 @@ class FeedDictSource:
                                 XML_TAG_CONTENT])
 
     @property
+    def summary(self) -> Optional[str]:
+        """Return the summary of this feed or feed item."""
+        return self.description
+
+    @property
+    def content(self) -> Optional[str]:
+        """Return the content of this feed or feed item."""
+        return self.description
+
+    @property
     def link(self) -> Optional[str]:
         """Return the link of this feed or feed item."""
         return self._attribute([XML_TAG_LINK])
@@ -186,17 +197,19 @@ class FeedDictSource:
                                 XML_TAG_DC_DATE])
 
     @property
+    def pub_date(self) -> Optional[datetime.datetime]:
+        """Return the published date of this feed or feed item."""
+        return self.published_date
+
+    @property
     def updated_date(self) -> Optional[datetime.datetime]:
         """Return the updated date of this feed or feed item."""
-        return self._attribute([XML_TAG_UPDATED])
+        return self._attribute([XML_TAG_LAST_BUILD_DATE, XML_TAG_UPDATED])
 
-    def get_additional_attribute(self, name):
-        """Get an additional attribute not provided as property."""
-        return self._attribute([name])
-
-
-class Feed(FeedDictSource):
-    """Represents a feed."""
+    @property
+    def last_build_date(self) -> Optional[datetime.datetime]:
+        """Return the last build date of this feed."""
+        return self.updated_date
 
     @property
     def author(self) -> Optional[str]:
@@ -209,16 +222,39 @@ class Feed(FeedDictSource):
         #   <name>Istituto Nazionale di Geofisica e Vulcanologia</name>
         #   <uri>http://www.ingv.it</uri>
         # </author>
-        author = self._attribute([XML_TAG_AUTHOR])
+        author = self._attribute([XML_TAG_AUTHOR, XML_TAG_CONTRIBUTOR])
         if author:
             name = author.get(XML_TAG_NAME, None)
             return name
         return None
 
     @property
+    def contributor(self) -> Optional[str]:
+        """Return the contributor of this feed."""
+        return self.author
+
+    @property
+    def managing_editor(self) -> Optional[str]:
+        """Return the managing editor of this feed."""
+        return self.author
+
+    def get_additional_attribute(self, name):
+        """Get an additional attribute not provided as property."""
+        return self._attribute([name])
+
+
+class Feed(FeedDictSource):
+    """Represents a feed."""
+
+    @property
     def copyright(self) -> Optional[str]:
         """Return the copyright of this feed."""
-        return self._attribute([XML_TAG_COPYRIGHT])
+        return self._attribute([XML_TAG_COPYRIGHT, XML_TAG_RIGHTS])
+
+    @property
+    def rights(self) -> Optional[str]:
+        """Return the rights of this feed."""
+        return self.copyright
 
     @property
     def generator(self) -> Optional[str]:
@@ -229,11 +265,6 @@ class Feed(FeedDictSource):
     def language(self) -> Optional[str]:
         """Return the language of this feed."""
         return self._attribute([XML_TAG_LANGUAGE])
-
-    @property
-    def last_build_date(self) -> Optional[datetime.datetime]:
-        """Return the last build date of this feed."""
-        return self._attribute([XML_TAG_LAST_BUILD_DATE])
 
     @property
     def ttl(self) -> Optional[int]:
@@ -272,6 +303,11 @@ class FeedItem(FeedDictSource):
             # </guid>
             guid = guid.get(XML_ATTR_TEXT)
         return guid
+
+    @property
+    def id(self) -> Optional[str]:
+        """Return the id of this feed item."""
+        return self.guid
 
     @property
     def source(self) -> Optional[str]:

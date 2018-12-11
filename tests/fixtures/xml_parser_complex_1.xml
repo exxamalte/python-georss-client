@@ -12,7 +12,6 @@
         <copyright>Feed Copyright 1</copyright>
         <generator>Feed Generator 1</generator>
         <language>Feed Language 1</language>
-        <lastBuildDate>2018-12-09T09:00:00+00:00</lastBuildDate>
         <ttl>42</ttl>
         <author>
             <name>Feed Author 1</name>
@@ -58,6 +57,9 @@
         </item>
         <item>
             <title>Title 4</title>
+            <contributor>
+                <name>Author 4</name>
+            </contributor>
             <geo:lat>-37.7890</geo:lat>
             <geo:long>149.6789</geo:long>
         </item>
