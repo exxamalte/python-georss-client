@@ -4,7 +4,7 @@
      xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
      xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
     <channel>
-        <title>Feed Title 1</title>
+        <title type="text">Feed Title 1</title>
         <ttl>INVALID</ttl>
         <managingEditor>Author 1</managingEditor>
         <lastBuildDate>2018-12-09T09:00:00+00:00</lastBuildDate>

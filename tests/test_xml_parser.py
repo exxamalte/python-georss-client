@@ -124,6 +124,7 @@ class TestXmlParser(unittest.TestCase):
 
         feed_entry = feed.entries[3]
         assert feed_entry.title == "Title 4"
+        assert feed_entry.description == "Description 4"
         assert feed_entry.author == "Author 4"
         assert feed_entry.contributor == "Author 4"
         self.assertIsInstance(feed_entry.geometry, Point)
@@ -132,12 +133,14 @@ class TestXmlParser(unittest.TestCase):
 
         feed_entry = feed.entries[4]
         assert feed_entry.title == "Title 5"
+        assert feed_entry.description == "Description 5"
         self.assertIsInstance(feed_entry.geometry, Polygon)
         assert feed_entry.geometry.centroid.latitude == -30.32
         assert feed_entry.geometry.centroid.longitude == 150.32
 
         feed_entry = feed.entries[5]
         assert feed_entry.title == "Title 6"
+        assert feed_entry.description == "Description 6"
         self.assertIsInstance(feed_entry.geometry, Polygon)
         assert feed_entry.geometry.centroid.latitude == -30.32
         assert feed_entry.geometry.centroid.longitude == 150.32
@@ -182,6 +185,7 @@ class TestXmlParser(unittest.TestCase):
         self.assertIsNone(feed.published_date)
         self.assertIsNone(feed.last_build_date)
         self.assertIsNone(feed.ttl)
+        assert feed.rights == "Feed Rights 1"
 
         self.assertIsNotNone(feed.entries)
         assert len(feed.entries) == 2

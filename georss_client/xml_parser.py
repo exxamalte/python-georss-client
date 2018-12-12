@@ -155,6 +155,14 @@ class FeedDictSource:
                     return value
         return None
 
+    def _attribute_with_text(self, names):
+        """Get an attribute with text from this feed or feed item."""
+        value = self._attribute(names)
+        if value and isinstance(value, dict) and XML_CDATA in value:
+            # <tag attr="/some.uri">Value</tag>
+            value = value.get(XML_CDATA)
+        return value
+
     @staticmethod
     def _key_exists(obj, keys):
         key = keys.pop(0)
@@ -165,14 +173,14 @@ class FeedDictSource:
     @property
     def title(self) -> Optional[str]:
         """Return the title of this feed or feed item."""
-        return self._attribute([XML_TAG_TITLE])
+        return self._attribute_with_text([XML_TAG_TITLE])
 
     @property
     def description(self) -> Optional[str]:
         """Return the description of this feed or feed item."""
-        return self._attribute([XML_TAG_DESCRIPTION,
-                                XML_TAG_SUMMARY,
-                                XML_TAG_CONTENT])
+        return self._attribute_with_text([XML_TAG_DESCRIPTION,
+                                          XML_TAG_SUMMARY,
+                                          XML_TAG_CONTENT])
 
     @property
     def summary(self) -> Optional[str]:
@@ -252,7 +260,7 @@ class Feed(FeedDictSource):
     @property
     def copyright(self) -> Optional[str]:
         """Return the copyright of this feed."""
-        return self._attribute([XML_TAG_COPYRIGHT, XML_TAG_RIGHTS])
+        return self._attribute_with_text([XML_TAG_COPYRIGHT, XML_TAG_RIGHTS])
 
     @property
     def rights(self) -> Optional[str]:
@@ -262,14 +270,7 @@ class Feed(FeedDictSource):
     @property
     def generator(self) -> Optional[str]:
         """Return the generator of this feed."""
-        generator = self._attribute([XML_TAG_GENERATOR])
-        if generator and isinstance(generator, dict) \
-                and XML_CDATA in generator:
-            # <generator uri="/some.uri" version="1.0">
-            #   Feed Generator 1
-            # </generator>
-            generator = generator.get(XML_CDATA)
-        return generator
+        return self._attribute_with_text([XML_TAG_GENERATOR])
 
     @property
     def language(self) -> Optional[str]:
@@ -306,13 +307,7 @@ class FeedItem(FeedDictSource):
     @property
     def guid(self) -> Optional[str]:
         """Return the guid of this feed item."""
-        guid = self._attribute([XML_TAG_GUID, XML_TAG_ID])
-        if guid and isinstance(guid, dict) and XML_CDATA in guid:
-            # <guid isPermaLink="false">
-            #   1234
-            # </guid>
-            guid = guid.get(XML_CDATA)
-        return guid
+        return self._attribute_with_text([XML_TAG_GUID, XML_TAG_ID])
 
     @property
     def id(self) -> Optional[str]:

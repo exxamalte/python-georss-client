@@ -58,6 +58,7 @@
         </item>
         <item>
             <title>Title 4</title>
+            <description type="'text">Description 4</description>
             <contributor>
                 <name>Author 4</name>
             </contributor>
@@ -66,6 +67,7 @@
         </item>
         <item>
             <title>Title 5</title>
+            <summary type="'text">Description 5</summary>
             <georss:polygon>
                 -30.1 150.1
                 -30.2 150.2
@@ -76,6 +78,7 @@
         </item>
         <item>
             <title>Title 6</title>
+            <content type="text">Description 6</content>
             <georss:where>
                 <gml:Polygon>
                     <gml:exterior>
