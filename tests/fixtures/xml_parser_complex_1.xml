@@ -16,6 +16,14 @@
         <author>
             <name>Feed Author 1</name>
         </author>
+        <image>
+            <title>Image Title 1</title>
+            <url>http://image.url/image.png</url>
+            <link>http://feed.link/feed.rss</link>
+            <description>Image Description 1</description>
+            <width>123</width>
+            <height>234</height>
+        </image>
         <random>Feed Random 1</random>
         <item>
             <title>Title 1</title>

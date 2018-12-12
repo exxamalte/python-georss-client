@@ -12,6 +12,11 @@
         <generator uri="/some.uri" version="1.0">
             Feed Generator 1
         </generator>
+        <image>
+            <title>Image Title 1</title>
+            <url>http://image.url/image.png</url>
+            <link>http://feed.link/feed.rss</link>
+        </image>
         <item>
             <title>Title 6</title>
             <published>INVALID DATE</published>

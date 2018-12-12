@@ -66,6 +66,13 @@ class TestXmlParser(unittest.TestCase):
         assert feed.author == "Feed Author 1"
         assert feed.contributor == "Feed Author 1"
         assert feed.managing_editor == "Feed Author 1"
+        self.assertIsNotNone(feed.image)
+        assert feed.image.title == "Image Title 1"
+        assert feed.image.url == "http://image.url/image.png"
+        assert feed.image.link == "http://feed.link/feed.rss"
+        assert feed.image.description == "Image Description 1"
+        assert feed.image.width == 123
+        assert feed.image.height == 234
         assert feed.get_additional_attribute('random') == "Feed Random 1"
         assert repr(feed) == "<Feed(Feed Link 1)>"
 
@@ -164,6 +171,13 @@ class TestXmlParser(unittest.TestCase):
         assert feed.copyright == "Feed Rights 1"
         assert feed.rights == "Feed Rights 1"
         assert feed.generator == "Feed Generator 1"
+        self.assertIsNotNone(feed.image)
+        assert feed.image.title == "Image Title 1"
+        assert feed.image.url == "http://image.url/image.png"
+        assert feed.image.link == "http://feed.link/feed.rss"
+        self.assertIsNone(feed.image.description)
+        self.assertIsNone(feed.image.width)
+        self.assertIsNone(feed.image.height)
 
         self.assertIsNotNone(feed.entries)
         assert len(feed.entries) == 1
@@ -186,6 +200,7 @@ class TestXmlParser(unittest.TestCase):
         self.assertIsNone(feed.last_build_date)
         self.assertIsNone(feed.ttl)
         assert feed.rights == "Feed Rights 1"
+        self.assertIsNone(feed.image)
 
         self.assertIsNotNone(feed.entries)
         assert len(feed.entries) == 2

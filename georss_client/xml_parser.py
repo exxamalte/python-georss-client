@@ -18,7 +18,8 @@ from georss_client.consts import XML_TAG_GEORSS_POLYGON, XML_TAG_GEO_LONG, \
     XML_TAG_SUMMARY, XML_TAG_DESCRIPTION, XML_TAG_TITLE, XML_TAG_FEED, \
     XML_TAG_CHANNEL, XML_TAG_RSS, XML_TAG_GML_POLYGON, XML_TAG_GML_EXTERIOR, \
     XML_TAG_GML_LINEAR_RING, XML_TAG_GML_POS_LIST, XML_TAG_MANAGING_EDITOR, \
-    XML_TAG_CONTRIBUTOR, XML_TAG_RIGHTS, XML_ATTR_HREF
+    XML_TAG_CONTRIBUTOR, XML_TAG_RIGHTS, XML_ATTR_HREF, XML_TAG_IMAGE, \
+    XML_TAG_URL, XML_TAG_HEIGHT, XML_TAG_WIDTH
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -33,7 +34,7 @@ DEFAULT_NAMESPACES = {
 
 KEYS_DATE = [XML_TAG_DC_DATE, XML_TAG_LAST_BUILD_DATE, XML_TAG_PUB_DATE,
              XML_TAG_PUBLISHED, XML_TAG_UPDATED]
-KEYS_INT = [XML_TAG_TTL]
+KEYS_INT = [XML_TAG_HEIGHT, XML_TAG_TTL, XML_TAG_WIDTH]
 
 
 class XmlParser:
@@ -200,6 +201,14 @@ class FeedDictSource:
             link = link.get(XML_ATTR_HREF)
         return link
 
+    def get_additional_attribute(self, name):
+        """Get an additional attribute not provided as property."""
+        return self._attribute([name])
+
+
+class FeedOrFeedItem(FeedDictSource):
+    """Represents the common base of feed and its items."""
+
     @property
     def published_date(self) -> Optional[datetime.datetime]:
         """Return the published date of this feed or feed item."""
@@ -249,12 +258,8 @@ class FeedDictSource:
         """Return the managing editor of this feed."""
         return self.author
 
-    def get_additional_attribute(self, name):
-        """Get an additional attribute not provided as property."""
-        return self._attribute([name])
 
-
-class Feed(FeedDictSource):
+class Feed(FeedOrFeedItem):
     """Represents a feed."""
 
     @property
@@ -283,6 +288,14 @@ class Feed(FeedDictSource):
         return self._attribute([XML_TAG_TTL])
 
     @property
+    def image(self):
+        """Return the image of this feed."""
+        image = self._attribute([XML_TAG_IMAGE])
+        if image:
+            return FeedImage(image)
+        return None
+
+    @property
     def entries(self):
         """Return the entries of this feed."""
         items = self._attribute([XML_TAG_ITEM, XML_TAG_ENTRY])
@@ -296,7 +309,26 @@ class Feed(FeedDictSource):
         return entries
 
 
-class FeedItem(FeedDictSource):
+class FeedImage(FeedDictSource):
+    """Represents a feed image."""
+
+    @property
+    def url(self) -> Optional[str]:
+        """Return the url of this feed image."""
+        return self._attribute([XML_TAG_URL])
+
+    @property
+    def height(self) -> Optional[int]:
+        """Return the height of this feed image."""
+        return self._attribute([XML_TAG_HEIGHT])
+
+    @property
+    def width(self) -> Optional[int]:
+        """Return the width of this feed image."""
+        return self._attribute([XML_TAG_WIDTH])
+
+
+class FeedItem(FeedOrFeedItem):
     """Represents a feed item."""
 
     def __repr__(self):
