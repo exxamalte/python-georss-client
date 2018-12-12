@@ -160,6 +160,7 @@ class TestXmlParser(unittest.TestCase):
                                  tzinfo=datetime.timezone.utc)
         assert feed.copyright == "Feed Rights 1"
         assert feed.rights == "Feed Rights 1"
+        assert feed.generator == "Feed Generator 1"
 
         self.assertIsNotNone(feed.entries)
         assert len(feed.entries) == 1

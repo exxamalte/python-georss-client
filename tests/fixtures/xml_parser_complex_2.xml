@@ -9,6 +9,9 @@
         <managingEditor>Author 1</managingEditor>
         <lastBuildDate>2018-12-09T09:00:00+00:00</lastBuildDate>
         <rights>Feed Rights 1</rights>
+        <generator uri="/some.uri" version="1.0">
+            Feed Generator 1
+        </generator>
         <item>
             <title>Title 6</title>
             <published>INVALID DATE</published>

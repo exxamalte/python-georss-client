@@ -262,7 +262,14 @@ class Feed(FeedDictSource):
     @property
     def generator(self) -> Optional[str]:
         """Return the generator of this feed."""
-        return self._attribute([XML_TAG_GENERATOR])
+        generator = self._attribute([XML_TAG_GENERATOR])
+        if generator and isinstance(generator, dict) \
+                and XML_ATTR_TEXT in generator:
+            # <generator uri="/some.uri" version="1.0">
+            #   Feed Generator 1
+            # </generator>
+            generator = generator.get(XML_ATTR_TEXT)
+        return generator
 
     @property
     def language(self) -> Optional[str]:
