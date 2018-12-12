@@ -10,7 +10,7 @@ from typing import Optional
 from georss_client.consts import XML_TAG_GEORSS_POLYGON, XML_TAG_GEO_LONG, \
     XML_TAG_GEO_LAT, XML_TAG_GEO_POINT, XML_TAG_GML_POS, XML_TAG_GML_POINT, \
     XML_TAG_GEORSS_WHERE, XML_TAG_GEORSS_POINT, XML_ATTR_TERM, \
-    XML_TAG_CATEGORY, XML_TAG_SOURCE, XML_ATTR_TEXT, XML_TAG_ID, \
+    XML_TAG_CATEGORY, XML_TAG_SOURCE, XML_CDATA, XML_TAG_ID, \
     XML_TAG_GUID, XML_TAG_ENTRY, XML_TAG_ITEM, XML_TAG_NAME, XML_TAG_AUTHOR, \
     XML_TAG_LAST_BUILD_DATE, XML_TAG_TTL, XML_TAG_LANGUAGE, \
     XML_TAG_GENERATOR, XML_TAG_COPYRIGHT, XML_TAG_DC_DATE, XML_TAG_PUB_DATE, \
@@ -264,11 +264,11 @@ class Feed(FeedDictSource):
         """Return the generator of this feed."""
         generator = self._attribute([XML_TAG_GENERATOR])
         if generator and isinstance(generator, dict) \
-                and XML_ATTR_TEXT in generator:
+                and XML_CDATA in generator:
             # <generator uri="/some.uri" version="1.0">
             #   Feed Generator 1
             # </generator>
-            generator = generator.get(XML_ATTR_TEXT)
+            generator = generator.get(XML_CDATA)
         return generator
 
     @property
@@ -307,11 +307,11 @@ class FeedItem(FeedDictSource):
     def guid(self) -> Optional[str]:
         """Return the guid of this feed item."""
         guid = self._attribute([XML_TAG_GUID, XML_TAG_ID])
-        if guid and isinstance(guid, dict) and XML_ATTR_TEXT in guid:
+        if guid and isinstance(guid, dict) and XML_CDATA in guid:
             # <guid isPermaLink="false">
             #   1234
             # </guid>
-            guid = guid.get(XML_ATTR_TEXT)
+            guid = guid.get(XML_CDATA)
         return guid
 
     @property

@@ -9,7 +9,8 @@ CUSTOM_ATTRIBUTE = 'custom_attribute'
 
 XML_ATTR_HREF = '@href'
 XML_ATTR_TERM = '@term'
-XML_ATTR_TEXT = '#text'
+
+XML_CDATA = '#text'
 
 XML_TAG_AUTHOR = 'author'
 XML_TAG_CATEGORY = 'category'
