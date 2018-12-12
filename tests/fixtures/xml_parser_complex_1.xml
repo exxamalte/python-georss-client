@@ -32,6 +32,7 @@
         <item>
             <title>Title 2</title>
             <summary>Description 2</summary>
+            <link href="Link 2"/>
             <published>Sun, 09 Dec 2018 07:35:00 GMT</published>
             <updated>2018-12-09T07:50:00+00:00</updated>
             <id>GUID 2</id>

@@ -7,6 +7,7 @@ Constants for feeds and feed entries.
 ATTR_ATTRIBUTION = 'attribution'
 CUSTOM_ATTRIBUTE = 'custom_attribute'
 
+XML_ATTR_HREF = '@href'
 XML_ATTR_TERM = '@term'
 XML_ATTR_TEXT = '#text'
 

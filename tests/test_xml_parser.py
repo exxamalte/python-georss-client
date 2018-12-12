@@ -95,6 +95,7 @@ class TestXmlParser(unittest.TestCase):
         feed_entry = feed.entries[1]
         assert feed_entry.title == "Title 2"
         assert feed_entry.description == "Description 2"
+        assert feed_entry.link == "Link 2"
         assert feed_entry.published_date \
             == datetime.datetime(2018, 12, 9, 7, 35,
                                  tzinfo=datetime.timezone.utc)

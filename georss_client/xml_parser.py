@@ -18,7 +18,7 @@ from georss_client.consts import XML_TAG_GEORSS_POLYGON, XML_TAG_GEO_LONG, \
     XML_TAG_SUMMARY, XML_TAG_DESCRIPTION, XML_TAG_TITLE, XML_TAG_FEED, \
     XML_TAG_CHANNEL, XML_TAG_RSS, XML_TAG_GML_POLYGON, XML_TAG_GML_EXTERIOR, \
     XML_TAG_GML_LINEAR_RING, XML_TAG_GML_POS_LIST, XML_TAG_MANAGING_EDITOR, \
-    XML_TAG_CONTRIBUTOR, XML_TAG_RIGHTS
+    XML_TAG_CONTRIBUTOR, XML_TAG_RIGHTS, XML_ATTR_HREF
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -187,7 +187,10 @@ class FeedDictSource:
     @property
     def link(self) -> Optional[str]:
         """Return the link of this feed or feed item."""
-        return self._attribute([XML_TAG_LINK])
+        link = self._attribute([XML_TAG_LINK])
+        if link and XML_ATTR_HREF in link:
+            link = link.get(XML_ATTR_HREF)
+        return link
 
     @property
     def published_date(self) -> Optional[datetime.datetime]:
