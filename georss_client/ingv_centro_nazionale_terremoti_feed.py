@@ -77,17 +77,3 @@ class IngvCentroNazionaleTerremotiFeedEntry(FeedEntry):
     def region(self) -> Optional[float]:
         """Return the region of this entry."""
         return self._search_in_title(REGEXP_ATTR_REGION)
-
-    @property
-    def published(self) -> Optional[datetime]:
-        """Return the published date of this entry."""
-        if self._rss_entry:
-            return self._rss_entry.published_date
-        return None
-
-    @property
-    def updated(self) -> Optional[datetime]:
-        """Return the updated date of this entry."""
-        if self._rss_entry:
-            return self._rss_entry.updated_date
-        return None

@@ -83,13 +83,6 @@ class NaturalResourcesCanadaEarthquakesFeedEntry(FeedEntry):
         return self._attribution
 
     @property
-    def published(self) -> Optional[datetime]:
-        """Return the published date of this entry."""
-        if self._rss_entry:
-            return self._rss_entry.published_date
-        return None
-
-    @property
     def magnitude(self) -> Optional[float]:
         """Return the type of this entry."""
         magnitude = self._search_in_description(REGEXP_ATTR_MAGNITUDE)

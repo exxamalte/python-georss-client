@@ -3,6 +3,7 @@ Base class for GeoRSS services.
 
 Fetches GeoRSS feed from URL to be defined by sub-class.
 """
+from datetime import datetime
 import logging
 import re
 
@@ -201,6 +202,20 @@ class FeedEntry:
         """Return the description of this entry."""
         if self._rss_entry and self._rss_entry.description:
             return self._rss_entry.description
+        return None
+
+    @property
+    def published(self) -> Optional[datetime]:
+        """Return the published date of this entry."""
+        if self._rss_entry:
+            return self._rss_entry.published_date
+        return None
+
+    @property
+    def updated(self) -> Optional[datetime]:
+        """Return the updated date of this entry."""
+        if self._rss_entry:
+            return self._rss_entry.updated_date
         return None
 
     def _search_in_description(self, regexp):
