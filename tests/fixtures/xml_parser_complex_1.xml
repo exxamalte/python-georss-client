@@ -12,6 +12,7 @@
         <copyright>Feed Copyright 1</copyright>
         <generator>Feed Generator 1</generator>
         <language>Feed Language 1</language>
+        <docs>http://docs.url/documentation.html</docs>
         <ttl>42</ttl>
         <author>
             <name>Feed Author 1</name>

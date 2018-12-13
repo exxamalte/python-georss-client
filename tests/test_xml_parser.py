@@ -62,6 +62,7 @@ class TestXmlParser(unittest.TestCase):
         assert feed.rights == "Feed Copyright 1"
         assert feed.generator == "Feed Generator 1"
         assert feed.language == "Feed Language 1"
+        assert feed.docs == "http://docs.url/documentation.html"
         assert feed.ttl == 42
         assert feed.author == "Feed Author 1"
         assert feed.contributor == "Feed Author 1"
@@ -184,6 +185,7 @@ class TestXmlParser(unittest.TestCase):
         self.assertIsNone(feed.image.description)
         self.assertIsNone(feed.image.width)
         self.assertIsNone(feed.image.height)
+        self.assertIsNone(feed.docs)
 
         self.assertIsNotNone(feed.entries)
         assert len(feed.entries) == 1
