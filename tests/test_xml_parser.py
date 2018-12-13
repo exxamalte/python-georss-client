@@ -142,6 +142,9 @@ class TestXmlParser(unittest.TestCase):
         assert feed_entry.contributor == "Author 4"
         assert feed_entry.category == ["Category 4A",
                                        "Category 4B"]
+        assert feed_entry.published_date == datetime.datetime(
+            2018, 9, 30, 21, 36, 48,
+            tzinfo=datetime.timezone(datetime.timedelta(hours=10), 'AEST'))
         self.assertIsInstance(feed_entry.geometry, Point)
         assert feed_entry.geometry.latitude == -37.789
         assert feed_entry.geometry.longitude == 149.6789
@@ -149,6 +152,9 @@ class TestXmlParser(unittest.TestCase):
         feed_entry = feed.entries[4]
         assert feed_entry.title == "Title 5"
         assert feed_entry.description == "Description 5"
+        assert feed_entry.published_date == datetime.datetime(
+            2018, 9, 20, 18, 1, 55,
+            tzinfo=datetime.timezone(datetime.timedelta(hours=2), 'CEST'))
         self.assertIsInstance(feed_entry.geometry, Polygon)
         assert feed_entry.geometry.centroid.latitude == -30.32
         assert feed_entry.geometry.centroid.longitude == 150.32
@@ -156,6 +162,9 @@ class TestXmlParser(unittest.TestCase):
         feed_entry = feed.entries[5]
         assert feed_entry.title == "Title 6"
         assert feed_entry.description == "Description 6"
+        assert feed_entry.published_date == datetime.datetime(
+            2018, 10, 7, 19,52,
+            tzinfo=datetime.timezone(datetime.timedelta(hours=-7), 'PDT'))
         self.assertIsInstance(feed_entry.geometry, Polygon)
         assert feed_entry.geometry.centroid.latitude == -30.32
         assert feed_entry.geometry.centroid.longitude == 150.32
