@@ -34,6 +34,7 @@ DEFAULT_NAMESPACES = {
 
 KEYS_DATE = [XML_TAG_DC_DATE, XML_TAG_LAST_BUILD_DATE, XML_TAG_PUB_DATE,
              XML_TAG_PUBLISHED, XML_TAG_UPDATED]
+KEYS_FLOAT = [XML_TAG_GEO_LAT, XML_TAG_GEO_LONG]
 KEYS_INT = [XML_TAG_HEIGHT, XML_TAG_TTL, XML_TAG_WIDTH]
 
 
@@ -52,9 +53,12 @@ class XmlParser:
 
             def postprocessor(path, key, value):
                 """Conduct type conversion for selected keys."""
+                _LOGGER.warning("postprocessor k=%s / v=%s", key, value)
                 try:
                     if key in KEYS_DATE and value:
                         return key, dateparser.parse(value)
+                    if key in KEYS_FLOAT and value:
+                        return key, float(value)
                     if key in KEYS_INT and value:
                         return key, int(value)
                 except (ValueError, TypeError) as error:
@@ -435,17 +439,13 @@ class FeedItem(FeedOrFeedItem):
             lat = point.get(XML_TAG_GEO_LAT)
             long = point.get(XML_TAG_GEO_LONG)
             if long and lat:
-                longitude = float(long)
-                latitude = float(lat)
-                return Point(latitude, longitude)
+                return Point(lat, long)
         # <geo:long>119.948006</geo:long>
         # <geo:lat>-23.126413</geo:lat>
         lat = self._attribute([XML_TAG_GEO_LAT])
         long = self._attribute([XML_TAG_GEO_LONG])
         if long and lat:
-            longitude = float(long)
-            latitude = float(lat)
-            return Point(latitude, longitude)
+            return Point(lat, long)
         # <georss:polygon>
         #   -34.937663524 148.597260613
         #   -34.9377026399999 148.597169138
