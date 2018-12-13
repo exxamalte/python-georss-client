@@ -19,7 +19,7 @@ from georss_client.consts import XML_TAG_GEORSS_POLYGON, XML_TAG_GEO_LONG, \
     XML_TAG_CHANNEL, XML_TAG_RSS, XML_TAG_GML_POLYGON, XML_TAG_GML_EXTERIOR, \
     XML_TAG_GML_LINEAR_RING, XML_TAG_GML_POS_LIST, XML_TAG_MANAGING_EDITOR, \
     XML_TAG_CONTRIBUTOR, XML_TAG_RIGHTS, XML_ATTR_HREF, XML_TAG_IMAGE, \
-    XML_TAG_URL, XML_TAG_HEIGHT, XML_TAG_WIDTH, XML_TAG_DOCS
+    XML_TAG_URL, XML_TAG_HEIGHT, XML_TAG_WIDTH, XML_TAG_DOCS, XML_TAG_SUBTITLE
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -278,6 +278,11 @@ class FeedOrFeedItem(FeedDictSource):
 
 class Feed(FeedOrFeedItem):
     """Represents a feed."""
+
+    @property
+    def subtitle(self) -> Optional[str]:
+        """Return the subtitle of this feed."""
+        return self._attribute_with_text([XML_TAG_SUBTITLE])
 
     @property
     def copyright(self) -> Optional[str]:

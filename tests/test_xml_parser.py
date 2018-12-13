@@ -42,6 +42,7 @@ class TestXmlParser(unittest.TestCase):
         self.assertIsNotNone(feed)
 
         assert feed.title == "Feed Title 1"
+        assert feed.subtitle == "Feed Subtitle 1"
         assert feed.description == "Feed Description 1"
         assert feed.summary == "Feed Description 1"
         assert feed.content == "Feed Description 1"
@@ -167,6 +168,7 @@ class TestXmlParser(unittest.TestCase):
         self.assertIsNotNone(feed)
 
         assert feed.title == "Feed Title 1"
+        assert feed.subtitle == "Feed Subtitle 1"
         assert feed.ttl == "INVALID"
         assert feed.author == "Author 1"
         assert feed.last_build_date \
@@ -202,6 +204,7 @@ class TestXmlParser(unittest.TestCase):
         self.assertIsNotNone(feed)
 
         self.assertIsNone(feed.title)
+        self.assertIsNone(feed.subtitle)
         self.assertIsNone(feed.description)
         self.assertIsNone(feed.language)
         self.assertIsNone(feed.published_date)
