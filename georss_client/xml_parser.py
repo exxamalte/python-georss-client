@@ -35,6 +35,8 @@ DEFAULT_NAMESPACES = {
 KEYS_DATE = [XML_TAG_DC_DATE, XML_TAG_LAST_BUILD_DATE, XML_TAG_PUB_DATE,
              XML_TAG_PUBLISHED, XML_TAG_UPDATED]
 KEYS_FLOAT = [XML_TAG_GEO_LAT, XML_TAG_GEO_LONG]
+KEYS_FLOAT_LIST = [XML_TAG_GEORSS_POLYGON, XML_TAG_GML_POS_LIST,
+                   XML_TAG_GML_POS, XML_TAG_GEORSS_POINT]
 KEYS_INT = [XML_TAG_HEIGHT, XML_TAG_TTL, XML_TAG_WIDTH]
 
 
@@ -53,12 +55,21 @@ class XmlParser:
 
             def postprocessor(path, key, value):
                 """Conduct type conversion for selected keys."""
-                _LOGGER.warning("postprocessor k=%s / v=%s", key, value)
+                # _LOGGER.warning("postprocessor k=%s / v=%s", key, value)
                 try:
                     if key in KEYS_DATE and value:
                         return key, dateparser.parse(value)
                     if key in KEYS_FLOAT and value:
                         return key, float(value)
+                    if key in KEYS_FLOAT_LIST and value:
+                        # Turn white-space separated list of numbers into
+                        # list of floats.
+                        coordinate_values = value.split()
+                        point_coordinates = []
+                        for i in range(0, len(coordinate_values)):
+                            point_coordinates.append(
+                                float(coordinate_values[i]))
+                        return key, point_coordinates
                     if key in KEYS_INT and value:
                         return key, int(value)
                 except (ValueError, TypeError) as error:
@@ -388,9 +399,7 @@ class FeedItem(FeedOrFeedItem):
         # <georss:point>-0.5 119.8</georss:point>
         point = self._attribute([XML_TAG_GEORSS_POINT])
         if point:
-            latitude = float(point.split(' ')[0])
-            longitude = float(point.split(' ')[1])
-            return Point(latitude, longitude)
+            return Point(point[0], point[1])
         # GML
         where = self._attribute([XML_TAG_GEORSS_WHERE])
         if where:
@@ -402,9 +411,7 @@ class FeedItem(FeedOrFeedItem):
             # </georss:where>
             pos = self._key_exists(where, [XML_TAG_GML_POINT, XML_TAG_GML_POS])
             if pos:
-                latitude = float(pos.split(' ')[0])
-                longitude = float(pos.split(' ')[1])
-                return Point(latitude, longitude)
+                return Point(pos[0], pos[1])
             # Polygon:
             # <georss:where>
             #   <gml:Polygon>
@@ -457,7 +464,7 @@ class FeedItem(FeedOrFeedItem):
         polygon = self._attribute([XML_TAG_GEORSS_POLYGON])
         if polygon:
             # For now, only supporting the first polygon.
-            if isinstance(polygon, list):
+            if isinstance(polygon, list) and isinstance(polygon[0], list):
                 polygon = polygon[0]
             return self._create_polygon(polygon)
         # None of the above
@@ -467,13 +474,11 @@ class FeedItem(FeedOrFeedItem):
     def _create_polygon(coordinates):
         """Create a polygon from the provided coordinates."""
         if coordinates:
-            # The coordinates must be in latitude-longitude order and
-            # whitespace separated.
-            coordinate_values = coordinates.split()
+            if len(coordinates) % 2 != 0:
+                # Not even number of coordinates - chop last entry.
+                coordinates = coordinates[0:len(coordinates)-1]
             points = []
-            for i in range(0, len(coordinate_values), 2):
-                latitude = float(coordinate_values[i])
-                longitude = float(coordinate_values[i + 1])
-                points.append(Point(latitude, longitude))
+            for i in range(0, len(coordinates), 2):
+                points.append(Point(coordinates[i], coordinates[i+1]))
             return Polygon(points)
         return None
