@@ -16,6 +16,7 @@
         <author>
             <name>Feed Author 1</name>
         </author>
+        <category>Feed Category 1</category>
         <image>
             <title>Image Title 1</title>
             <url>http://image.url/image.png</url>
@@ -59,6 +60,9 @@
             <guid isPermaLink="false">
                 GUID 3
             </guid>
+            <category>Category 3A</category>
+            <category>Category 3B</category>
+            <category>Category 3C</category>
             <geo:Point>
                 <geo:lat>-37.6789</geo:lat>
                 <geo:long>149.5678</geo:long>
@@ -70,6 +74,8 @@
             <contributor>
                 <name>Author 4</name>
             </contributor>
+            <category term="Category 4A"/>
+            <category term="Category 4B"/>
             <geo:lat>-37.7890</geo:lat>
             <geo:long>149.6789</geo:long>
         </item>

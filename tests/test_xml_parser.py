@@ -66,6 +66,7 @@ class TestXmlParser(unittest.TestCase):
         assert feed.author == "Feed Author 1"
         assert feed.contributor == "Feed Author 1"
         assert feed.managing_editor == "Feed Author 1"
+        assert feed.category == ["Feed Category 1"]
         self.assertIsNotNone(feed.image)
         assert feed.image.title == "Image Title 1"
         assert feed.image.url == "http://image.url/image.png"
@@ -92,7 +93,7 @@ class TestXmlParser(unittest.TestCase):
         assert feed_entry.guid == "GUID 1"
         assert feed_entry.id == "GUID 1"
         assert feed_entry.source == "Source 1"
-        assert feed_entry.category == "Category 1"
+        assert feed_entry.category == ["Category 1"]
         self.assertIsInstance(feed_entry.geometry, Point)
         assert feed_entry.geometry.latitude == -37.4567
         assert feed_entry.geometry.longitude == 149.3456
@@ -110,7 +111,7 @@ class TestXmlParser(unittest.TestCase):
             == datetime.datetime(2018, 12, 9, 7, 50,
                                  tzinfo=datetime.timezone.utc)
         assert feed_entry.guid == "GUID 2"
-        assert feed_entry.category == "Category 2"
+        assert feed_entry.category == ["Category 2"]
         self.assertIsInstance(feed_entry.geometry, Point)
         assert feed_entry.geometry.latitude == -37.5678
         assert feed_entry.geometry.longitude == 149.4567
@@ -125,6 +126,9 @@ class TestXmlParser(unittest.TestCase):
             == datetime.datetime(2018, 12, 9, 7, 55,
                                  tzinfo=datetime.timezone.utc)
         assert feed_entry.guid == "GUID 3"
+        assert feed_entry.category == ["Category 3A",
+                                       "Category 3B",
+                                       "Category 3C"]
         self.assertIsInstance(feed_entry.geometry, Point)
         assert feed_entry.geometry.latitude == -37.6789
         assert feed_entry.geometry.longitude == 149.5678
@@ -134,6 +138,8 @@ class TestXmlParser(unittest.TestCase):
         assert feed_entry.description == "Description 4"
         assert feed_entry.author == "Author 4"
         assert feed_entry.contributor == "Author 4"
+        assert feed_entry.category == ["Category 4A",
+                                       "Category 4B"]
         self.assertIsInstance(feed_entry.geometry, Point)
         assert feed_entry.geometry.latitude == -37.789
         assert feed_entry.geometry.longitude == 149.6789

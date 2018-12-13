@@ -210,6 +210,23 @@ class FeedOrFeedItem(FeedDictSource):
     """Represents the common base of feed and its items."""
 
     @property
+    def category(self) -> Optional[list]:
+        """Return the categories of this feed item."""
+        category = self._attribute([XML_TAG_CATEGORY])
+        if category:
+            if isinstance(category, str) or isinstance(category, dict):
+                # If it's a string or a dict, wrap in list.
+                category = [category]
+            result = []
+            for item in category:
+                if XML_ATTR_TERM in item:
+                    # <category term="Category 1"/>
+                    item = item.get(XML_ATTR_TERM)
+                result.append(item)
+            return result
+        return None
+
+    @property
     def published_date(self) -> Optional[datetime.datetime]:
         """Return the published date of this feed or feed item."""
         return self._attribute([XML_TAG_PUB_DATE,
@@ -350,15 +367,6 @@ class FeedItem(FeedOrFeedItem):
     def source(self) -> Optional[str]:
         """Return the source of this feed item."""
         return self._attribute([XML_TAG_SOURCE])
-
-    @property
-    def category(self) -> Optional[str]:
-        """Return the category of this feed item."""
-        category = self._attribute([XML_TAG_CATEGORY])
-        if category and XML_ATTR_TERM in category:
-            # <category term="Category 1"/>
-            category = category.get(XML_ATTR_TERM)
-        return category
 
     @property
     def geometry(self) -> Optional[Geometry]:

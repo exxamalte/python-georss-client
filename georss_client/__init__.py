@@ -108,7 +108,8 @@ class GeoRssFeed:
         if self._filter_categories:
             filtered_entries = list(
                 filter(lambda entry:
-                       entry.category in self._filter_categories,
+                       len({entry.category}.intersection(
+                           self._filter_categories)) > 0,
                        filtered_entries))
         _LOGGER.debug("Entries after filtering %s", filtered_entries)
         return filtered_entries
@@ -180,7 +181,8 @@ class FeedEntry:
     def category(self) -> Optional[str]:
         """Return the category of this entry."""
         if self._rss_entry:
-            return self._rss_entry.category
+            # To keep this simple, just return the first category.
+            return self._rss_entry.category[0]
         return None
 
     @property
