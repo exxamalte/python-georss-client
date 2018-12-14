@@ -180,11 +180,12 @@ class FeedDictSource:
         return value
 
     @staticmethod
-    def _key_exists(obj, keys):
+    def _attribute_in_structure(obj, keys):
+        """Return the attribute found under the chain of keys."""
         key = keys.pop(0)
         if key in obj:
-            return FeedDictSource._key_exists(obj[key], keys) if keys \
-                else obj[key]
+            return FeedDictSource._attribute_in_structure(
+                obj[key], keys) if keys else obj[key]
 
     @property
     def title(self) -> Optional[str]:
@@ -409,7 +410,8 @@ class FeedItem(FeedOrFeedItem):
             #     <gml:pos>44.11 -66.23</gml:pos>
             #   </gml:Point>
             # </georss:where>
-            pos = self._key_exists(where, [XML_TAG_GML_POINT, XML_TAG_GML_POS])
+            pos = self._attribute_in_structure(
+                where, [XML_TAG_GML_POINT, XML_TAG_GML_POS])
             if pos:
                 return Point(pos[0], pos[1])
             # Polygon:
@@ -431,10 +433,9 @@ class FeedItem(FeedOrFeedItem):
             #     </gml:exterior>
             #   </gml:Polygon>
             # </georss:where>
-            pos_list = self._key_exists(where, [XML_TAG_GML_POLYGON,
-                                                XML_TAG_GML_EXTERIOR,
-                                                XML_TAG_GML_LINEAR_RING,
-                                                XML_TAG_GML_POS_LIST])
+            pos_list = self._attribute_in_structure(
+                where, [XML_TAG_GML_POLYGON, XML_TAG_GML_EXTERIOR,
+                        XML_TAG_GML_LINEAR_RING, XML_TAG_GML_POS_LIST])
             if pos_list:
                 return self._create_polygon(pos_list)
         # <geo:Point xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#">
