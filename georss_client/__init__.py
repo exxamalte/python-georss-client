@@ -12,7 +12,8 @@ from haversine import haversine
 from typing import Optional
 
 from georss_client.consts import ATTR_ATTRIBUTION, CUSTOM_ATTRIBUTE
-from georss_client.xml_parser import XmlParser, Point, Polygon
+from georss_client.xml_parser import XmlParser
+from georss_client.xml_parser.geometry import Point, Polygon
 
 _LOGGER = logging.getLogger(__name__)
 

@@ -3,7 +3,7 @@ import unittest
 from unittest.mock import MagicMock
 
 from georss_client import GeoRssDistanceHelper, FeedEntry
-from georss_client.xml_parser import Point, Polygon
+from georss_client.xml_parser.geometry import Point, Polygon
 
 
 class TestGeoRssDistanceHelper(unittest.TestCase):

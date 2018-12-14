@@ -1,10 +1,8 @@
 """
-RSS XML Parser with GeoRSS support.
+GeoRSS feed models.
 """
-import dateparser as dateparser
 import datetime
 import logging
-import xmltodict
 from typing import Optional
 
 from georss_client.consts import XML_TAG_GEORSS_POLYGON, XML_TAG_GEO_LONG, \
@@ -15,138 +13,13 @@ from georss_client.consts import XML_TAG_GEORSS_POLYGON, XML_TAG_GEO_LONG, \
     XML_TAG_LAST_BUILD_DATE, XML_TAG_TTL, XML_TAG_LANGUAGE, \
     XML_TAG_GENERATOR, XML_TAG_COPYRIGHT, XML_TAG_DC_DATE, XML_TAG_PUB_DATE, \
     XML_TAG_PUBLISHED, XML_TAG_UPDATED, XML_TAG_LINK, XML_TAG_CONTENT, \
-    XML_TAG_SUMMARY, XML_TAG_DESCRIPTION, XML_TAG_TITLE, XML_TAG_FEED, \
-    XML_TAG_CHANNEL, XML_TAG_RSS, XML_TAG_GML_POLYGON, XML_TAG_GML_EXTERIOR, \
+    XML_TAG_SUMMARY, XML_TAG_DESCRIPTION, XML_TAG_TITLE, XML_TAG_GML_POLYGON, XML_TAG_GML_EXTERIOR, \
     XML_TAG_GML_LINEAR_RING, XML_TAG_GML_POS_LIST, XML_TAG_MANAGING_EDITOR, \
     XML_TAG_CONTRIBUTOR, XML_TAG_RIGHTS, XML_ATTR_HREF, XML_TAG_IMAGE, \
     XML_TAG_URL, XML_TAG_HEIGHT, XML_TAG_WIDTH, XML_TAG_DOCS, XML_TAG_SUBTITLE
+from georss_client.xml_parser.geometry import Geometry, Point, Polygon
 
 _LOGGER = logging.getLogger(__name__)
-
-DEFAULT_NAMESPACES = {
-    'http://www.w3.org/2005/Atom': None,
-    'http://purl.org/dc/elements/1.1/': 'dc',
-    'http://www.georss.org/georss': 'georss',
-    'http://www.w3.org/2003/01/geo/wgs84_pos#': 'geo',
-    'http://www.opengis.net/gml': 'gml',
-    'http://www.gdacs.org/': 'gdacs',
-}
-
-KEYS_DATE = [XML_TAG_DC_DATE, XML_TAG_LAST_BUILD_DATE, XML_TAG_PUB_DATE,
-             XML_TAG_PUBLISHED, XML_TAG_UPDATED]
-KEYS_FLOAT = [XML_TAG_GEO_LAT, XML_TAG_GEO_LONG]
-KEYS_FLOAT_LIST = [XML_TAG_GEORSS_POLYGON, XML_TAG_GML_POS_LIST,
-                   XML_TAG_GML_POS, XML_TAG_GEORSS_POINT]
-KEYS_INT = [XML_TAG_HEIGHT, XML_TAG_TTL, XML_TAG_WIDTH]
-
-
-class XmlParser:
-    """Built-in XML parser."""
-
-    def __init__(self, additional_namespaces=None):
-        """Initialise the XML parser."""
-        self._namespaces = DEFAULT_NAMESPACES
-        if additional_namespaces:
-            self._namespaces.update(additional_namespaces)
-
-    def parse(self, xml):
-        """Parse the provided xml."""
-        if xml:
-
-            def postprocessor(path, key, value):
-                """Conduct type conversion for selected keys."""
-                # _LOGGER.warning("postprocessor k=%s / v=%s", key, value)
-                try:
-                    if key in KEYS_DATE and value:
-                        return key, dateparser.parse(value)
-                    if key in KEYS_FLOAT and value:
-                        return key, float(value)
-                    if key in KEYS_FLOAT_LIST and value:
-                        # Turn white-space separated list of numbers into
-                        # list of floats.
-                        coordinate_values = value.split()
-                        point_coordinates = []
-                        for i in range(0, len(coordinate_values)):
-                            point_coordinates.append(
-                                float(coordinate_values[i]))
-                        return key, point_coordinates
-                    if key in KEYS_INT and value:
-                        return key, int(value)
-                except (ValueError, TypeError) as error:
-                    _LOGGER.warning("Unable to process (%s/%s): %s",
-                                    key, value, error)
-                return key, value
-
-            parsed_dict = xmltodict.parse(
-                xml, process_namespaces=True, namespaces=self._namespaces,
-                postprocessor=postprocessor)
-
-            if XML_TAG_RSS in parsed_dict:
-                rss = parsed_dict.get(XML_TAG_RSS)
-                if XML_TAG_CHANNEL in rss:
-                    channel = rss.get(XML_TAG_CHANNEL)
-                    return Feed(channel)
-            if XML_TAG_FEED in parsed_dict:
-                feed = parsed_dict.get(XML_TAG_FEED)
-                return Feed(feed)
-
-        return None
-
-
-class Geometry:
-    """Represents a geometry."""
-
-
-class Point(Geometry):
-    """Represents a point."""
-
-    def __init__(self, latitude, longitude):
-        """Initialise point."""
-        self._latitude = latitude
-        self._longitude = longitude
-
-    def __repr__(self):
-        """Return string representation of this point."""
-        return '<{}(latitude={}, longitude={})>'.format(
-            self.__class__.__name__, self.latitude, self.longitude)
-
-    @property
-    def latitude(self) -> Optional[float]:
-        """Return the latitude of this point."""
-        return self._latitude
-
-    @property
-    def longitude(self) -> Optional[float]:
-        """Return the longitude of this point."""
-        return self._longitude
-
-
-class Polygon(Geometry):
-    """Represents a polygon."""
-
-    def __init__(self, points):
-        """Initialise polygon."""
-        self._points = points
-
-    def __repr__(self):
-        """Return string representation of this polygon."""
-        return '<{}(centroid={})>'.format(
-            self.__class__.__name__, self.centroid)
-
-    @property
-    def points(self) -> Optional[list]:
-        """Return the points of this polygon."""
-        return self._points
-
-    @property
-    def centroid(self) -> Point:
-        """Find the polygon's centroid as a best approximation."""
-        longitudes_list = [point.longitude for point in self.points]
-        latitudes_list = [point.latitude for point in self.points]
-        number_of_points = len(self.points)
-        longitude = sum(longitudes_list) / number_of_points
-        latitude = sum(latitudes_list) / number_of_points
-        return Point(latitude, longitude)
 
 
 class FeedDictSource:
@@ -480,6 +353,6 @@ class FeedItem(FeedOrFeedItem):
                 coordinates = coordinates[0:len(coordinates)-1]
             points = []
             for i in range(0, len(coordinates), 2):
-                points.append(Point(coordinates[i], coordinates[i+1]))
+                points.append(Point(coordinates[i], coordinates[i + 1]))
             return Polygon(points)
         return None

@@ -2,7 +2,8 @@
 import datetime
 import unittest
 
-from georss_client.xml_parser import XmlParser, Point, Polygon
+from georss_client.xml_parser import XmlParser
+from georss_client.xml_parser.geometry import Point, Polygon
 from tests.utils import load_fixture
 
 
