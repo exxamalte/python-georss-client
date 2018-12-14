@@ -4,8 +4,20 @@
      xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
      xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
     <channel>
-        <title>Feed Title 1</title>
+        <title type="text">Feed Title 1</title>
+        <subtitle type="text">Feed Subtitle 1</subtitle>
         <ttl>INVALID</ttl>
+        <managingEditor>Author 1</managingEditor>
+        <lastBuildDate>2018-12-09T09:00:00+00:00</lastBuildDate>
+        <rights>Feed Rights 1</rights>
+        <generator uri="/some.uri" version="1.0">
+            Feed Generator 1
+        </generator>
+        <image>
+            <title>Image Title 1</title>
+            <url>http://image.url/image.png</url>
+            <link>http://feed.link/feed.rss</link>
+        </image>
         <item>
             <title>Title 6</title>
             <published>INVALID DATE</published>

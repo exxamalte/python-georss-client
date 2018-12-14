@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:georss="http://www.georss.org/georss"
+     xmlns:gml='http://www.opengis.net/gml'
+     xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+     xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+    <channel>
+        <title/>
+        <description/>
+        <language/>
+        <pubDate/>
+        <lastBuildDate/>
+        <ttl/>
+        <rights type="text">Feed Rights 1</rights>
+        <item>
+            <title/>
+            <published/>
+            <georss:point/>
+        </item>
+        <item>
+            <title/>
+            <geo:Point>
+                <random/>
+            </geo:Point>
+        </item>
+    </channel>
+</rss>

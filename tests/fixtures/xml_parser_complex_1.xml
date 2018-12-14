@@ -5,6 +5,7 @@
      xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
     <channel>
         <title>Feed Title 1</title>
+        <subtitle>Feed Subtitle 1</subtitle>
         <description>Feed Description 1</description>
         <link>Feed Link 1</link>
         <pubDate>Sun, 09 Dec 2018 08:30:00 GMT</pubDate>
@@ -12,11 +13,20 @@
         <copyright>Feed Copyright 1</copyright>
         <generator>Feed Generator 1</generator>
         <language>Feed Language 1</language>
-        <lastBuildDate>2018-12-09T09:00:00+00:00</lastBuildDate>
+        <docs>http://docs.url/documentation.html</docs>
         <ttl>42</ttl>
         <author>
             <name>Feed Author 1</name>
         </author>
+        <category>Feed Category 1</category>
+        <image>
+            <title>Image Title 1</title>
+            <url>http://image.url/image.png</url>
+            <link>http://feed.link/feed.rss</link>
+            <description>Image Description 1</description>
+            <width>123</width>
+            <height>234</height>
+        </image>
         <random>Feed Random 1</random>
         <item>
             <title>Title 1</title>
@@ -33,6 +43,7 @@
         <item>
             <title>Title 2</title>
             <summary>Description 2</summary>
+            <link href="Link 2"/>
             <published>Sun, 09 Dec 2018 07:35:00 GMT</published>
             <updated>2018-12-09T07:50:00+00:00</updated>
             <id>GUID 2</id>
@@ -51,6 +62,9 @@
             <guid isPermaLink="false">
                 GUID 3
             </guid>
+            <category>Category 3A</category>
+            <category>Category 3B</category>
+            <category>Category 3C</category>
             <geo:Point>
                 <geo:lat>-37.6789</geo:lat>
                 <geo:long>149.5678</geo:long>
@@ -58,11 +72,20 @@
         </item>
         <item>
             <title>Title 4</title>
+            <description type="'text">Description 4</description>
+            <contributor>
+                <name>Author 4</name>
+            </contributor>
+            <category term="Category 4A"/>
+            <category term="Category 4B"/>
+            <published>Sun, 30 Sep 2018 21:36:48 +1000</published>
             <geo:lat>-37.7890</geo:lat>
             <geo:long>149.6789</geo:long>
         </item>
         <item>
             <title>Title 5</title>
+            <summary type="'text">Description 5</summary>
+            <published>Thu, 20 Sep 2018 18:01:55 +0200</published>
             <georss:polygon>
                 -30.1 150.1
                 -30.2 150.2
@@ -70,6 +93,26 @@
                 -30.8 150.8
                 -30.1 150.1
             </georss:polygon>
+        </item>
+        <item>
+            <title>Title 6</title>
+            <content type="text">Description 6</content>
+            <published>Sun, 7 Oct 2018 19:52:00 PDT</published>
+            <georss:where>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                -30.1 150.1
+                                -30.2 150.2
+                                -30.4 150.4
+                                -30.8 150.8
+                                -30.1 150.1
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </georss:where>
         </item>
     </channel>
 </rss>

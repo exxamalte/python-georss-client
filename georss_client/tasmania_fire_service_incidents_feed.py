@@ -95,10 +95,3 @@ class TfsIncidentsFeedEntry(FeedEntry):
     def type(self) -> str:
         """Return the type of this entry."""
         return self._search_in_description(REGEXP_ATTR_TYPE)
-
-    @property
-    def published(self) -> Optional[datetime]:
-        """Return the published date of this entry."""
-        if self._rss_entry:
-            return self._rss_entry.published_date
-        return None

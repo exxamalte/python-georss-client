@@ -1,4 +1,5 @@
 """Test for the generic georss feed."""
+import datetime
 import requests
 import unittest
 from unittest import mock
@@ -33,10 +34,8 @@ class TestGenericFeed(unittest.TestCase):
         assert feed_entry.title == "Title 1"
         assert feed_entry.external_id == "1234"
         assert feed_entry.category == "Category 1"
-        # assert feed_entry.published == datetime.datetime(
-        #     2018, 9, 23, 8, 30, tzinfo=datetime.timezone.utc)
-        # assert feed_entry.updated == datetime.datetime(
-        #     2018, 9, 23, 8, 35, tzinfo=datetime.timezone.utc)
+        assert feed_entry.published == datetime.datetime(2018, 9, 23, 8, 30)
+        assert feed_entry.updated == datetime.datetime(2018, 9, 23, 8, 35)
         assert feed_entry.coordinates == (-37.2345, 149.1234)
         self.assertAlmostEqual(feed_entry.distance_to_home, 714.4, 1)
 

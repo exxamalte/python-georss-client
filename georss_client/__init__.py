@@ -3,6 +3,7 @@ Base class for GeoRSS services.
 
 Fetches GeoRSS feed from URL to be defined by sub-class.
 """
+from datetime import datetime
 import logging
 import re
 
@@ -11,7 +12,8 @@ from haversine import haversine
 from typing import Optional
 
 from georss_client.consts import ATTR_ATTRIBUTION, CUSTOM_ATTRIBUTE
-from georss_client.xml_parser import XmlParser, Point, Polygon
+from georss_client.xml_parser import XmlParser
+from georss_client.xml_parser.geometry import Point, Polygon
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -108,7 +110,8 @@ class GeoRssFeed:
         if self._filter_categories:
             filtered_entries = list(
                 filter(lambda entry:
-                       entry.category in self._filter_categories,
+                       len({entry.category}.intersection(
+                           self._filter_categories)) > 0,
                        filtered_entries))
         _LOGGER.debug("Entries after filtering %s", filtered_entries)
         return filtered_entries
@@ -117,7 +120,6 @@ class GeoRssFeed:
         """Extract global metadata from feed."""
         global_data = {}
         author = feed.author
-        # author = feed.get('author', None)
         if author:
             global_data[ATTR_ATTRIBUTION] = author
         return global_data
@@ -150,15 +152,17 @@ class FeedEntry:
         return None
 
     @property
-    def external_id(self) -> str:
+    def external_id(self) -> Optional[str]:
         """Return the external id of this entry."""
-        external_id = self._rss_entry.guid
-        if not external_id:
-            external_id = self.title
-        if not external_id:
-            # Use geometry as ID as a fallback.
-            external_id = hash(self.coordinates)
-        return external_id
+        if self._rss_entry:
+            external_id = self._rss_entry.guid
+            if not external_id:
+                external_id = self.title
+            if not external_id:
+                # Use geometry as ID as a fallback.
+                external_id = hash(self.coordinates)
+            return external_id
+        return None
 
     @property
     def title(self) -> Optional[str]:
@@ -179,7 +183,8 @@ class FeedEntry:
     def category(self) -> Optional[str]:
         """Return the category of this entry."""
         if self._rss_entry:
-            return self._rss_entry.category
+            # To keep this simple, just return the first category.
+            return self._rss_entry.category[0]
         return None
 
     @property
@@ -198,6 +203,20 @@ class FeedEntry:
         """Return the description of this entry."""
         if self._rss_entry and self._rss_entry.description:
             return self._rss_entry.description
+        return None
+
+    @property
+    def published(self) -> Optional[datetime]:
+        """Return the published date of this entry."""
+        if self._rss_entry:
+            return self._rss_entry.published_date
+        return None
+
+    @property
+    def updated(self) -> Optional[datetime]:
+        """Return the updated date of this entry."""
+        if self._rss_entry:
+            return self._rss_entry.updated_date
         return None
 
     def _search_in_description(self, regexp):

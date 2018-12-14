@@ -62,17 +62,3 @@ class QfesBushfireAlertFeedEntry(FeedEntry):
     def status(self) -> str:
         """Return the status of this entry."""
         return self._search_in_description(REGEXP_ATTR_STATUS)
-
-    @property
-    def published(self) -> Optional[datetime]:
-        """Return the published date of this entry."""
-        if self._rss_entry:
-            return self._rss_entry.published_date
-        return None
-
-    @property
-    def updated(self) -> Optional[datetime]:
-        """Return the updated date of this entry."""
-        if self._rss_entry:
-            return self._rss_entry.updated_date
-        return None
