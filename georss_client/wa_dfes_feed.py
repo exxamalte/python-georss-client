@@ -5,7 +5,6 @@ Fetches GeoRSS feed from WA Department of Fire and Emergency Services (DFES)
 Feed.
 """
 import logging
-from datetime import datetime
 
 from typing import Optional
 
@@ -85,13 +84,6 @@ class WaDfesFeedEntry(FeedEntry):
     def attribution(self) -> str:
         """Return the attribution of this entry."""
         return ATTRIBUTION
-
-    @property
-    def published(self) -> Optional[datetime]:
-        """Return the published date of this entry."""
-        if self._rss_entry:
-            return self._rss_entry.published_date
-        return None
 
 
 class WaDfesWarningsFeedEntry(WaDfesFeedEntry):
