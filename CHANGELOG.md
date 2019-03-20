@@ -1,5 +1,8 @@
 # Changes
 
+## 0.6 (20/03/2019)
+* Support for Instituto Geográfico Nacional Sismología (Earthquakes) feed.
+
 ## 0.5 (14/12/2018)
 * Built-in XML parser.
 * Python 3.7 support.
