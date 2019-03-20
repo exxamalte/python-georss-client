@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:gml="http://www.opengis.net/gml" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:taxo="http://purl.org/rss/1.0/modules/taxonomy/" version="2.0">
+  <channel>
+    <title>GeoRSS Sismología IGN</title>
+    <link>http://www.ign.es/ign/rss</link>
+    <description>Este canal te permite consultar los terremotos ocurridos en España durante los últimos diez días. Esta información está sujeta a modificaciones como consecuencia de la continua revisión del análisis sísmico.</description>
+    <language>es</language>
+    <dc:language>es</dc:language>
+    <item>
+      <title>-Info.terremoto: 18/03/2019 19:34:55</title>
+      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dfcfp</link>
+      <description>Se ha producido un terremoto de magnitud 3.1 en SW EL PINAR DE EL HIERRO.IHI en la fecha 18/03/2019 19:34:55 en la siguiente localización: 27.62,-18.0859</description>
+      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dfcfp</guid>
+      <geo:lat>27.62</geo:lat>
+      <geo:long>-18.0859</geo:long>
+    </item>
+    <item>
+      <title>-Info.terremoto: 18/03/2019 5:11:01</title>
+      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019delll</link>
+      <description>Se ha producido un terremoto de magnitud 2.6 en GOLFO DE CÁDIZ en la fecha 18/03/2019 5:11:01 en la siguiente localización: 36.7061,-7.221</description>
+      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019delll</guid>
+      <geo:lat>36.7061</geo:lat>
+      <geo:long>-7.221</geo:long>
+    </item>
+    <item>
+      <title>-Info.terremoto: 18/03/2019 1:11:35</title>
+      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dejoe</link>
+      <description>Se ha producido un terremoto de magnitud 3.3 en SW CABO DE SAN VICENTE en la fecha 18/03/2019 1:11:35 en la siguiente localización: 36.7595,-9.1271</description>
+      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dejoe</guid>
+      <geo:lat>36.7595</geo:lat>
+      <geo:long>-9.1271</geo:long>
+    </item>
+    <item>
+      <title>-Info.terremoto: 15/03/2019 4:05:17</title>
+      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dckae</link>
+      <description>Se ha producido un terremoto de magnitud 2.8 en SW CABO DE SAN VICENTE en la fecha 15/03/2019 4:05:17 en la siguiente localización: 36.4739,-9.9301</description>
+      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dckae</guid>
+      <geo:lat>36.4739</geo:lat>
+      <geo:long>-9.9301</geo:long>
+    </item>
+    <item>
+      <title>-Info.terremoto: 13/03/2019 22:22:38</title>
+      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dbmfa</link>
+      <description>Se ha producido un terremoto de magnitud 3.4 en SW KHOURIBGA.MAC en la fecha 13/03/2019 22:22:38 en la siguiente localización: 32.4017,-7.1112</description>
+      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dbmfa</guid>
+      <geo:lat>32.4017</geo:lat>
+      <geo:long>-7.1112</geo:long>
+    </item>
+    <item>
+      <title>-Info.terremoto: 13/03/2019 21:12:07</title>
+      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dblmf</link>
+      <description>Se ha producido un terremoto de magnitud 3.8 en AZORES-CABO DE SAN VICENTE en la fecha 13/03/2019 21:12:07 en la siguiente localización: 36.922,-14.3794</description>
+      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dblmf</guid>
+      <geo:lat>36.922</geo:lat>
+      <geo:long>-14.3794</geo:long>
+    </item>
+    <item>
+      <title>-Info.terremoto: 13/03/2019 18:16:47</title>
+      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dbkgm</link>
+      <description>Se ha producido un terremoto de magnitud 2.9 en NW OLVERA.CA en la fecha 13/03/2019 18:16:47 en la siguiente localización: 36.9908,-5.3273</description>
+      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dbkgm</guid>
+      <geo:lat>36.9908</geo:lat>
+      <geo:long>-5.3273</geo:long>
+    </item>
+    <item>
+      <title>-Info.terremoto: 13/03/2019 17:50:58</title>
+      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dbkdj</link>
+      <description>Se ha producido un terremoto de magnitud 3.1 en SW PRUNA.SE en la fecha 13/03/2019 17:50:58 en la siguiente localización: 36.9652,-5.243</description>
+      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dbkdj</guid>
+      <geo:lat>36.9652</geo:lat>
+      <geo:long>-5.243</geo:long>
+    </item>
+    <item>
+      <title>-Info.terremoto: 13/03/2019 17:47:21</title>
+      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dbkdc</link>
+      <description>Se ha producido un terremoto de magnitud 3.2 en NW PRUNA.SE en la fecha 13/03/2019 17:47:21 en la siguiente localización: 37.023,-5.3069</description>
+      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dbkdc</guid>
+      <geo:lat>37.023</geo:lat>
+      <geo:long>-5.3069</geo:long>
+    </item>
+    <item>
+      <title>-Info.terremoto: 13/03/2019 11:25:58</title>
+      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dbhed</link>
+      <description>Se ha producido un terremoto de magnitud 2.7 en SW TARGUIST.MAC en la fecha 13/03/2019 11:25:58 en la siguiente localización: 34.9133,-4.3158</description>
+      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dbhed</guid>
+      <geo:lat>34.9133</geo:lat>
+      <geo:long>-4.3158</geo:long>
+    </item>
+    <item>
+      <title>-Info.terremoto: 13/03/2019 3:44:48</title>
+      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dbdli</link>
+      <description>Se ha producido un terremoto de magnitud 2.6 en NW OLVERA.CA en la fecha 13/03/2019 3:44:48 en la siguiente localización: 37.0126,-5.2953</description>
+      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dbdli</guid>
+      <geo:lat>37.0126</geo:lat>
+      <geo:long>-5.2953</geo:long>
+    </item>
+    <item>
+      <title>-Info.terremoto: 13/03/2019 3:19:32</title>
+      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dbdig</link>
+      <description>Se ha producido un terremoto de magnitud 3.0 en NW PRUNA.SE en la fecha 13/03/2019 3:19:32 en la siguiente localización: 37.0185,-5.3007</description>
+      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dbdig</guid>
+      <geo:lat>37.0185</geo:lat>
+      <geo:long>-5.3007</geo:long>
+    </item>
+    <item>
+      <title>-Info.terremoto: 13/03/2019 2:41:37</title>
+      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dbddl</link>
+      <description>Se ha producido un terremoto de magnitud 4.0 en NW OLVERA.CA en la fecha 13/03/2019 2:41:37 en la siguiente localización: 36.9962,-5.2873</description>
+      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dbddl</guid>
+      <geo:lat>36.9962</geo:lat>
+      <geo:long>-5.2873</geo:long>
+    </item>
+    <item>
+      <title>-Info.terremoto: 13/03/2019 0:51:41</title>
+      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dbcgd</link>
+      <description>Se ha producido un terremoto de magnitud 2.9 en NW PRUNA.SE en la fecha 13/03/2019 0:51:41 en la siguiente localización: 37.0407,-5.2818</description>
+      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dbcgd</guid>
+      <geo:lat>37.0407</geo:lat>
+      <geo:long>-5.2818</geo:long>
+    </item>
+    <item>
+      <title>-Info.terremoto: 12/03/2019 22:20:04</title>
+      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dbbdi</link>
+      <description>Se ha producido un terremoto de magnitud 3.3 en SW CABO DE SAN VICENTE en la fecha 12/03/2019 22:20:04 en la siguiente localización: 36.6776,-11.2588</description>
+      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dbbdi</guid>
+      <geo:lat>36.6776</geo:lat>
+      <geo:long>-11.2588</geo:long>
+    </item>
+    <item>
+      <title>-Info.terremoto: 12/03/2019 21:32:31</title>
+      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dbanl</link>
+      <description>Se ha producido un terremoto de magnitud 4.0 en ATLÁNTICO en la fecha 12/03/2019 21:32:31 en la siguiente localización: 38.024,-17.8788</description>
+      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dbanl</guid>
+      <geo:lat>38.024</geo:lat>
+      <geo:long>-17.8788</geo:long>
+    </item>
+    <item>
+      <title>-Info.terremoto: 12/03/2019 11:12:05</title>
+      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dambg</link>
+      <description>Se ha producido un terremoto de magnitud 3.9 en E TARGUIST.MAC en la fecha 12/03/2019 11:12:05 en la siguiente localización: 34.9314,-4.2159</description>
+      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dambg</guid>
+      <geo:lat>34.9314</geo:lat>
+      <geo:long>-4.2159</geo:long>
+    </item>
+    <item>
+      <title>-Info.terremoto: 12/03/2019 0:18:26</title>
+      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dahap</link>
+      <description>Se ha producido un terremoto de magnitud 2.9 en SW ARUDY.FRA en la fecha 12/03/2019 0:18:26 en la siguiente localización: 43.1016,-0.4328</description>
+      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dahap</guid>
+      <geo:lat>43.1016</geo:lat>
+      <geo:long>-0.4328</geo:long>
+    </item>
+    <item>
+      <title>-Info.terremoto: 12/03/2019 0:18:11</title>
+      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dahba</link>
+      <description>Se ha producido un terremoto de magnitud 2.8 en W ARUDY.FRA en la fecha 12/03/2019 0:18:11 en la siguiente localización: 43.1212,-0.4527</description>
+      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dahba</guid>
+      <geo:lat>43.1212</geo:lat>
+      <geo:long>-0.4527</geo:long>
+    </item>
+    <item>
+      <title>-Info.terremoto: 11/03/2019 19:52:51</title>
+      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dafaf</link>
+      <description>Se ha producido un terremoto de magnitud 2.7 en ATLÁNTICO-CANARIAS en la fecha 11/03/2019 19:52:51 en la siguiente localización: 28.9791,-14.2134</description>
+      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dafaf</guid>
+      <geo:lat>28.9791</geo:lat>
+      <geo:long>-14.2134</geo:long>
+    </item>
+    <item>
+      <title>-Info.terremoto: 11/03/2019 18:32:00</title>
+      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019daegg</link>
+      <description>Se ha producido un terremoto de magnitud 3.7 en E BEJAIA.ARG en la fecha 11/03/2019 18:32:00 en la siguiente localización: 36.7197,5.3109</description>
+      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019daegg</guid>
+      <geo:lat>36.7197</geo:lat>
+      <geo:long>5.3109</geo:long>
+    </item>
+    <item>
+      <title>-Info.terremoto: 10/03/2019 8:31:45</title>
+      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019cpelg</link>
+      <description>Se ha producido un terremoto de magnitud 2.6 en NW ELNE.FRA en la fecha 10/03/2019 8:31:45 en la siguiente localización: 42.6334,2.96</description>
+      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019cpelg</guid>
+      <geo:lat>42.6334</geo:lat>
+      <geo:long>2.96</geo:long>
+    </item>
+    <item>
+      <title>-Info.terremoto: 09/03/2019 16:55:39</title>
+      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019conie</link>
+      <description>Se ha producido un terremoto de magnitud 2.9 en ALBORÁN SUR en la fecha 09/03/2019 16:55:39 en la siguiente localización: 35.509,-3.8226</description>
+      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019conie</guid>
+      <geo:lat>35.509</geo:lat>
+      <geo:long>-3.8226</geo:long>
+    </item>
+    <item>
+      <title>-Info.terremoto: 09/03/2019 3:04:02</title>
+      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019cohbp</link>
+      <description>Se ha producido un terremoto de magnitud 3.3 en SE BEJAIA.ARG en la fecha 09/03/2019 3:04:02 en la siguiente localización: 36.5546,5.2605</description>
+      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019cohbp</guid>
+      <geo:lat>36.5546</geo:lat>
+      <geo:long>5.2605</geo:long>
+    </item>
+    <item>
+      <title>-Info.terremoto: 09/03/2019 0:55:40</title>
+      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019cogcd</link>
+      <description>Se ha producido un terremoto de magnitud 3.2 en E BEJAIA.ARG en la fecha 09/03/2019 0:55:40 en la siguiente localización: 36.7294,5.2914</description>
+      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019cogcd</guid>
+      <geo:lat>36.7294</geo:lat>
+      <geo:long>5.2914</geo:long>
+    </item>
+  </channel>
+</rss>
+

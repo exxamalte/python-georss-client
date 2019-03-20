@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:gml="http://www.opengis.net/gml" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:taxo="http://purl.org/rss/1.0/modules/taxonomy/" version="2.0">
+  <channel>
+    <title>GeoRSS Sismología IGN</title>
+    <link>http://www.ign.es/ign/rss</link>
+    <description>Este canal te permite consultar los terremotos ocurridos en España durante los últimos diez días. Esta información está sujeta a modificaciones como consecuencia de la continua revisión del análisis sísmico.</description>
+    <language>es</language>
+    <dc:language>es</dc:language>
+    <item>
+      <title>-Info.terremoto: 18/03/2019 19:34:55</title>
+      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dfcfp</link>
+      <description>Se ha producido un terremoto de magnitud 3.1 en SW EL PINAR DE EL HIERRO.IHI en la fecha 18/03/2019 19:34:55 en la siguiente localización: 27.62,-18.0859</description>
+      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dfcfp</guid>
+      <geo:lat>27.62</geo:lat>
+      <geo:long>-18.0859</geo:long>
+    </item>
+    <item>
+      <title>-Info.terremoto: NO DATE</title>
+      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019delll</link>
+      <description>DESCRIPTION MISSING MAGNITUDE AND REGION</description>
+      <guid>ITEM_ID</guid>
+      <geo:lat>36.7061</geo:lat>
+      <geo:long>-7.221</geo:long>
+    </item>
+    <item>
+      <title>-Info.terremoto: 18/03/2019 1:11:35</title>
+      <link>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dejoe</link>
+      <description>Se ha producido un terremoto de magnitud 3.3 en SW CABO DE SAN VICENTE en la fecha 18/03/2019 1:11:35 en la siguiente localización: 36.7595,-9.1271</description>
+      <guid>http://www.ign.es/web/ign/portal/sis-catalogo-terremotos/-/catalogo-terremotos/detailTerremoto?evid=es2019dejoe</guid>
+      <geo:lat>36.7595</geo:lat>
+      <geo:long>-9.1271</geo:long>
+    </item>
+  </channel>
+</rss>

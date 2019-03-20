@@ -164,6 +164,14 @@ class FeedEntry:
             return external_id
         return None
 
+    def _search_in_external_id(self, regexp):
+        """Find a sub-string in the entry's external id."""
+        if self.external_id:
+            match = re.search(regexp, self.external_id)
+            if match:
+                return match.group(CUSTOM_ATTRIBUTE)
+        return None
+
     @property
     def title(self) -> Optional[str]:
         """Return the title of this entry."""
@@ -182,7 +190,8 @@ class FeedEntry:
     @property
     def category(self) -> Optional[str]:
         """Return the category of this entry."""
-        if self._rss_entry:
+        if self._rss_entry and self._rss_entry.category \
+                and isinstance(self._rss_entry.category, list):
             # To keep this simple, just return the first category.
             return self._rss_entry.category[0]
         return None
