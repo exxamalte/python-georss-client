@@ -3,12 +3,9 @@ Tasmania Fire Service Incidents Feed.
 
 Fetches GeoRSS feed from Tasmania Fire Service Incidents Feed.
 """
-from datetime import datetime
-
-from typing import Optional
-
 from georss_client import GeoRssFeed, FeedEntry
 from georss_client.consts import CUSTOM_ATTRIBUTE
+from georss_client.feed_manager import FeedManagerBase
 
 ATTRIBUTION = "Tasmania Fire Service"
 
@@ -29,6 +26,21 @@ URL = "http://www.fire.tas.gov.au/Show?pageId=colBushfireSummariesRss"
 
 VALID_CATEGORIES = ['Emergency Warning', 'Watch and Act', 'Advice',
                     'No Alert Level']
+
+
+class TfsIncidentsFeedManager(FeedManagerBase):
+    """Feed Manager for Tasmania Fire Service Incidents feed."""
+
+    def __init__(self, generate_callback, update_callback, remove_callback,
+                 coordinates, filter_radius=None,
+                 filter_categories=None):
+        """Initialize the Tasmania Fire Service Incidents Feed Manager."""
+        feed = TfsIncidentsFeed(
+            coordinates,
+            filter_radius=filter_radius,
+            filter_categories=filter_categories)
+        super().__init__(feed, generate_callback, update_callback,
+                         remove_callback)
 
 
 class TfsIncidentsFeed(GeoRssFeed):

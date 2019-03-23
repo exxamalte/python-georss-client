@@ -10,6 +10,7 @@ from typing import Optional
 
 from georss_client import GeoRssFeed, FeedEntry
 from georss_client.consts import CUSTOM_ATTRIBUTE
+from georss_client.feed_manager import FeedManagerBase
 
 ATTRIBUTION = "Instituto Geográfico Nacional"
 
@@ -30,8 +31,23 @@ REGEXP_ATTR_SHORT_ID = r'http:\/\/www\.ign\.es\/web\/ign\/portal\/' \
 URL = "http://www.ign.es/ign/RssTools/sismologia.xml"
 
 
+class IgnSismologiaFeedManager(FeedManagerBase):
+    """Feed Manager for IGN Sismología feed."""
+
+    def __init__(self, generate_callback, update_callback, remove_callback,
+                 coordinates, filter_radius=None,
+                 filter_minimum_magnitude=None):
+        """Initialize the IGN Sismología Feed Manager."""
+        feed = IgnSismologiaFeed(
+            coordinates,
+            filter_radius=filter_radius,
+            filter_minimum_magnitude=filter_minimum_magnitude)
+        super().__init__(feed, generate_callback, update_callback,
+                         remove_callback)
+
+
 class IgnSismologiaFeed(GeoRssFeed):
-    """IGN Instituto Geográfico Nacional Sismología feed."""
+    """IGN Sismología feed."""
 
     def __init__(self, home_coordinates, filter_radius=None,
                  filter_minimum_magnitude=None):
@@ -62,7 +78,7 @@ class IgnSismologiaFeed(GeoRssFeed):
 
 
 class IgnSismologiaFeedEntry(FeedEntry):
-    """IGN Instituto Geográfico Nacional Sismología feed entry."""
+    """IGN Sismología feed entry."""
 
     def __init__(self, home_coordinates, rss_entry):
         """Initialise this service."""
