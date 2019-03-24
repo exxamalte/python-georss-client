@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns:georss="http://www.georss.org/georss"
+      xmlns="http://www.w3.org/2005/Atom">
+    <author>
+        <name>Attribution 1</name>
+    </author>
+    <entry>
+        <id>1234</id>
+        <title>Title 1</title>
+        <georss:point>-37.2345 149.1234</georss:point>
+    </entry>
+</feed>

@@ -210,8 +210,7 @@ class TestGenericFeed(unittest.TestCase):
             _generate_entity,
             _update_entity,
             _remove_entity,
-            HOME_COORDINATES_1,
-            None)
+            HOME_COORDINATES_1)
         assert repr(feed_manager) == "<GenericFeedManager(" \
                                      "feed=<GenericFeed(home=" \
                                      "(-31.0, 151.0), url=None, " \
@@ -290,3 +289,45 @@ class TestGenericFeed(unittest.TestCase):
         assert len(generated_entity_external_ids) == 0
         assert len(updated_entity_external_ids) == 0
         assert len(removed_entity_external_ids) == 3
+
+    @mock.patch("requests.Request")
+    @mock.patch("requests.Session")
+    def test_feed_manager_no_timestamp(self, mock_session, mock_request):
+        """Test updating feed is ok."""
+        mock_session.return_value.__enter__.return_value.send\
+            .return_value.ok = True
+        mock_session.return_value.__enter__.return_value.send\
+            .return_value.text = load_fixture(
+                'generic_feed_5.xml')
+
+        # This will just record calls and keep track of external ids.
+        generated_entity_external_ids = []
+        updated_entity_external_ids = []
+        removed_entity_external_ids = []
+
+        def _generate_entity(external_id):
+            """Generate new entity."""
+            generated_entity_external_ids.append(external_id)
+
+        def _update_entity(external_id):
+            """Update entity."""
+            updated_entity_external_ids.append(external_id)
+
+        def _remove_entity(external_id):
+            """Remove entity."""
+            removed_entity_external_ids.append(external_id)
+
+        feed_manager = GenericFeedManager(
+            _generate_entity,
+            _update_entity,
+            _remove_entity,
+            HOME_COORDINATES_1)
+        assert repr(feed_manager) == "<GenericFeedManager(" \
+                                     "feed=<GenericFeed(home=" \
+                                     "(-31.0, 151.0), url=None, " \
+                                     "radius=None, categories=None)>)>"
+        feed_manager.update()
+        entries = feed_manager.feed_entries
+        self.assertIsNotNone(entries)
+        assert len(entries) == 1
+        self.assertIsNone(feed_manager.last_timestamp)

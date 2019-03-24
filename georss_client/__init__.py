@@ -134,8 +134,10 @@ class GeoRssFeed:
             dates = sorted(
                 [entry.published for entry in feed_entries if entry.published],
                 reverse=True)
-            _LOGGER.error("Sorted dates: %s", dates)
-            return dates[0]
+            if dates:
+                last_timestamp = dates[0]
+                _LOGGER.debug("Last timestamp: %s", last_timestamp)
+                return last_timestamp
         return None
 
     @property
