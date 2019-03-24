@@ -3,12 +3,9 @@ QFES Bushfire Alert Feed.
 
 Fetches GeoRSS feed from QFES Bushfire Alert Feed.
 """
-from datetime import datetime
-
-from typing import Optional
-
 from georss_client import GeoRssFeed, FeedEntry, ATTR_ATTRIBUTION
 from georss_client.consts import CUSTOM_ATTRIBUTE
+from georss_client.feed_manager import FeedManagerBase
 
 REGEXP_ATTR_STATUS = 'Current Status: (?P<{}>[^<]+)[\n\r]'\
     .format(CUSTOM_ATTRIBUTE)
@@ -17,6 +14,21 @@ URL = "https://www.qfes.qld.gov.au/data/alerts/bushfireAlert.xml"
 
 VALID_CATEGORIES = ['Emergency Warning', 'Watch and Act', 'Advice',
                     'Notification']
+
+
+class QfesBushfireAlertFeedManager(FeedManagerBase):
+    """Feed Manager for QFES Bushfire Alert feed."""
+
+    def __init__(self, generate_callback, update_callback, remove_callback,
+                 coordinates, filter_radius=None,
+                 filter_categories=None):
+        """Initialize the QFES Bushfire Alert Feed Manager."""
+        feed = QfesBushfireAlertFeed(
+            coordinates,
+            filter_radius=filter_radius,
+            filter_categories=filter_categories)
+        super().__init__(feed, generate_callback, update_callback,
+                         remove_callback)
 
 
 class QfesBushfireAlertFeed(GeoRssFeed):

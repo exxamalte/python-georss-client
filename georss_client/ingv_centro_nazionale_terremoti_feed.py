@@ -3,12 +3,11 @@ INGV Centro Nazionale Terremoti (Earthquakes) Feed.
 
 Fetches GeoRSS feed from INGV Centro Nazionale Terremoti.
 """
-from datetime import datetime
-
 from typing import Optional
 
 from georss_client import GeoRssFeed, FeedEntry
 from georss_client.consts import CUSTOM_ATTRIBUTE, ATTR_ATTRIBUTION
+from georss_client.feed_manager import FeedManagerBase
 
 REGEXP_ATTR_MAGNITUDE = r'Magnitude\(M.{{0,3}}\) (?P<{}>[^ ]+) '\
     .format(CUSTOM_ATTRIBUTE)
@@ -16,6 +15,21 @@ REGEXP_ATTR_REGION = r'Magnitude\(M.{{0,3}}\) [^ ]+[ ]+-[ ]+(?P<{}>.+)$'\
     .format(CUSTOM_ATTRIBUTE)
 
 URL = "http://cnt.rm.ingv.it/feed/atom/all_week"
+
+
+class IngvCentroNazionaleTerremotiFeedManager(FeedManagerBase):
+    """Feed Manager for INGV Centro Nazionale Terremoti feed."""
+
+    def __init__(self, generate_callback, update_callback, remove_callback,
+                 coordinates, filter_radius=None,
+                 filter_minimum_magnitude=None):
+        """Initialize the INGV Centro Nazionale Terremoti Feed Manager."""
+        feed = IngvCentroNazionaleTerremotiFeed(
+            coordinates,
+            filter_radius=filter_radius,
+            filter_minimum_magnitude=filter_minimum_magnitude)
+        super().__init__(feed, generate_callback, update_callback,
+                         remove_callback)
 
 
 class IngvCentroNazionaleTerremotiFeed(GeoRssFeed):

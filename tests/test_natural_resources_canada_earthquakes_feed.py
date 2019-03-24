@@ -6,8 +6,11 @@ from unittest import mock
 from georss_client import UPDATE_OK
 from georss_client.exceptions import GeoRssException
 from georss_client.natural_resources_canada_earthquakes_feed import \
-    NaturalResourcesCanadaEarthquakesFeed
+    NaturalResourcesCanadaEarthquakesFeed, \
+    NaturalResourcesCanadaEarthquakesFeedManager
 from tests.utils import load_fixture
+
+HOME_COORDINATES = (49.25, -123.1)
 
 
 class TestNaturalResourcesCanadaEarthquakesFeed(unittest.TestCase):
@@ -17,14 +20,13 @@ class TestNaturalResourcesCanadaEarthquakesFeed(unittest.TestCase):
     @mock.patch("requests.Session")
     def test_update_ok_en(self, mock_session, mock_request):
         """Test updating feed is ok."""
-        home_coordinates = (49.25, -123.1)
         mock_session.return_value.__enter__.return_value.send\
             .return_value.ok = True
         mock_session.return_value.__enter__.return_value.send\
             .return_value.text = \
             load_fixture('natural_resources_canada_earthquakes_en_feed.xml')
 
-        feed = NaturalResourcesCanadaEarthquakesFeed(home_coordinates, 'en')
+        feed = NaturalResourcesCanadaEarthquakesFeed(HOME_COORDINATES, 'en')
         assert repr(feed) == "<NaturalResourcesCanadaEarthquakesFeed(" \
                              "home=(49.25, -123.1), url=http://www." \
                              "earthquakescanada.nrcan.gc.ca/index-en.php?" \
@@ -57,7 +59,6 @@ class TestNaturalResourcesCanadaEarthquakesFeed(unittest.TestCase):
     @mock.patch("requests.Session")
     def test_update_ok_en_with_magnitude(self, mock_session, mock_request):
         """Test updating feed is ok."""
-        home_coordinates = (49.25, -123.1)
         mock_session.return_value.__enter__.return_value.send\
             .return_value.ok = True
         mock_session.return_value.__enter__.return_value.send\
@@ -65,7 +66,7 @@ class TestNaturalResourcesCanadaEarthquakesFeed(unittest.TestCase):
             load_fixture('natural_resources_canada_earthquakes_en_feed.xml')
 
         feed = NaturalResourcesCanadaEarthquakesFeed(
-            home_coordinates, 'en', filter_minimum_magnitude=4.0)
+            HOME_COORDINATES, 'en', filter_minimum_magnitude=4.0)
         assert repr(feed) == "<NaturalResourcesCanadaEarthquakesFeed(" \
                              "home=(49.25, -123.1), url=http://www." \
                              "earthquakescanada.nrcan.gc.ca/index-en.php?" \
@@ -84,14 +85,13 @@ class TestNaturalResourcesCanadaEarthquakesFeed(unittest.TestCase):
     @mock.patch("requests.Session")
     def test_update_ok_fr(self, mock_session, mock_request):
         """Test updating feed is ok."""
-        home_coordinates = (49.25, -123.1)
         mock_session.return_value.__enter__.return_value.send\
             .return_value.ok = True
         mock_session.return_value.__enter__.return_value.send\
             .return_value.text = \
             load_fixture('natural_resources_canada_earthquakes_fr_feed.xml')
 
-        feed = NaturalResourcesCanadaEarthquakesFeed(home_coordinates, 'fr')
+        feed = NaturalResourcesCanadaEarthquakesFeed(HOME_COORDINATES, 'fr')
         assert repr(feed) == "<NaturalResourcesCanadaEarthquakesFeed(" \
                              "home=(49.25, -123.1), url=http://www." \
                              "earthquakescanada.nrcan.gc.ca/index-fr.php?" \
@@ -124,7 +124,6 @@ class TestNaturalResourcesCanadaEarthquakesFeed(unittest.TestCase):
     @mock.patch("requests.Session")
     def test_update_ok_fr_with_magnitude(self, mock_session, mock_request):
         """Test updating feed is ok."""
-        home_coordinates = (49.25, -123.1)
         mock_session.return_value.__enter__.return_value.send\
             .return_value.ok = True
         mock_session.return_value.__enter__.return_value.send\
@@ -132,7 +131,7 @@ class TestNaturalResourcesCanadaEarthquakesFeed(unittest.TestCase):
             load_fixture('natural_resources_canada_earthquakes_fr_feed.xml')
 
         feed = NaturalResourcesCanadaEarthquakesFeed(
-            home_coordinates, 'fr', filter_minimum_magnitude=4.0)
+            HOME_COORDINATES, 'fr', filter_minimum_magnitude=4.0)
         assert repr(feed) == "<NaturalResourcesCanadaEarthquakesFeed(" \
                              "home=(49.25, -123.1), url=http://www." \
                              "earthquakescanada.nrcan.gc.ca/index-fr.php?" \
@@ -149,8 +148,58 @@ class TestNaturalResourcesCanadaEarthquakesFeed(unittest.TestCase):
 
     def test_update_wrong_language(self):
         """Test invalid feed language."""
-        home_coordinates = (49.25, -123.1)
-
         with self.assertRaises(GeoRssException):
-            NaturalResourcesCanadaEarthquakesFeed(home_coordinates,
+            NaturalResourcesCanadaEarthquakesFeed(HOME_COORDINATES,
                                                   'DOES NOT EXIST')
+
+    @mock.patch("requests.Request")
+    @mock.patch("requests.Session")
+    def test_feed_manager(self, mock_session, mock_request):
+        """Test the feed manager."""
+        mock_session.return_value.__enter__.return_value.send\
+            .return_value.ok = True
+        mock_session.return_value.__enter__.return_value.send\
+            .return_value.text = load_fixture(
+                'natural_resources_canada_earthquakes_en_feed.xml')
+
+        # This will just record calls and keep track of external ids.
+        generated_entity_external_ids = []
+        updated_entity_external_ids = []
+        removed_entity_external_ids = []
+
+        def _generate_entity(external_id):
+            """Generate new entity."""
+            generated_entity_external_ids.append(external_id)
+
+        def _update_entity(external_id):
+            """Update entity."""
+            updated_entity_external_ids.append(external_id)
+
+        def _remove_entity(external_id):
+            """Remove entity."""
+            removed_entity_external_ids.append(external_id)
+
+        feed_manager = NaturalResourcesCanadaEarthquakesFeedManager(
+            _generate_entity,
+            _update_entity,
+            _remove_entity,
+            HOME_COORDINATES,
+            'en')
+        assert repr(feed_manager) == "<NaturalResourcesCanadaEarthquakes" \
+                                     "FeedManager(feed=<NaturalResources" \
+                                     "CanadaEarthquakesFeed(home=" \
+                                     "(49.25, -123.1), " \
+                                     "url=http://www.earthquakescanada." \
+                                     "nrcan.gc.ca/index-en.php?" \
+                                     "tpl_region=canada&tpl_output=rss, " \
+                                     "radius=None, magnitude=None)>)>"
+        feed_manager.update()
+        entries = feed_manager.feed_entries
+        self.assertIsNotNone(entries)
+        assert len(entries) == 2
+        assert feed_manager.last_timestamp \
+            == datetime.datetime(2018, 9, 29, 8, 30,
+                                 tzinfo=datetime.timezone.utc)
+        assert len(generated_entity_external_ids) == 2
+        assert len(updated_entity_external_ids) == 0
+        assert len(removed_entity_external_ids) == 0

@@ -11,6 +11,7 @@ from typing import Optional
 from georss_client import GeoRssFeed, FeedEntry
 from georss_client.consts import CUSTOM_ATTRIBUTE
 from georss_client.exceptions import GeoRssException
+from georss_client.feed_manager import FeedManagerBase
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -34,6 +35,22 @@ URLS = {
 }
 
 XML_TAG_DFES_REGION = 'dfes:region'
+
+
+class WaDfesFeedManager(FeedManagerBase):
+    """Feed Manager for Department of Fire and Emergency Services feed."""
+
+    def __init__(self, generate_callback, update_callback, remove_callback,
+                 coordinates, feed, filter_radius=None,
+                 filter_categories=None):
+        """Initialize the DFES Feed Manager."""
+        feed = WaDfesFeed(
+            coordinates,
+            feed,
+            filter_radius=filter_radius,
+            filter_categories=filter_categories)
+        super().__init__(feed, generate_callback, update_callback,
+                         remove_callback)
 
 
 class WaDfesFeed(GeoRssFeed):

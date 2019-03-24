@@ -5,10 +5,27 @@ Support for generic GeoRSS feeds from various sources.
 """
 from georss_client import GeoRssFeed, FeedEntry
 from georss_client.consts import ATTR_ATTRIBUTION
+from georss_client.feed_manager import FeedManagerBase
+
+
+class GenericFeedManager(FeedManagerBase):
+    """Feed Manager for Generic GeoRSS feed."""
+
+    def __init__(self, generate_callback, update_callback, remove_callback,
+                 coordinates, url, filter_radius=None,
+                 filter_categories=None):
+        """Initialize the Tasmania Fire Service Incidents Feed Manager."""
+        feed = GenericFeed(
+            coordinates,
+            url,
+            filter_radius=filter_radius,
+            filter_categories=filter_categories)
+        super().__init__(feed, generate_callback, update_callback,
+                         remove_callback)
 
 
 class GenericFeed(GeoRssFeed):
-    """Generic GeoJSON feed."""
+    """Generic GeoRSS feed."""
 
     def __init__(self, home_coordinates, url, filter_radius=None,
                  filter_categories=None):
