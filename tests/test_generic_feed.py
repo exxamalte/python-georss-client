@@ -210,7 +210,8 @@ class TestGenericFeed(unittest.TestCase):
             _generate_entity,
             _update_entity,
             _remove_entity,
-            HOME_COORDINATES_1)
+            HOME_COORDINATES_1,
+            None)
         assert repr(feed_manager) == "<GenericFeedManager(" \
                                      "feed=<GenericFeed(home=" \
                                      "(-31.0, 151.0), url=None, " \
@@ -321,7 +322,8 @@ class TestGenericFeed(unittest.TestCase):
             _generate_entity,
             _update_entity,
             _remove_entity,
-            HOME_COORDINATES_1)
+            HOME_COORDINATES_1,
+            None)
         assert repr(feed_manager) == "<GenericFeedManager(" \
                                      "feed=<GenericFeed(home=" \
                                      "(-31.0, 151.0), url=None, " \
