@@ -1,5 +1,8 @@
 # Changes
 
+## 0.7 (24/03/2019)
+* Simple Feed Manager for all feeds added.
+
 ## 0.6 (20/03/2019)
 * Support for Instituto Geográfico Nacional Sismología (Earthquakes) feed.
 
