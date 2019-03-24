@@ -1,5 +1,8 @@
 # Changes
 
+## 0.8 (24/03/2019)
+* Fixed issue where the feed entries do not have any suitable timestamps.
+
 ## 0.7 (24/03/2019)
 * Simple Feed Manager for all feeds added.
 
