@@ -156,27 +156,6 @@ feed = IngvCentroNazionaleTerremotiFeed((40.84, 14.25), filter_radius=200,
 status, entries = feed.update()
 ```
 
-### [Instituto Geográfico Nacional Sismología (Earthquakes) Feed](http://www.ign.es/)
-
-**Supported Filters**
-
-| Filter            |                            | Description |
-|-------------------|----------------------------|-------------|
-| Radius            | `filter_radius`            | Radius in kilometers around the home coordinates in which events from feed are included. |
-| Minimum Magnitude | `filter_minimum_magnitude` | Minimum magnitude as float value. Only events with a magnitude equal or above this value are included. |
-
-**Example**
-```python
-from georss_client.ign_sismologia_feed import IgnSismologiaFeed
-# Home Coordinates: Latitude: 40.38, Longitude: -3.72
-# Filter radius: 200 km
-# Filter minimum magnitude: 3.0
-feed = IgnSismologiaFeed((40.38, -3.72), 
-                         filter_radius=200,
-                         filter_minimum_magnitude=3.0)
-status, entries = feed.update()
-```
-
 ## Feed Managers
 
 The Feed Managers help managing feed updates over time, by notifying the 
