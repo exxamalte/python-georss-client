@@ -22,25 +22,6 @@ Status Codes
 
 ## Supported GeoRSS Feeds
 
-### Generic Feed
-
-**Supported Filters**
-
-| Filter |                         | Description |
-|--------|-------------------------|-------------|
-| Radius | `filter_radius`         | Radius in kilometers around the home coordinates in which events from feed are included. |
-| Categories | `filter_categories` | Array of category names. Only events with a category matching any of these is included. |
-
-**Example**
-```python
-from georss_client.generic_feed import GenericFeed
-# Home Coordinates: Latitude: -27.5, Longitude: 153.0
-# Filter radius: 1000 km
-feed = GenericFeed((-27.5, 153.0), filter_radius=200, 
-                   url="https://www.qfes.qld.gov.au/data/alerts/bushfireAlert.xml")
-status, entries = feed.update()
-```
-
 ### [Queensland Fire and Emergency Services (QFES) Bushfire Alert Feed](https://www.ruralfire.qld.gov.au/map/Pages/default.aspx)
 
 **Supported Filters**
