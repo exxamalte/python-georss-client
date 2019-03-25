@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns:georss="http://www.georss.org/georss"
+      xmlns="http://www.w3.org/2005/Atom">
+    <author>
+        <name>Attribution 1</name>
+    </author>
+    <entry>
+        <category term="Category 1"/>
+        <id>1234</id>
+        <title>Title 1</title>
+        <published>2018-09-23T08:30:00</published>
+        <updated>2018-09-23T08:35:00</updated>
+        <georss:point>-37.2345 149.1234</georss:point>
+    </entry>
+    <entry>
+        <category term="Category 2"/>
+        <id>2345</id>
+        <title>Title 2</title>
+        <published>2018-09-23T08:40:00</published>
+        <updated>2018-09-23T08:45:00</updated>
+        <georss:point>-37.4567 149.3456</georss:point>
+    </entry>
+    <entry>
+        <category term="Category 3"/>
+        <title>Title 3</title>
+        <published>2018-09-23T08:50:00</published>
+        <updated>2018-09-23T08:55:00</updated>
+        <georss:point>-37.6789 149.5678</georss:point>
+    </entry>
+    <entry>
+        <category term="Category 4"/>
+        <published>2018-09-23T09:00:00</published>
+        <updated>2018-09-23T09:05:00</updated>
+        <georss:point>-37.8901 149.7890</georss:point>
+    </entry>
+    <entry>
+        <category term="Category 5"/>
+        <id>5678</id>
+        <title>Title 5</title>
+        <published>2018-09-23T09:10:00</published>
+        <updated>2018-09-23T09:15:00</updated>
+        <georss:point>-37.6789 149.5678</georss:point>
+    </entry>
+    <entry>
+        <category term="Category 6"/>
+        <id>6789</id>
+        <title>Title 6</title>
+        <published>2018-09-23T09:20:00</published>
+        <updated>2018-09-23T09:25:00</updated>
+    </entry>
+</feed>
