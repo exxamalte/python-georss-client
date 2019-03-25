@@ -1,14 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/"
-     xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" version="2.0">
-    <channel>
-        <item>
-            <title>Title 1</title>
-            <pubDate>2018-09-23 08:30:00</pubDate>
-            <guid>1234</guid>
-            <category>Category 1</category>
-            <geo:long>149.1234</geo:long>
-            <geo:lat>-37.2345</geo:lat>
-        </item>
-    </channel>
-</rss>
+<feed xmlns:georss="http://www.georss.org/georss"
+      xmlns="http://www.w3.org/2005/Atom">
+    <author>
+        <name>Attribution 1</name>
+    </author>
+    <entry>
+        <category term="Category 1"/>
+        <id>1234</id>
+        <title>Title 1 UPDATED</title>
+        <published>2018-09-23T08:30:00</published>
+        <updated>2018-09-23T08:35:00</updated>
+        <georss:point>-37.2345 149.1234</georss:point>
+    </entry>
+    <entry>
+        <category term="Category 2"/>
+        <id>2345</id>
+        <title>Title 2</title>
+        <published>2018-09-23T08:40:00</published>
+        <updated>2018-09-23T08:45:00</updated>
+        <georss:point>-37.4567 149.3456</georss:point>
+    </entry>
+    <entry>
+        <category term="Category 6"/>
+        <id>6789</id>
+        <title>Title 6</title>
+        <published>2018-09-23T09:20:00</published>
+        <updated>2018-09-23T09:25:00</updated>
+        <georss:point>-37.6789 149.5678</georss:point>
+    </entry>
+</feed>
