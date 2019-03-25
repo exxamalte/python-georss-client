@@ -1,5 +1,8 @@
 # Changes
 
+## 0.X (XX/03/2019)
+* Migrated Instituto Geográfico Nacional Sismología feed integration to [georss_ign_sismologia_client](https://github.com/exxamalte/python-georss-ign-sismologia-client)
+
 ## 0.8 (24/03/2019)
 * Fixed issue where the feed entries do not have any suitable timestamps.
 
