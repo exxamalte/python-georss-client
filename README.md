@@ -60,32 +60,6 @@ feed = TfsIncidentsFeed((-41.5, 148.0), filter_radius=50)
 status, entries = feed.update()
 ```
 
-### [Western Australia Department of Fire and Emergency Services Feed](https://www.emergency.wa.gov.au/)
-
-**Supported Feeds**
-
-| Category  | Feed            |
-|-----------|-----------------|
-| Warnings  | `warnings`      |
-| Incidents | `all_incidents` |
-
-**Supported Filters**
-
-| Filter     |                     | Description |
-|------------|---------------------|-------------|
-| Radius     | `filter_radius`     | Radius in kilometers around the home coordinates in which events from feed are included. |
-| Categories | `filter_categories` | Array of category names. Only events with a category matching any of these is included. |
-
-**Example**
-```python
-from georss_client.wa_dfes_feed import WaDfesFeed
-# Home Coordinates: Latitude: -31.0, Longitude: 121.0
-# Feed: Warnings
-# Filter radius: 50 km
-feed = WaDfesFeed((-31.0, 121.0), 'warnings', filter_radius=50)
-status, entries = feed.update()
-```
-
 ### [Natural Resources Canada Earthquakes Feed](http://www.earthquakescanada.nrcan.gc.ca/index-en.php)
 
 **Supported Languages**
