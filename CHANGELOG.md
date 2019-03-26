@@ -3,6 +3,7 @@
 ## 0.X (XX/03/2019)
 * Migrated Instituto Geográfico Nacional Sismología feed integration to [python-georss-ign-sismologia-client](https://github.com/exxamalte/python-georss-ign-sismologia-client)
 * Migrated generic GeoRSS feed integration to [python-georss-generic-client](https://github.com/exxamalte/python-georss-generic-client)
+* Migrated Western Australia Department of Fire and Emergency Services feed integration to [python-georss-wa-dfes-client](https://github.com/exxamalte/python-georss-wa-dfes-client)
 
 ## 0.8 (24/03/2019)
 * Fixed issue where the feed entries do not have any suitable timestamps.
