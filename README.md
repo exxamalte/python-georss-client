@@ -22,26 +22,6 @@ Status Codes
 
 ## Supported GeoRSS Feeds
 
-### [Queensland Fire and Emergency Services (QFES) Bushfire Alert Feed](https://www.ruralfire.qld.gov.au/map/Pages/default.aspx)
-
-**Supported Filters**
-
-| Filter     |                     | Description |
-|------------|---------------------|-------------|
-| Radius     | `filter_radius`     | Radius in kilometers around the home coordinates in which events from feed are included. |
-| Categories | `filter_categories` | Array of category names. Only events with a category matching any of these is included. |
-
-**Example**
-```python
-from georss_client.qfes_bushfire_alert_feed import QfesBushfireAlertFeed
-# Home Coordinates: Latitude: -27.5, Longitude: 153.0
-# Filter radius: 50 km
-# Filter categories: 'Advice'
-feed = QfesBushfireAlertFeed((-27.5, 153.0), filter_radius=50, 
-                             filter_categories=['Advice'])
-status, entries = feed.update()
-```
-
 ### [Tasmania Fire Service Incidents Feed](http://www.fire.tas.gov.au/Show?pageId=colCurrentBushfires)
 
 **Supported Filters**
