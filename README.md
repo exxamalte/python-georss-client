@@ -22,35 +22,7 @@ Status Codes
 
 ## Supported GeoRSS Feeds
 
-### [Natural Resources Canada Earthquakes Feed](http://www.earthquakescanada.nrcan.gc.ca/index-en.php)
-
-**Supported Languages**
-
-| Language | Feed |
-|----------|------|
-| English  | `en` |
-| Français | `fr` |
-
-**Supported Filters**
-
-| Filter            |                            | Description |
-|-------------------|----------------------------|-------------|
-| Radius            | `filter_radius`            | Radius in kilometers around the home coordinates in which events from feed are included. |
-| Minimum Magnitude | `filter_minimum_magnitude` | Minimum magnitude as float value. Only events with a magnitude equal or above this value are included. |
-
-**Example**
-```python
-from georss_client.natural_resources_canada_earthquakes_feed import \
-    NaturalResourcesCanadaEarthquakesFeed
-# Home Coordinates: Latitude: 49.25, Longitude: -123.1
-# Language: English
-# Filter radius: 200 km
-# Filter minimum magnitude: 4.0
-feed = NaturalResourcesCanadaEarthquakesFeed((49.25, -123.1), 'en', 
-                                             filter_radius=200,
-                                             filter_minimum_magnitude=4.0)
-status, entries = feed.update()
-```
+TBD
 
 ## Feed Managers
 
