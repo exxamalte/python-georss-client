@@ -52,27 +52,6 @@ feed = NaturalResourcesCanadaEarthquakesFeed((49.25, -123.1), 'en',
 status, entries = feed.update()
 ```
 
-### [INGV Centro Nazionale Terremoti (Earthquakes) Feed](http://cnt.rm.ingv.it/)
-
-**Supported Filters**
-
-| Filter            |                            | Description |
-|-------------------|----------------------------|-------------|
-| Radius            | `filter_radius`            | Radius in kilometers around the home coordinates in which events from feed are included. |
-| Minimum Magnitude | `filter_minimum_magnitude` | Minimum magnitude as float value. Only events with a magnitude equal or above this value are included. |
-
-**Example**
-```python
-from georss_client.ingv_centro_nazionale_terremoti_feed import \
-    IngvCentroNazionaleTerremotiFeed
-# Home Coordinates: Latitude: 40.84, Longitude: 14.25
-# Filter radius: 200 km
-# Filter minimum magnitude: 4.0
-feed = IngvCentroNazionaleTerremotiFeed((40.84, 14.25), filter_radius=200, 
-                                        filter_minimum_magnitude=4.0)
-status, entries = feed.update()
-```
-
 ## Feed Managers
 
 The Feed Managers help managing feed updates over time, by notifying the 

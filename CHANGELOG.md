@@ -6,6 +6,7 @@
 * Migrated Western Australia Department of Fire and Emergency Services feed integration to [python-georss-wa-dfes-client](https://github.com/exxamalte/python-georss-wa-dfes-client)
 * Migrated Queensland Fire and Emergency Services (QFES) Bushfire Alert feed integration to [python-georss-qfes-bushfire-alert-client](https://github.com/exxamalte/python-georss-qfes-bushfire-alert-client)
 * Migrated Tasmania Fire Service Incidents feed to [python-georss-tfs-incidents-client](https://github.com/exxamalte/python-georss-tfs-incidents-client).
+* Migrated INGV Centro Nazionale Terremoti (Earthquakes) feed to [python-georss-ingv-centro-nazionale-terremoti-client](https://github.com/exxamalte/python-georss-ingv-centro-nazionale-terremoti-client)
 
 ## 0.8 (24/03/2019)
 * Fixed issue where the feed entries do not have any suitable timestamps.
