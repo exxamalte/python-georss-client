@@ -22,24 +22,6 @@ Status Codes
 
 ## Supported GeoRSS Feeds
 
-### [Tasmania Fire Service Incidents Feed](http://www.fire.tas.gov.au/Show?pageId=colCurrentBushfires)
-
-**Supported Filters**
-
-| Filter     |                     | Description |
-|------------|---------------------|-------------|
-| Radius     | `filter_radius`     | Radius in kilometers around the home coordinates in which events from feed are included. |
-| Categories | `filter_categories` | Array of category names. Only events with a category matching any of these is included. |
-
-**Example**
-```python
-from georss_client.tasmania_fire_service_incidents_feed import TfsIncidentsFeed
-# Home Coordinates: Latitude: -41.5, Longitude: 148.0
-# Filter radius: 50 km
-feed = TfsIncidentsFeed((-41.5, 148.0), filter_radius=50)
-status, entries = feed.update()
-```
-
 ### [Natural Resources Canada Earthquakes Feed](http://www.earthquakescanada.nrcan.gc.ca/index-en.php)
 
 **Supported Languages**
