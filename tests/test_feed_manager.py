@@ -3,19 +3,12 @@ import datetime
 import unittest
 from unittest import mock
 
-from georss_client import GeoRssFeed, FeedEntry
 from georss_client.feed_manager import FeedManagerBase
+from tests import MockGeoRssFeed
 from tests.utils import load_fixture
 
 HOME_COORDINATES_1 = (-31.0, 151.0)
 HOME_COORDINATES_2 = (-37.0, 150.0)
-
-
-class MockGeoRssFeed(GeoRssFeed):
-
-    def _new_entry(self, home_coordinates, rss_entry, global_data):
-        """Generate a new entry."""
-        return FeedEntry(home_coordinates, rss_entry)
 
 
 class TestFeedManager(unittest.TestCase):
@@ -97,7 +90,7 @@ class TestFeedManager(unittest.TestCase):
         removed_entity_external_ids.clear()
 
         mock_session.return_value.__enter__.return_value.send\
-            .return_value.text = load_fixture('generic_feed_2.xml')
+            .return_value.text = load_fixture('generic_feed_4.xml')
 
         feed_manager.update()
         entries = feed_manager.feed_entries
@@ -139,7 +132,7 @@ class TestFeedManager(unittest.TestCase):
         mock_session.return_value.__enter__.return_value.send\
             .return_value.ok = True
         mock_session.return_value.__enter__.return_value.send\
-            .return_value.text = load_fixture('generic_feed_3.xml')
+            .return_value.text = load_fixture('generic_feed_5.xml')
 
         feed = MockGeoRssFeed(HOME_COORDINATES_1, None)
 

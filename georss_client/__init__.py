@@ -261,10 +261,6 @@ class FeedEntry:
 class GeoRssDistanceHelper:
     """Helper to calculate distances between GeoRSS geometries."""
 
-    def __init__(self):
-        """Initialize the geo distance helper."""
-        pass
-
     @staticmethod
     def extract_coordinates(geometry):
         """Extract the best coordinates from the feature for display."""
