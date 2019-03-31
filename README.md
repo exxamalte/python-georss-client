@@ -6,23 +6,41 @@
 [![Version](https://img.shields.io/pypi/pyversions/georss-client.svg)](https://pypi.python.org/pypi/georss-client)
 [![Maintainability](https://api.codeclimate.com/v1/badges/ed2a70f3af0c2324dcce/maintainability)](https://codeclimate.com/github/exxamalte/python-georss-client/maintainability)
 
-This library provides convenient access to [GeoRSS](http://www.georss.org/) Feeds.
+This library is a framework to build concrete libraries for convenient access 
+to [GeoRSS](http://www.georss.org/) Feeds.
 
 
 ## Installation
 `pip install georss-client`
 
+
+## Known Implementations
+
+| Library | Source | Topic |
+|---------|--------|-------|
+| [python-georss-generic-client](https://github.com/exxamalte/python-georss-generic-client) | Generic GeoRSS Feeds | misc |
+| [python-georss-ign-sismologia-client](https://github.com/exxamalte/python-georss-ign-sismologia-client) | Instituto Geográfico Nacional Sismología | Earthquakes |
+| [python-georss-ingv-centro-nazionale-terremoti-client](https://github.com/exxamalte/python-georss-ingv-centro-nazionale-terremoti-client) | INGV Centro Nazionale Terremoti | Earthquakes |
+| [python-georss-nrcan-earthquakes-client](https://github.com/exxamalte/python-georss-nrcan-earthquakes-client) | Natural Resources Canada | Earthquakes |
+| [python-georss-qfes-bushfire-alert-client](https://github.com/exxamalte/python-georss-qfes-bushfire-alert-client) | Queensland Fire and Emergency Services (QFES) Bushfire Alert | Fires |
+| [python-georss-tfs-incidents-client](https://github.com/exxamalte/python-georss-tfs-incidents-client) | Tasmania Fire Service Incidents | Fires |
+| [python-georss-wa-dfes-client](https://github.com/exxamalte/python-georss-wa-dfes-client) | Western Australia Department of Fire and Emergency Services | Fires |
+
+
 ## Usage
-See below for examples of how this library can be used for particular GeoRSS feeds. After instantiating a particular class and supply the required parameters, you can call `update` to retrieve the feed data. The return value will be a tuple of a status code and the actual data in the form of a list of feed entries specific to the selected feed.
+Each implementation extracts relevant information from the GeoRSS feed. Not all
+feeds contain the same level of information, or present their information in
+different ways.
+
+After instantiating a particular class and supply the required 
+parameters, you can call `update` to retrieve the feed data. The return 
+value will be a tuple of a status code and the actual data in the form of a 
+list of feed entries specific to the selected feed.
 
 Status Codes
 * _UPDATE_OK_: Update went fine and data was retrieved. The library may still return empty data, for example because no entries fulfilled the filter criteria.
 * _UPDATE_OK_NO_DATA_: Update went fine but no data was retrieved, for example because the server indicated that there was not update since the last request.
 * _UPDATE_ERROR_: Something went wrong during the update
-
-## Supported GeoRSS Feeds
-
-TBD
 
 ## Feed Managers
 
