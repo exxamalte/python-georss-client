@@ -39,36 +39,37 @@ class XmlParser:
         if additional_namespaces:
             self._namespaces.update(additional_namespaces)
 
+    @staticmethod
+    def postprocessor(path, key, value):
+        """Conduct type conversion for selected keys."""
+        try:
+            if key in KEYS_DATE and value:
+                return key, dateparser.parse(value)
+            if key in KEYS_FLOAT and value:
+                return key, float(value)
+            if key in KEYS_FLOAT_LIST and value:
+                # Turn white-space separated list of numbers into
+                # list of floats.
+                coordinate_values = value.split()
+                point_coordinates = []
+                for i in range(0, len(coordinate_values)):
+                    point_coordinates.append(
+                        float(coordinate_values[i]))
+                return key, point_coordinates
+            if key in KEYS_INT and value:
+                return key, int(value)
+        except (ValueError, TypeError) as error:
+            _LOGGER.warning("Unable to process (%s/%s): %s",
+                            key, value, error)
+        return key, value
+
     def parse(self, xml):
         """Parse the provided xml."""
         if xml:
 
-            def postprocessor(path, key, value):
-                """Conduct type conversion for selected keys."""
-                try:
-                    if key in KEYS_DATE and value:
-                        return key, dateparser.parse(value)
-                    if key in KEYS_FLOAT and value:
-                        return key, float(value)
-                    if key in KEYS_FLOAT_LIST and value:
-                        # Turn white-space separated list of numbers into
-                        # list of floats.
-                        coordinate_values = value.split()
-                        point_coordinates = []
-                        for i in range(0, len(coordinate_values)):
-                            point_coordinates.append(
-                                float(coordinate_values[i]))
-                        return key, point_coordinates
-                    if key in KEYS_INT and value:
-                        return key, int(value)
-                except (ValueError, TypeError) as error:
-                    _LOGGER.warning("Unable to process (%s/%s): %s",
-                                    key, value, error)
-                return key, value
-
             parsed_dict = xmltodict.parse(
                 xml, process_namespaces=True, namespaces=self._namespaces,
-                postprocessor=postprocessor)
+                postprocessor=XmlParser.postprocessor)
 
             if XML_TAG_RSS in parsed_dict:
                 rss = parsed_dict.get(XML_TAG_RSS)
