@@ -16,6 +16,8 @@ matrix:
       after_success: coveralls
     - python: "3.8-dev"
       env: TOXENV=py38
+      dist: xenial
+      sudo: true
   allow_failures:
     - python: "3.8-dev"
       env: TOXENV=py38
