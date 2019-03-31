@@ -12,7 +12,7 @@ REQUIRES = [
 
 setup(
     name="georss_client",
-    version="0.8",
+    version="0.9",
     author="Malte Franken",
     author_email="coding@subspace.de",
     description="A GeoRSS client library.",
@@ -21,7 +21,6 @@ setup(
     url="https://github.com/exxamalte/python-georss-client",
     packages=find_packages(),
     classifiers=[
-        "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "License :: OSI Approved :: Apache Software License",

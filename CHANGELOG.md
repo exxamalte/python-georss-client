@@ -1,6 +1,6 @@
 # Changes
 
-## 0.X (XX/03/2019)
+## 0.9 (01/04/2019)
 * Migrated Instituto Geográfico Nacional Sismología feed integration to [python-georss-ign-sismologia-client](https://github.com/exxamalte/python-georss-ign-sismologia-client)
 * Migrated generic GeoRSS feed integration to [python-georss-generic-client](https://github.com/exxamalte/python-georss-generic-client)
 * Migrated Western Australia Department of Fire and Emergency Services feed integration to [python-georss-wa-dfes-client](https://github.com/exxamalte/python-georss-wa-dfes-client)
@@ -8,6 +8,7 @@
 * Migrated Tasmania Fire Service Incidents feed to [python-georss-tfs-incidents-client](https://github.com/exxamalte/python-georss-tfs-incidents-client).
 * Migrated INGV Centro Nazionale Terremoti (Earthquakes) feed to [python-georss-ingv-centro-nazionale-terremoti-client](https://github.com/exxamalte/python-georss-ingv-centro-nazionale-terremoti-client)
 * Migrated Natural Resources Canada Earthquakes feed [python-georss-nrcan-earthquakes-client](https://github.com/exxamalte/python-georss-nrcan-earthquakes-client)
+* Dropped Python 3.5 support.
 
 ## 0.8 (24/03/2019)
 * Fixed issue where the feed entries do not have any suitable timestamps.
