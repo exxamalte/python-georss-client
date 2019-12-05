@@ -3,6 +3,7 @@ Base class for GeoRSS services.
 
 Fetches GeoRSS feed from URL to be defined by sub-class.
 """
+import codecs
 from datetime import datetime
 import logging
 import re
@@ -80,6 +81,7 @@ class GeoRssFeed:
             with requests.Session() as session:
                 response = session.send(self._request, timeout=10)
             if response.ok:
+                self._pre_process_response(response)
                 parser = XmlParser(self._additional_namespaces())
                 feed_data = parser.parse(response.text)
                 self.parser = parser
@@ -94,6 +96,15 @@ class GeoRssFeed:
             _LOGGER.warning("Fetching data from %s failed with %s",
                             self._request.url, request_ex)
             return UPDATE_ERROR, None
+
+    def _pre_process_response(self, response):
+        """Pre-process the response."""
+        if response:
+            _LOGGER.debug("Response encoding %s", response.encoding)
+            if response.content.startswith(codecs.BOM_UTF8):
+                _LOGGER.debug("UTF8 byte order mark detected, "
+                              "setting encoding to 'utf-8-sig'")
+                response.encoding = 'utf-8-sig'
 
     def _filter_entries(self, entries):
         """Filter the provided entries."""

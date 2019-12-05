@@ -1,6 +1,7 @@
 """Tests for XML parser."""
 import datetime
 import unittest
+from pyexpat import ExpatError
 
 from georss_client.xml_parser import XmlParser
 from georss_client.xml_parser.geometry import Point, Polygon
@@ -234,6 +235,17 @@ class TestXmlParser(unittest.TestCase):
         feed_entry = feed.entries[1]
         self.assertIsNone(feed_entry.title)
         self.assertIsNone(feed_entry.geometry)
+
+    def test_byte_order_mark(self):
+        """Test parsing an XML file with byte order mark."""
+        xml_parser = XmlParser()
+        # Create XML starting with byte order mark.
+        xml = "\xef\xbb\xbf<?xml version='1.0' encoding='utf-8'?>" \
+              "<rss version='2.0'><channel><item><title>Title 1</title>" \
+              "</item></channel></rss>"
+        # This will raise an error because the parser can't handle
+        with self.assertRaises(ExpatError):
+            xml_parser.parse(xml)
 
 
 class TestGeometries(unittest.TestCase):
