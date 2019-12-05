@@ -1,5 +1,8 @@
 # Changes
 
+## 0.10 (05/12/2019)
+* Fix handling feeds starting with byte order mark
+
 ## 0.9 (01/04/2019)
 * Migrated Instituto Geográfico Nacional Sismología feed integration to [python-georss-ign-sismologia-client](https://github.com/exxamalte/python-georss-ign-sismologia-client)
 * Migrated generic GeoRSS feed integration to [python-georss-generic-client](https://github.com/exxamalte/python-georss-generic-client)
