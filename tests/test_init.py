@@ -181,6 +181,23 @@ class TestGeoRssFeed(unittest.TestCase):
         assert status == UPDATE_ERROR
         self.assertIsNone(entries)
 
+    @mock.patch("requests.Request")
+    @mock.patch("requests.Session")
+    def test_update_bom(self, mock_session, mock_request):
+        """Test updating feed with BOM (byte order mark) is ok."""
+        mock_session.return_value.__enter__.return_value.send\
+            .return_value.ok = True
+        mock_session.return_value.__enter__.return_value.send\
+            .return_value.text = load_fixture('xml_parser_bom_1.xml')
+
+        feed = MockGeoRssFeed(HOME_COORDINATES_1, None)
+        assert repr(feed) == "<MockGeoRssFeed(home=(-31.0, 151.0), " \
+                             "url=None, radius=None, categories=None)>"
+        status, entries = feed.update()
+        assert status == UPDATE_OK
+        self.assertIsNotNone(entries)
+        assert len(entries) == 0
+
 
 class TestGeoRssDistanceHelper(unittest.TestCase):
     """Tests for the GeoJSON distance helper."""
