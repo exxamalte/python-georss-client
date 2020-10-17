@@ -55,7 +55,7 @@ class TestGeoRssFeed(unittest.TestCase):
 
         feed_entry = entries[3]
         self.assertIsNone(feed_entry.title)
-        assert feed_entry.external_id == -7266545992534134585
+        assert feed_entry.external_id == hash(feed_entry.coordinates)
 
         feed_entry = entries[4]
         assert feed_entry.title == "Title 5"
