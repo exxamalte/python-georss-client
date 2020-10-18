@@ -76,9 +76,10 @@ class TestFeedManager(unittest.TestCase):
         assert feed_entry.title == "Title 3"
         assert feed_entry.external_id == "Title 3"
 
-        feed_entry = entries.get(-7266545992534134585)
+        external_id = hash((-37.8901, 149.7890))
+        feed_entry = entries.get(external_id)
         self.assertIsNone(feed_entry.title)
-        assert feed_entry.external_id == -7266545992534134585
+        assert feed_entry.external_id == external_id
 
         feed_entry = entries.get("5678")
         assert feed_entry.title == "Title 5"
