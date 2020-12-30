@@ -19,6 +19,7 @@ DEFAULT_NAMESPACES = {
     'http://purl.org/dc/elements/1.1/': 'dc',
     'http://www.georss.org/georss': 'georss',
     'http://www.w3.org/2003/01/geo/wgs84_pos#': 'geo',
+    'http://www.w3.org/2003/01/geo/': 'geo',
     'http://www.opengis.net/gml': 'gml',
     'http://www.gdacs.org/': 'gdacs',
 }
