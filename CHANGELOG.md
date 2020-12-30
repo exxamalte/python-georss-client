@@ -1,5 +1,8 @@
 # Changes
 
+## 0.12 (30/12/2020)
+* Add non-standard namespace used by [EMSC feed](https://www.emsc-csem.org/service/rss/rss.php).
+
 ## 0.11 (18/10/2020)
 * Excluded tests from package (thanks @scop).
 * Python 3.8 support.
