@@ -18,16 +18,17 @@ from georss_client.xml_parser.geometry import Point, Polygon
 
 _LOGGER = logging.getLogger(__name__)
 
-UPDATE_OK = 'OK'
-UPDATE_OK_NO_DATA = 'OK_NO_DATA'
-UPDATE_ERROR = 'ERROR'
+UPDATE_OK = "OK"
+UPDATE_OK_NO_DATA = "OK_NO_DATA"
+UPDATE_ERROR = "ERROR"
 
 
 class GeoRssFeed:
     """GeoRSS feed base class."""
 
-    def __init__(self, home_coordinates, url, filter_radius=None,
-                 filter_categories=None):
+    def __init__(
+        self, home_coordinates, url, filter_radius=None, filter_categories=None
+    ):
         """Initialise this service."""
         self._home_coordinates = home_coordinates
         self._filter_radius = filter_radius
@@ -38,9 +39,13 @@ class GeoRssFeed:
 
     def __repr__(self):
         """Return string representation of this feed."""
-        return '<{}(home={}, url={}, radius={}, categories={})>'.format(
-            self.__class__.__name__, self._home_coordinates, self._url,
-            self._filter_radius, self._filter_categories)
+        return "<{}(home={}, url={}, radius={}, categories={})>".format(
+            self.__class__.__name__,
+            self._home_coordinates,
+            self._url,
+            self._filter_radius,
+            self._filter_categories,
+        )
 
     def _new_entry(self, home_coordinates, rss_entry, global_data):
         """Generate a new entry."""
@@ -59,11 +64,11 @@ class GeoRssFeed:
                 global_data = self._extract_from_feed(data)
                 # Extract data from feed entries.
                 for rss_entry in data.entries:
-                    entries.append(self._new_entry(self._home_coordinates,
-                                                   rss_entry, global_data))
+                    entries.append(
+                        self._new_entry(self._home_coordinates, rss_entry, global_data)
+                    )
                 filtered_entries = self._filter_entries(entries)
-                self._last_timestamp = self._extract_last_timestamp(
-                    filtered_entries)
+                self._last_timestamp = self._extract_last_timestamp(filtered_entries)
                 return UPDATE_OK, filtered_entries
             else:
                 # Should not happen.
@@ -90,11 +95,14 @@ class GeoRssFeed:
             else:
                 _LOGGER.warning(
                     "Fetching data from %s failed with status %s",
-                    self._request.url, response.status_code)
+                    self._request.url,
+                    response.status_code,
+                )
                 return UPDATE_ERROR, None
         except requests.exceptions.RequestException as request_ex:
-            _LOGGER.warning("Fetching data from %s failed with %s",
-                            self._request.url, request_ex)
+            _LOGGER.warning(
+                "Fetching data from %s failed with %s", self._request.url, request_ex
+            )
             return UPDATE_ERROR, None
 
     def _pre_process_response(self, response):
@@ -102,9 +110,10 @@ class GeoRssFeed:
         if response:
             _LOGGER.debug("Response encoding %s", response.encoding)
             if response.content.startswith(codecs.BOM_UTF8):
-                _LOGGER.debug("UTF8 byte order mark detected, "
-                              "setting encoding to 'utf-8-sig'")
-                response.encoding = 'utf-8-sig'
+                _LOGGER.debug(
+                    "UTF8 byte order mark detected, " "setting encoding to 'utf-8-sig'"
+                )
+                response.encoding = "utf-8-sig"
 
     def _filter_entries(self, entries):
         """Filter the provided entries."""
@@ -112,22 +121,27 @@ class GeoRssFeed:
         _LOGGER.debug("Entries before filtering %s", filtered_entries)
         # Always remove entries without geometry
         filtered_entries = list(
-            filter(lambda entry:
-                   entry.geometry is not None,
-                   filtered_entries))
+            filter(lambda entry: entry.geometry is not None, filtered_entries)
+        )
         # Filter by distance.
         if self._filter_radius:
             filtered_entries = list(
-                filter(lambda entry:
-                       entry.distance_to_home <= self._filter_radius,
-                       filtered_entries))
+                filter(
+                    lambda entry: entry.distance_to_home <= self._filter_radius,
+                    filtered_entries,
+                )
+            )
         # Filter by category.
         if self._filter_categories:
             filtered_entries = list(
-                filter(lambda entry:
-                       len({entry.category}.intersection(
-                           self._filter_categories)) > 0,
-                       filtered_entries))
+                filter(
+                    lambda entry: len(
+                        {entry.category}.intersection(self._filter_categories)
+                    )
+                    > 0,
+                    filtered_entries,
+                )
+            )
         _LOGGER.debug("Entries after filtering %s", filtered_entries)
         return filtered_entries
 
@@ -144,7 +158,8 @@ class GeoRssFeed:
         if feed_entries:
             dates = sorted(
                 [entry.published for entry in feed_entries if entry.published],
-                reverse=True)
+                reverse=True,
+            )
             if dates:
                 last_timestamp = dates[0]
                 _LOGGER.debug("Last timestamp: %s", last_timestamp)
@@ -167,7 +182,7 @@ class FeedEntry:
 
     def __repr__(self):
         """Return string representation of this entry."""
-        return '<{}(id={})>'.format(self.__class__.__name__, self.external_id)
+        return "<{}(id={})>".format(self.__class__.__name__, self.external_id)
 
     @property
     def geometry(self):
@@ -222,8 +237,11 @@ class FeedEntry:
     @property
     def category(self) -> Optional[str]:
         """Return the category of this entry."""
-        if self._rss_entry and self._rss_entry.category \
-                and isinstance(self._rss_entry.category, list):
+        if (
+            self._rss_entry
+            and self._rss_entry.category
+            and isinstance(self._rss_entry.category, list)
+        ):
             # To keep this simple, just return the first category.
             return self._rss_entry.category[0]
         return None
@@ -237,7 +255,8 @@ class FeedEntry:
     def distance_to_home(self):
         """Return the distance in km of this entry to the home coordinates."""
         return GeoRssDistanceHelper.distance_to_geometry(
-            self._home_coordinates, self.geometry)
+            self._home_coordinates, self.geometry
+        )
 
     @property
     def description(self) -> Optional[str]:
@@ -267,5 +286,3 @@ class FeedEntry:
             if match:
                 return match.group(CUSTOM_ATTRIBUTE)
         return None
-
-

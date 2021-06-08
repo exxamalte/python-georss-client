@@ -14,7 +14,7 @@ class TestXmlParser(unittest.TestCase):
     def test_simple_1(self):
         """Test parsing various actual XML files."""
         xml_parser = XmlParser()
-        xml = load_fixture('xml_parser_simple_1.xml')
+        xml = load_fixture("xml_parser_simple_1.xml")
         feed = xml_parser.parse(xml)
         self.assertIsNotNone(feed)
         self.assertIsNotNone(feed.entries)
@@ -23,7 +23,7 @@ class TestXmlParser(unittest.TestCase):
     def test_simple_2(self):
         """Test parsing various actual XML files."""
         xml_parser = XmlParser()
-        xml = load_fixture('xml_parser_simple_2.xml')
+        xml = load_fixture("xml_parser_simple_2.xml")
         feed = xml_parser.parse(xml)
         self.assertIsNotNone(feed)
         self.assertIsNotNone(feed.entries)
@@ -32,14 +32,14 @@ class TestXmlParser(unittest.TestCase):
     def test_simple_3(self):
         """Test parsing various actual XML files."""
         xml_parser = XmlParser()
-        xml = load_fixture('xml_parser_simple_3.xml')
+        xml = load_fixture("xml_parser_simple_3.xml")
         feed = xml_parser.parse(xml)
         self.assertIsNone(feed)
 
     def test_complex_1(self):
         """Test parsing various actual XML files."""
         xml_parser = XmlParser()
-        xml = load_fixture('xml_parser_complex_1.xml')
+        xml = load_fixture("xml_parser_complex_1.xml")
         feed = xml_parser.parse(xml)
         self.assertIsNotNone(feed)
 
@@ -49,18 +49,18 @@ class TestXmlParser(unittest.TestCase):
         assert feed.summary == "Feed Description 1"
         assert feed.content == "Feed Description 1"
         assert feed.link == "Feed Link 1"
-        assert feed.published_date \
-            == datetime.datetime(2018, 12, 9, 8, 30,
-                                 tzinfo=datetime.timezone.utc)
-        assert feed.pub_date \
-            == datetime.datetime(2018, 12, 9, 8, 30,
-                                 tzinfo=datetime.timezone.utc)
-        assert feed.updated_date \
-            == datetime.datetime(2018, 12, 9, 8, 45,
-                                 tzinfo=datetime.timezone.utc)
-        assert feed.last_build_date \
-            == datetime.datetime(2018, 12, 9, 8, 45,
-                                 tzinfo=datetime.timezone.utc)
+        assert feed.published_date == datetime.datetime(
+            2018, 12, 9, 8, 30, tzinfo=datetime.timezone.utc
+        )
+        assert feed.pub_date == datetime.datetime(
+            2018, 12, 9, 8, 30, tzinfo=datetime.timezone.utc
+        )
+        assert feed.updated_date == datetime.datetime(
+            2018, 12, 9, 8, 45, tzinfo=datetime.timezone.utc
+        )
+        assert feed.last_build_date == datetime.datetime(
+            2018, 12, 9, 8, 45, tzinfo=datetime.timezone.utc
+        )
         assert feed.copyright == "Feed Copyright 1"
         assert feed.rights == "Feed Copyright 1"
         assert feed.generator == "Feed Generator 1"
@@ -78,7 +78,7 @@ class TestXmlParser(unittest.TestCase):
         assert feed.image.description == "Image Description 1"
         assert feed.image.width == 123
         assert feed.image.height == 234
-        assert feed.get_additional_attribute('random') == "Feed Random 1"
+        assert feed.get_additional_attribute("random") == "Feed Random 1"
         assert repr(feed) == "<Feed(Feed Link 1)>"
 
         self.assertIsNotNone(feed.entries)
@@ -88,12 +88,12 @@ class TestXmlParser(unittest.TestCase):
         assert feed_entry.title == "Title 1"
         assert feed_entry.description == "Description 1"
         assert feed_entry.link == "Link 1"
-        assert feed_entry.published_date \
-            == datetime.datetime(2018, 12, 9, 7, 30,
-                                 tzinfo=datetime.timezone.utc)
-        assert feed_entry.updated_date \
-            == datetime.datetime(2018, 12, 9, 7, 45,
-                                 tzinfo=datetime.timezone.utc)
+        assert feed_entry.published_date == datetime.datetime(
+            2018, 12, 9, 7, 30, tzinfo=datetime.timezone.utc
+        )
+        assert feed_entry.updated_date == datetime.datetime(
+            2018, 12, 9, 7, 45, tzinfo=datetime.timezone.utc
+        )
         assert feed_entry.guid == "GUID 1"
         assert feed_entry.id == "GUID 1"
         assert feed_entry.source == "Source 1"
@@ -101,19 +101,19 @@ class TestXmlParser(unittest.TestCase):
         self.assertIsInstance(feed_entry.geometry, Point)
         assert feed_entry.geometry.latitude == -37.4567
         assert feed_entry.geometry.longitude == 149.3456
-        assert feed_entry.get_additional_attribute('random') == "Random 1"
+        assert feed_entry.get_additional_attribute("random") == "Random 1"
         assert repr(feed_entry) == "<FeedItem(GUID 1)>"
 
         feed_entry = feed.entries[1]
         assert feed_entry.title == "Title 2"
         assert feed_entry.description == "Description 2"
         assert feed_entry.link == "Link 2"
-        assert feed_entry.published_date \
-            == datetime.datetime(2018, 12, 9, 7, 35,
-                                 tzinfo=datetime.timezone.utc)
-        assert feed_entry.updated_date \
-            == datetime.datetime(2018, 12, 9, 7, 50,
-                                 tzinfo=datetime.timezone.utc)
+        assert feed_entry.published_date == datetime.datetime(
+            2018, 12, 9, 7, 35, tzinfo=datetime.timezone.utc
+        )
+        assert feed_entry.updated_date == datetime.datetime(
+            2018, 12, 9, 7, 50, tzinfo=datetime.timezone.utc
+        )
         assert feed_entry.guid == "GUID 2"
         assert feed_entry.category == ["Category 2"]
         self.assertIsInstance(feed_entry.geometry, Point)
@@ -123,16 +123,14 @@ class TestXmlParser(unittest.TestCase):
         feed_entry = feed.entries[2]
         assert feed_entry.title == "Title 3"
         assert feed_entry.description == "Description 3"
-        assert feed_entry.published_date \
-            == datetime.datetime(2018, 12, 9, 7, 40,
-                                 tzinfo=datetime.timezone.utc)
-        assert feed_entry.updated_date \
-            == datetime.datetime(2018, 12, 9, 7, 55,
-                                 tzinfo=datetime.timezone.utc)
+        assert feed_entry.published_date == datetime.datetime(
+            2018, 12, 9, 7, 40, tzinfo=datetime.timezone.utc
+        )
+        assert feed_entry.updated_date == datetime.datetime(
+            2018, 12, 9, 7, 55, tzinfo=datetime.timezone.utc
+        )
         assert feed_entry.guid == "GUID 3"
-        assert feed_entry.category == ["Category 3A",
-                                       "Category 3B",
-                                       "Category 3C"]
+        assert feed_entry.category == ["Category 3A", "Category 3B", "Category 3C"]
         self.assertIsInstance(feed_entry.geometry, Point)
         assert feed_entry.geometry.latitude == -37.6789
         assert feed_entry.geometry.longitude == 149.5678
@@ -142,11 +140,16 @@ class TestXmlParser(unittest.TestCase):
         assert feed_entry.description == "Description 4"
         assert feed_entry.author == "Author 4"
         assert feed_entry.contributor == "Author 4"
-        assert feed_entry.category == ["Category 4A",
-                                       "Category 4B"]
+        assert feed_entry.category == ["Category 4A", "Category 4B"]
         assert feed_entry.published_date == datetime.datetime(
-            2018, 9, 30, 21, 36, 48,
-            tzinfo=datetime.timezone(datetime.timedelta(hours=10), 'AEST'))
+            2018,
+            9,
+            30,
+            21,
+            36,
+            48,
+            tzinfo=datetime.timezone(datetime.timedelta(hours=10), "AEST"),
+        )
         self.assertIsInstance(feed_entry.geometry, Point)
         assert feed_entry.geometry.latitude == -37.789
         assert feed_entry.geometry.longitude == 149.6789
@@ -155,8 +158,14 @@ class TestXmlParser(unittest.TestCase):
         assert feed_entry.title == "Title 5"
         assert feed_entry.description == "Description 5"
         assert feed_entry.published_date == datetime.datetime(
-            2018, 9, 20, 18, 1, 55,
-            tzinfo=datetime.timezone(datetime.timedelta(hours=2), 'CEST'))
+            2018,
+            9,
+            20,
+            18,
+            1,
+            55,
+            tzinfo=datetime.timezone(datetime.timedelta(hours=2), "CEST"),
+        )
         self.assertIsInstance(feed_entry.geometry, Polygon)
         assert feed_entry.geometry.centroid.latitude == -30.32
         assert feed_entry.geometry.centroid.longitude == 150.32
@@ -165,8 +174,13 @@ class TestXmlParser(unittest.TestCase):
         assert feed_entry.title == "Title 6"
         assert feed_entry.description == "Description 6"
         assert feed_entry.published_date == datetime.datetime(
-            2018, 10, 7, 19,52,
-            tzinfo=datetime.timezone(datetime.timedelta(hours=-7), 'PDT'))
+            2018,
+            10,
+            7,
+            19,
+            52,
+            tzinfo=datetime.timezone(datetime.timedelta(hours=-7), "PDT"),
+        )
         self.assertIsInstance(feed_entry.geometry, Polygon)
         assert feed_entry.geometry.centroid.latitude == -30.32
         assert feed_entry.geometry.centroid.longitude == 150.32
@@ -174,7 +188,7 @@ class TestXmlParser(unittest.TestCase):
     def test_complex_2(self):
         """Test parsing various actual XML files."""
         xml_parser = XmlParser()
-        xml = load_fixture('xml_parser_complex_2.xml')
+        xml = load_fixture("xml_parser_complex_2.xml")
         feed = xml_parser.parse(xml)
         self.assertIsNotNone(feed)
 
@@ -182,12 +196,12 @@ class TestXmlParser(unittest.TestCase):
         assert feed.subtitle == "Feed Subtitle 1"
         assert feed.ttl == "INVALID"
         assert feed.author == "Author 1"
-        assert feed.last_build_date \
-            == datetime.datetime(2018, 12, 9, 9, 0,
-                                 tzinfo=datetime.timezone.utc)
-        assert feed.updated_date \
-            == datetime.datetime(2018, 12, 9, 9, 0,
-                                 tzinfo=datetime.timezone.utc)
+        assert feed.last_build_date == datetime.datetime(
+            2018, 12, 9, 9, 0, tzinfo=datetime.timezone.utc
+        )
+        assert feed.updated_date == datetime.datetime(
+            2018, 12, 9, 9, 0, tzinfo=datetime.timezone.utc
+        )
         assert feed.copyright == "Feed Rights 1"
         assert feed.rights == "Feed Rights 1"
         assert feed.generator == "Feed Generator 1"
@@ -210,7 +224,7 @@ class TestXmlParser(unittest.TestCase):
     def test_complex_3(self):
         """Test parsing various actual XML files."""
         xml_parser = XmlParser()
-        xml = load_fixture('xml_parser_complex_3.xml')
+        xml = load_fixture("xml_parser_complex_3.xml")
         feed = xml_parser.parse(xml)
         self.assertIsNotNone(feed)
 
@@ -240,9 +254,11 @@ class TestXmlParser(unittest.TestCase):
         """Test parsing an XML file with byte order mark."""
         xml_parser = XmlParser()
         # Create XML starting with byte order mark.
-        xml = "\xef\xbb\xbf<?xml version='1.0' encoding='utf-8'?>" \
-              "<rss version='2.0'><channel><item><title>Title 1</title>" \
-              "</item></channel></rss>"
+        xml = (
+            "\xef\xbb\xbf<?xml version='1.0' encoding='utf-8'?>"
+            "<rss version='2.0'><channel><item><title>Title 1</title>"
+            "</item></channel></rss>"
+        )
         # This will raise an error because the parser can't handle
         with self.assertRaises(ExpatError):
             xml_parser.parse(xml)
@@ -260,15 +276,19 @@ class TestGeometries(unittest.TestCase):
 
     def test_polygon(self):
         """Test polygon."""
-        polygon = Polygon([
-            Point(-30.1, 150.1),
-            Point(-30.2, 150.2),
-            Point(-30.4, 150.4),
-            Point(-30.8, 150.8),
-            Point(-30.1, 150.1)
-        ])
+        polygon = Polygon(
+            [
+                Point(-30.1, 150.1),
+                Point(-30.2, 150.2),
+                Point(-30.4, 150.4),
+                Point(-30.8, 150.8),
+                Point(-30.1, 150.1),
+            ]
+        )
         assert len(polygon.points) == 5
         assert polygon.centroid.latitude == -30.32
         assert polygon.centroid.longitude == 150.32
-        assert repr(polygon) == "<Polygon(centroid=" \
-                                "<Point(latitude=-30.32, longitude=150.32)>)>"
+        assert (
+            repr(polygon) == "<Polygon(centroid="
+            "<Point(latitude=-30.32, longitude=150.32)>)>"
+        )
