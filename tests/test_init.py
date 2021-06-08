@@ -1,16 +1,17 @@
 """Tests for base classes."""
 import datetime
-import requests
 import unittest
 from unittest import mock
 from unittest.mock import MagicMock
 
+import requests
+
 from georss_client import (
-    GeoRssDistanceHelper,
-    FeedEntry,
-    GeoRssFeed,
     UPDATE_ERROR,
     UPDATE_OK,
+    FeedEntry,
+    GeoRssDistanceHelper,
+    GeoRssFeed,
 )
 from georss_client.xml_parser.geometry import Point, Polygon
 from tests import MockGeoRssFeed

@@ -1,5 +1,5 @@
 """Tests for georss-client library."""
-from georss_client import GeoRssFeed, FeedEntry
+from georss_client import FeedEntry, GeoRssFeed
 
 
 class MockGeoRssFeed(GeoRssFeed):
