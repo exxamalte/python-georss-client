@@ -4,12 +4,12 @@ Base class for GeoRSS services.
 Fetches GeoRSS feed from URL to be defined by sub-class.
 """
 import codecs
-from datetime import datetime
 import logging
 import re
+from datetime import datetime
+from typing import Optional
 
 import requests
-from typing import Optional
 
 from georss_client.consts import ATTR_ATTRIBUTION, CUSTOM_ATTRIBUTE
 from georss_client.geo_rss_distance_helper import GeoRssDistanceHelper

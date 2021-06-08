@@ -4,13 +4,13 @@ GeoRSS feed dict source.
 from typing import Optional
 
 from georss_client.consts import (
-    XML_CDATA,
-    XML_TAG_TITLE,
-    XML_TAG_DESCRIPTION,
-    XML_TAG_SUMMARY,
-    XML_TAG_CONTENT,
-    XML_TAG_LINK,
     XML_ATTR_HREF,
+    XML_CDATA,
+    XML_TAG_CONTENT,
+    XML_TAG_DESCRIPTION,
+    XML_TAG_LINK,
+    XML_TAG_SUMMARY,
+    XML_TAG_TITLE,
 )
 
 
