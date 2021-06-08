@@ -1,5 +1,9 @@
 # Changes
 
+## 0.14 (08/06/2021)
+* Add license tag (thanks @fabaff).
+* General code improvements.
+
 ## 0.13 (20/04/2021)
 * Python 3.9 support.
 
