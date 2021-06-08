@@ -5,29 +5,52 @@ import dateparser as dateparser
 import logging
 import xmltodict
 
-from georss_client.consts import XML_TAG_DC_DATE, XML_TAG_LAST_BUILD_DATE, \
-    XML_TAG_PUB_DATE, XML_TAG_PUBLISHED, XML_TAG_UPDATED, XML_TAG_GEO_LAT, \
-    XML_TAG_GEO_LONG, XML_TAG_GEORSS_POLYGON, XML_TAG_GML_POS_LIST, \
-    XML_TAG_GML_POS, XML_TAG_GEORSS_POINT, XML_TAG_HEIGHT, XML_TAG_TTL, \
-    XML_TAG_WIDTH, XML_TAG_RSS, XML_TAG_CHANNEL, XML_TAG_FEED
+from georss_client.consts import (
+    XML_TAG_DC_DATE,
+    XML_TAG_LAST_BUILD_DATE,
+    XML_TAG_PUB_DATE,
+    XML_TAG_PUBLISHED,
+    XML_TAG_UPDATED,
+    XML_TAG_GEO_LAT,
+    XML_TAG_GEO_LONG,
+    XML_TAG_GEORSS_POLYGON,
+    XML_TAG_GML_POS_LIST,
+    XML_TAG_GML_POS,
+    XML_TAG_GEORSS_POINT,
+    XML_TAG_HEIGHT,
+    XML_TAG_TTL,
+    XML_TAG_WIDTH,
+    XML_TAG_RSS,
+    XML_TAG_CHANNEL,
+    XML_TAG_FEED,
+)
 from georss_client.xml_parser.feed import Feed
 
 _LOGGER = logging.getLogger(__name__)
 
 DEFAULT_NAMESPACES = {
-    'http://www.w3.org/2005/Atom': None,
-    'http://purl.org/dc/elements/1.1/': 'dc',
-    'http://www.georss.org/georss': 'georss',
-    'http://www.w3.org/2003/01/geo/wgs84_pos#': 'geo',
-    'http://www.w3.org/2003/01/geo/': 'geo',
-    'http://www.opengis.net/gml': 'gml',
-    'http://www.gdacs.org/': 'gdacs',
+    "http://www.w3.org/2005/Atom": None,
+    "http://purl.org/dc/elements/1.1/": "dc",
+    "http://www.georss.org/georss": "georss",
+    "http://www.w3.org/2003/01/geo/wgs84_pos#": "geo",
+    "http://www.w3.org/2003/01/geo/": "geo",
+    "http://www.opengis.net/gml": "gml",
+    "http://www.gdacs.org/": "gdacs",
 }
-KEYS_DATE = [XML_TAG_DC_DATE, XML_TAG_LAST_BUILD_DATE, XML_TAG_PUB_DATE,
-             XML_TAG_PUBLISHED, XML_TAG_UPDATED]
+KEYS_DATE = [
+    XML_TAG_DC_DATE,
+    XML_TAG_LAST_BUILD_DATE,
+    XML_TAG_PUB_DATE,
+    XML_TAG_PUBLISHED,
+    XML_TAG_UPDATED,
+]
 KEYS_FLOAT = [XML_TAG_GEO_LAT, XML_TAG_GEO_LONG]
-KEYS_FLOAT_LIST = [XML_TAG_GEORSS_POLYGON, XML_TAG_GML_POS_LIST,
-                   XML_TAG_GML_POS, XML_TAG_GEORSS_POINT]
+KEYS_FLOAT_LIST = [
+    XML_TAG_GEORSS_POLYGON,
+    XML_TAG_GML_POS_LIST,
+    XML_TAG_GML_POS,
+    XML_TAG_GEORSS_POINT,
+]
 KEYS_INT = [XML_TAG_HEIGHT, XML_TAG_TTL, XML_TAG_WIDTH]
 
 
@@ -54,14 +77,12 @@ class XmlParser:
                 coordinate_values = value.split()
                 point_coordinates = []
                 for i in range(0, len(coordinate_values)):
-                    point_coordinates.append(
-                        float(coordinate_values[i]))
+                    point_coordinates.append(float(coordinate_values[i]))
                 return key, point_coordinates
             if key in KEYS_INT and value:
                 return key, int(value)
         except (ValueError, TypeError) as error:
-            _LOGGER.warning("Unable to process (%s/%s): %s",
-                            key, value, error)
+            _LOGGER.warning("Unable to process (%s/%s): %s", key, value, error)
         return key, value
 
     def parse(self, xml):
@@ -69,8 +90,11 @@ class XmlParser:
         if xml:
 
             parsed_dict = xmltodict.parse(
-                xml, process_namespaces=True, namespaces=self._namespaces,
-                postprocessor=XmlParser.postprocessor)
+                xml,
+                process_namespaces=True,
+                namespaces=self._namespaces,
+                postprocessor=XmlParser.postprocessor,
+            )
 
             if XML_TAG_RSS in parsed_dict:
                 rss = parsed_dict.get(XML_TAG_RSS)

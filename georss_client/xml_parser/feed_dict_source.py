@@ -3,9 +3,15 @@ GeoRSS feed dict source.
 """
 from typing import Optional
 
-from georss_client.consts import XML_CDATA, XML_TAG_TITLE, \
-    XML_TAG_DESCRIPTION, XML_TAG_SUMMARY, XML_TAG_CONTENT, XML_TAG_LINK, \
-    XML_ATTR_HREF
+from georss_client.consts import (
+    XML_CDATA,
+    XML_TAG_TITLE,
+    XML_TAG_DESCRIPTION,
+    XML_TAG_SUMMARY,
+    XML_TAG_CONTENT,
+    XML_TAG_LINK,
+    XML_ATTR_HREF,
+)
 
 
 class FeedDictSource:
@@ -17,8 +23,7 @@ class FeedDictSource:
 
     def __repr__(self):
         """Return string representation of this feed item."""
-        return '<{}({})>'.format(
-            self.__class__.__name__, self.link)
+        return "<{}({})>".format(self.__class__.__name__, self.link)
 
     def _attribute(self, names):
         """Get an attribute from this feed or feed item."""
@@ -43,8 +48,11 @@ class FeedDictSource:
         """Return the attribute found under the chain of keys."""
         key = keys.pop(0)
         if key in obj:
-            return FeedDictSource._attribute_in_structure(
-                obj[key], keys) if keys else obj[key]
+            return (
+                FeedDictSource._attribute_in_structure(obj[key], keys)
+                if keys
+                else obj[key]
+            )
 
     @property
     def title(self) -> Optional[str]:
@@ -54,9 +62,9 @@ class FeedDictSource:
     @property
     def description(self) -> Optional[str]:
         """Return the description of this feed or feed item."""
-        return self._attribute_with_text([XML_TAG_DESCRIPTION,
-                                          XML_TAG_SUMMARY,
-                                          XML_TAG_CONTENT])
+        return self._attribute_with_text(
+            [XML_TAG_DESCRIPTION, XML_TAG_SUMMARY, XML_TAG_CONTENT]
+        )
 
     @property
     def summary(self) -> Optional[str]:

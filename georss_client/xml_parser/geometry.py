@@ -18,8 +18,9 @@ class Point(Geometry):
 
     def __repr__(self):
         """Return string representation of this point."""
-        return '<{}(latitude={}, longitude={})>'.format(
-            self.__class__.__name__, self.latitude, self.longitude)
+        return "<{}(latitude={}, longitude={})>".format(
+            self.__class__.__name__, self.latitude, self.longitude
+        )
 
     @property
     def latitude(self) -> Optional[float]:
@@ -41,8 +42,7 @@ class Polygon(Geometry):
 
     def __repr__(self):
         """Return string representation of this polygon."""
-        return '<{}(centroid={})>'.format(
-            self.__class__.__name__, self.centroid)
+        return "<{}(centroid={})>".format(self.__class__.__name__, self.centroid)
 
     @property
     def points(self) -> Optional[list]:

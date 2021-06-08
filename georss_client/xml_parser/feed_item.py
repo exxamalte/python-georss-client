@@ -3,11 +3,23 @@ GeoRSS feed item.
 """
 from typing import Optional
 
-from georss_client.consts import XML_TAG_GUID, XML_TAG_ID, XML_TAG_SOURCE, \
-    XML_TAG_GEORSS_POINT, XML_TAG_GEORSS_WHERE, XML_TAG_GML_POINT, \
-    XML_TAG_GML_POS, XML_TAG_GML_POLYGON, XML_TAG_GML_EXTERIOR, \
-    XML_TAG_GML_LINEAR_RING, XML_TAG_GML_POS_LIST, XML_TAG_GEO_POINT, \
-    XML_TAG_GEO_LAT, XML_TAG_GEO_LONG, XML_TAG_GEORSS_POLYGON
+from georss_client.consts import (
+    XML_TAG_GUID,
+    XML_TAG_ID,
+    XML_TAG_SOURCE,
+    XML_TAG_GEORSS_POINT,
+    XML_TAG_GEORSS_WHERE,
+    XML_TAG_GML_POINT,
+    XML_TAG_GML_POS,
+    XML_TAG_GML_POLYGON,
+    XML_TAG_GML_EXTERIOR,
+    XML_TAG_GML_LINEAR_RING,
+    XML_TAG_GML_POS_LIST,
+    XML_TAG_GEO_POINT,
+    XML_TAG_GEO_LAT,
+    XML_TAG_GEO_LONG,
+    XML_TAG_GEORSS_POLYGON,
+)
 from georss_client.xml_parser.feed_or_feed_item import FeedOrFeedItem
 from georss_client.xml_parser.geometry import Geometry, Point, Polygon
 
@@ -17,8 +29,7 @@ class FeedItem(FeedOrFeedItem):
 
     def __repr__(self):
         """Return string representation of this feed item."""
-        return '<{}({})>'.format(
-            self.__class__.__name__, self.guid)
+        return "<{}({})>".format(self.__class__.__name__, self.guid)
 
     @property
     def guid(self) -> Optional[str]:
@@ -52,7 +63,8 @@ class FeedItem(FeedOrFeedItem):
             #   </gml:Point>
             # </georss:where>
             pos = self._attribute_in_structure(
-                where, [XML_TAG_GML_POINT, XML_TAG_GML_POS])
+                where, [XML_TAG_GML_POINT, XML_TAG_GML_POS]
+            )
             if pos:
                 return Point(pos[0], pos[1])
             # Polygon:
@@ -75,8 +87,14 @@ class FeedItem(FeedOrFeedItem):
             #   </gml:Polygon>
             # </georss:where>
             pos_list = self._attribute_in_structure(
-                where, [XML_TAG_GML_POLYGON, XML_TAG_GML_EXTERIOR,
-                        XML_TAG_GML_LINEAR_RING, XML_TAG_GML_POS_LIST])
+                where,
+                [
+                    XML_TAG_GML_POLYGON,
+                    XML_TAG_GML_EXTERIOR,
+                    XML_TAG_GML_LINEAR_RING,
+                    XML_TAG_GML_POS_LIST,
+                ],
+            )
             if pos_list:
                 return self._create_polygon(pos_list)
         # <geo:Point xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#">
@@ -118,7 +136,7 @@ class FeedItem(FeedOrFeedItem):
         if coordinates:
             if len(coordinates) % 2 != 0:
                 # Not even number of coordinates - chop last entry.
-                coordinates = coordinates[0:len(coordinates)-1]
+                coordinates = coordinates[0 : len(coordinates) - 1]
             points = []
             for i in range(0, len(coordinates), 2):
                 points.append(Point(coordinates[i], coordinates[i + 1]))

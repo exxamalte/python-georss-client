@@ -12,15 +12,14 @@ HOME_COORDINATES_2 = (-37.0, 150.0)
 
 
 class TestFeedManager(unittest.TestCase):
-
     @mock.patch("requests.Request")
     @mock.patch("requests.Session")
     def test_feed_manager(self, mock_session, mock_request):
         """Test the feed manager."""
-        mock_session.return_value.__enter__.return_value.send\
-            .return_value.ok = True
-        mock_session.return_value.__enter__.return_value.send\
-            .return_value.text = load_fixture('generic_feed_1.xml')
+        mock_session.return_value.__enter__.return_value.send.return_value.ok = True
+        mock_session.return_value.__enter__.return_value.send.return_value.text = (
+            load_fixture("generic_feed_1.xml")
+        )
 
         feed = MockGeoRssFeed(HOME_COORDINATES_1, None)
 
@@ -42,21 +41,20 @@ class TestFeedManager(unittest.TestCase):
             removed_entity_external_ids.append(external_id)
 
         feed_manager = FeedManagerBase(
-            feed,
-            _generate_entity,
-            _update_entity,
-            _remove_entity)
-        assert repr(feed_manager) == "<FeedManagerBase(" \
-                                     "feed=<MockGeoRssFeed(home=" \
-                                     "(-31.0, 151.0), url=None, " \
-                                     "radius=None, categories=None)>)>"
+            feed, _generate_entity, _update_entity, _remove_entity
+        )
+        assert (
+            repr(feed_manager) == "<FeedManagerBase("
+            "feed=<MockGeoRssFeed(home="
+            "(-31.0, 151.0), url=None, "
+            "radius=None, categories=None)>)>"
+        )
         feed_manager.update()
         entries = feed_manager.feed_entries
         self.assertIsNotNone(entries)
         assert len(entries) == 5
         self.assertIsNotNone(feed_manager.last_update)
-        assert feed_manager.last_timestamp \
-            == datetime.datetime(2018, 9, 23, 9, 10)
+        assert feed_manager.last_timestamp == datetime.datetime(2018, 9, 23, 9, 10)
         assert len(generated_entity_external_ids) == 5
         assert len(updated_entity_external_ids) == 0
         assert len(removed_entity_external_ids) == 0
@@ -90,8 +88,9 @@ class TestFeedManager(unittest.TestCase):
         updated_entity_external_ids.clear()
         removed_entity_external_ids.clear()
 
-        mock_session.return_value.__enter__.return_value.send\
-            .return_value.text = load_fixture('generic_feed_4.xml')
+        mock_session.return_value.__enter__.return_value.send.return_value.text = (
+            load_fixture("generic_feed_4.xml")
+        )
 
         feed_manager.update()
         entries = feed_manager.feed_entries
@@ -115,8 +114,7 @@ class TestFeedManager(unittest.TestCase):
         updated_entity_external_ids.clear()
         removed_entity_external_ids.clear()
 
-        mock_session.return_value.__enter__.return_value.send\
-            .return_value.ok = False
+        mock_session.return_value.__enter__.return_value.send.return_value.ok = False
 
         feed_manager.update()
         entries = feed_manager.feed_entries
@@ -130,10 +128,10 @@ class TestFeedManager(unittest.TestCase):
     @mock.patch("requests.Session")
     def test_feed_manager_no_timestamp(self, mock_session, mock_request):
         """Test updating feed is ok."""
-        mock_session.return_value.__enter__.return_value.send\
-            .return_value.ok = True
-        mock_session.return_value.__enter__.return_value.send\
-            .return_value.text = load_fixture('generic_feed_5.xml')
+        mock_session.return_value.__enter__.return_value.send.return_value.ok = True
+        mock_session.return_value.__enter__.return_value.send.return_value.text = (
+            load_fixture("generic_feed_5.xml")
+        )
 
         feed = MockGeoRssFeed(HOME_COORDINATES_1, None)
 
@@ -155,14 +153,14 @@ class TestFeedManager(unittest.TestCase):
             removed_entity_external_ids.append(external_id)
 
         feed_manager = FeedManagerBase(
-            feed,
-            _generate_entity,
-            _update_entity,
-            _remove_entity)
-        assert repr(feed_manager) == "<FeedManagerBase(" \
-                                     "feed=<MockGeoRssFeed(home=" \
-                                     "(-31.0, 151.0), url=None, " \
-                                     "radius=None, categories=None)>)>"
+            feed, _generate_entity, _update_entity, _remove_entity
+        )
+        assert (
+            repr(feed_manager) == "<FeedManagerBase("
+            "feed=<MockGeoRssFeed(home="
+            "(-31.0, 151.0), url=None, "
+            "radius=None, categories=None)>)>"
+        )
         feed_manager.update()
         entries = feed_manager.feed_entries
         self.assertIsNotNone(entries)
