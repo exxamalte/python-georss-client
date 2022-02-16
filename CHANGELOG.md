@@ -1,5 +1,12 @@
 # Changes
 
+## 0.15 (16/02/2022)
+* No functional changes.
+* Migrated to github actions.
+* Added Python 3.10 support.
+* Removed Python 3.6 support.
+* Bumped library versions: black, flake8, isort.
+
 ## 0.14 (08/06/2021)
 * Add license tag (thanks @fabaff).
 * General code improvements.
