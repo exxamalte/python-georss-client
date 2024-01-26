@@ -1,11 +1,11 @@
-"""
-Base class for the feed manager.
+"""Base class for the feed manager.
 
 This allows managing feeds and their entries throughout their life-cycle.
 """
+from __future__ import annotations
+
 import logging
 from datetime import datetime
-from typing import Optional
 
 from georss_client import UPDATE_OK, UPDATE_OK_NO_DATA
 
@@ -27,7 +27,7 @@ class FeedManagerBase:
 
     def __repr__(self):
         """Return string representation of this feed."""
-        return "<{}(feed={})>".format(self.__class__.__name__, self._feed)
+        return f"<{self.__class__.__name__}(feed={self._feed})>"
 
     def update(self):
         """Update the feed and then update connected entities."""
@@ -85,11 +85,11 @@ class FeedManagerBase:
             self._remove_callback(external_id)
 
     @property
-    def last_timestamp(self) -> Optional[datetime]:
+    def last_timestamp(self) -> datetime | None:
         """Return the last timestamp extracted from this feed."""
         return self._feed.last_timestamp
 
     @property
-    def last_update(self) -> Optional[datetime]:
+    def last_update(self) -> datetime | None:
         """Return the last successful update of this feed."""
         return self._last_update

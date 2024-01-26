@@ -1,8 +1,7 @@
-"""
-GeoRSS feed models.
-"""
+"""GeoRSS feed models."""
+from __future__ import annotations
+
 import logging
-from typing import Optional
 
 from georss_client.consts import (
     XML_TAG_COPYRIGHT,
@@ -27,37 +26,37 @@ class Feed(FeedOrFeedItem):
     """Represents a feed."""
 
     @property
-    def subtitle(self) -> Optional[str]:
+    def subtitle(self) -> str | None:
         """Return the subtitle of this feed."""
         return self._attribute_with_text([XML_TAG_SUBTITLE])
 
     @property
-    def copyright(self) -> Optional[str]:
+    def copyright(self) -> str | None:
         """Return the copyright of this feed."""
         return self._attribute_with_text([XML_TAG_COPYRIGHT, XML_TAG_RIGHTS])
 
     @property
-    def rights(self) -> Optional[str]:
+    def rights(self) -> str | None:
         """Return the rights of this feed."""
         return self.copyright
 
     @property
-    def generator(self) -> Optional[str]:
+    def generator(self) -> str | None:
         """Return the generator of this feed."""
         return self._attribute_with_text([XML_TAG_GENERATOR])
 
     @property
-    def language(self) -> Optional[str]:
+    def language(self) -> str | None:
         """Return the language of this feed."""
         return self._attribute([XML_TAG_LANGUAGE])
 
     @property
-    def docs(self) -> Optional[str]:
+    def docs(self) -> str | None:
         """Return the docs URL of this feed."""
         return self._attribute_with_text([XML_TAG_DOCS])
 
     @property
-    def ttl(self) -> Optional[int]:
+    def ttl(self) -> int | None:
         """Return the ttl of this feed."""
         return self._attribute([XML_TAG_TTL])
 

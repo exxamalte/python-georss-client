@@ -22,6 +22,8 @@ HOME_COORDINATES_2 = (-37.0, 150.0)
 
 
 class TestGeoRssFeed(unittest.TestCase):
+    """Test cases for GeoRSS feed."""
+
     @mock.patch("requests.Request")
     @mock.patch("requests.Session")
     def test_update_ok(self, mock_session, mock_request):
@@ -308,6 +310,8 @@ class TestGeoRssDistanceHelper(unittest.TestCase):
 
 
 class TestFeedEntry(unittest.TestCase):
+    """Test cases or feed entry."""
+
     def test_simple_feed_entry(self):
         """Test feed entry behaviour."""
         feed_entry = FeedEntry(None, None)

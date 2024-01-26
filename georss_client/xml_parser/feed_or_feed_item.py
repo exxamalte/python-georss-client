@@ -1,8 +1,7 @@
-"""
-GeoRSS feed or feed item.
-"""
+"""GeoRSS feed or feed item."""
+from __future__ import annotations
+
 import datetime
-from typing import Optional
 
 from georss_client.consts import (
     XML_ATTR_TERM,
@@ -24,7 +23,7 @@ class FeedOrFeedItem(FeedDictSource):
     """Represents the common base of feed and its items."""
 
     @property
-    def category(self) -> Optional[list]:
+    def category(self) -> list | None:
         """Return the categories of this feed item."""
         category = self._attribute([XML_TAG_CATEGORY])
         if category:
@@ -41,27 +40,27 @@ class FeedOrFeedItem(FeedDictSource):
         return None
 
     @property
-    def published_date(self) -> Optional[datetime.datetime]:
+    def published_date(self) -> datetime.datetime | None:
         """Return the published date of this feed or feed item."""
         return self._attribute([XML_TAG_PUB_DATE, XML_TAG_PUBLISHED, XML_TAG_DC_DATE])
 
     @property
-    def pub_date(self) -> Optional[datetime.datetime]:
+    def pub_date(self) -> datetime.datetime | None:
         """Return the published date of this feed or feed item."""
         return self.published_date
 
     @property
-    def updated_date(self) -> Optional[datetime.datetime]:
+    def updated_date(self) -> datetime.datetime | None:
         """Return the updated date of this feed or feed item."""
         return self._attribute([XML_TAG_LAST_BUILD_DATE, XML_TAG_UPDATED])
 
     @property
-    def last_build_date(self) -> Optional[datetime.datetime]:
+    def last_build_date(self) -> datetime.datetime | None:
         """Return the last build date of this feed."""
         return self.updated_date
 
     @property
-    def author(self) -> Optional[str]:
+    def author(self) -> str | None:
         """Return the author of this feed."""
         # <managingEditor>jrc-ems@ec.europa.eu</managingEditor>
         managing_editor = self._attribute([XML_TAG_MANAGING_EDITOR])
@@ -78,11 +77,11 @@ class FeedOrFeedItem(FeedDictSource):
         return None
 
     @property
-    def contributor(self) -> Optional[str]:
+    def contributor(self) -> str | None:
         """Return the contributor of this feed."""
         return self.author
 
     @property
-    def managing_editor(self) -> Optional[str]:
+    def managing_editor(self) -> str | None:
         """Return the managing editor of this feed."""
         return self.author

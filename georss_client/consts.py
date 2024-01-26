@@ -1,5 +1,4 @@
-"""
-Constants.
+"""Constants.
 
 Constants for feeds and feed entries.
 """

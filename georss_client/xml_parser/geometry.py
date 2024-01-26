@@ -1,7 +1,5 @@
-"""
-Geometry models.
-"""
-from typing import Optional
+"""Geometry models."""
+from __future__ import annotations
 
 
 class Geometry:
@@ -23,12 +21,12 @@ class Point(Geometry):
         )
 
     @property
-    def latitude(self) -> Optional[float]:
+    def latitude(self) -> float | None:
         """Return the latitude of this point."""
         return self._latitude
 
     @property
-    def longitude(self) -> Optional[float]:
+    def longitude(self) -> float | None:
         """Return the longitude of this point."""
         return self._longitude
 
@@ -42,10 +40,10 @@ class Polygon(Geometry):
 
     def __repr__(self):
         """Return string representation of this polygon."""
-        return "<{}(centroid={})>".format(self.__class__.__name__, self.centroid)
+        return f"<{self.__class__.__name__}(centroid={self.centroid})>"
 
     @property
-    def points(self) -> Optional[list]:
+    def points(self) -> list | None:
         """Return the points of this polygon."""
         return self._points
 
