@@ -1,7 +1,5 @@
-"""
-GeoRSS feed item.
-"""
-from typing import Optional
+"""GeoRSS feed item."""
+from __future__ import annotations
 
 from georss_client.consts import (
     XML_TAG_GEO_LAT,
@@ -29,25 +27,25 @@ class FeedItem(FeedOrFeedItem):
 
     def __repr__(self):
         """Return string representation of this feed item."""
-        return "<{}({})>".format(self.__class__.__name__, self.guid)
+        return f"<{self.__class__.__name__}({self.guid})>"
 
     @property
-    def guid(self) -> Optional[str]:
+    def guid(self) -> str | None:
         """Return the guid of this feed item."""
         return self._attribute_with_text([XML_TAG_GUID, XML_TAG_ID])
 
     @property
-    def id(self) -> Optional[str]:
+    def id(self) -> str | None:
         """Return the id of this feed item."""
         return self.guid
 
     @property
-    def source(self) -> Optional[str]:
+    def source(self) -> str | None:
         """Return the source of this feed item."""
         return self._attribute([XML_TAG_SOURCE])
 
     @property
-    def geometry(self) -> Optional[Geometry]:
+    def geometry(self) -> Geometry | None:
         """Return the geometry of this feed item."""
         # <georss:point>-0.5 119.8</georss:point>
         point = self._attribute([XML_TAG_GEORSS_POINT])

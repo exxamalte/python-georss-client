@@ -1,7 +1,5 @@
-"""
-GeoRSS feed dict source.
-"""
-from typing import Optional
+"""GeoRSS feed dict source."""
+from __future__ import annotations
 
 from georss_client.consts import (
     XML_ATTR_HREF,
@@ -23,7 +21,7 @@ class FeedDictSource:
 
     def __repr__(self):
         """Return string representation of this feed item."""
-        return "<{}({})>".format(self.__class__.__name__, self.link)
+        return f"<{self.__class__.__name__}({self.link})>"
 
     def _attribute(self, names):
         """Get an attribute from this feed or feed item."""
@@ -55,29 +53,29 @@ class FeedDictSource:
             )
 
     @property
-    def title(self) -> Optional[str]:
+    def title(self) -> str | None:
         """Return the title of this feed or feed item."""
         return self._attribute_with_text([XML_TAG_TITLE])
 
     @property
-    def description(self) -> Optional[str]:
+    def description(self) -> str | None:
         """Return the description of this feed or feed item."""
         return self._attribute_with_text(
             [XML_TAG_DESCRIPTION, XML_TAG_SUMMARY, XML_TAG_CONTENT]
         )
 
     @property
-    def summary(self) -> Optional[str]:
+    def summary(self) -> str | None:
         """Return the summary of this feed or feed item."""
         return self.description
 
     @property
-    def content(self) -> Optional[str]:
+    def content(self) -> str | None:
         """Return the content of this feed or feed item."""
         return self.description
 
     @property
-    def link(self) -> Optional[str]:
+    def link(self) -> str | None:
         """Return the link of this feed or feed item."""
         link = self._attribute([XML_TAG_LINK])
         if link and XML_ATTR_HREF in link:

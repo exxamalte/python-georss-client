@@ -1,6 +1,4 @@
-"""
-GeoRSS Distance Helper.
-"""
+"""GeoRSS Distance Helper."""
 import logging
 
 from haversine import haversine
@@ -70,7 +68,6 @@ class GeoRssDistanceHelper:
 
     @staticmethod
     def _distance_to_coordinates(home_coordinates, coordinates):
-        """Calculate the distance between home coordinates and the
-        coordinates."""
+        """Calculate the distance between home coordinates and the coordinates."""
         # Expecting coordinates in format: (latitude, longitude).
         return haversine(coordinates, home_coordinates)

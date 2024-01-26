@@ -12,6 +12,8 @@ HOME_COORDINATES_2 = (-37.0, 150.0)
 
 
 class TestFeedManager(unittest.TestCase):
+    """Test cases for feed manager."""
+
     @mock.patch("requests.Request")
     @mock.patch("requests.Session")
     def test_feed_manager(self, mock_session, mock_request):

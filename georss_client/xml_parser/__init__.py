@@ -1,9 +1,7 @@
-"""
-XML Parser.
-"""
+"""XML Parser."""
 import logging
 
-import dateparser as dateparser
+import dateparser
 import xmltodict
 
 from georss_client.consts import (
@@ -89,7 +87,6 @@ class XmlParser:
     def parse(self, xml):
         """Parse the provided xml."""
         if xml:
-
             parsed_dict = xmltodict.parse(
                 xml,
                 process_namespaces=True,

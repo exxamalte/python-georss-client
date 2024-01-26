@@ -1,20 +1,19 @@
-"""
-Base class for GeoRSS services.
+"""Base class for GeoRSS services.
 
 Fetches GeoRSS feed from URL to be defined by sub-class.
 """
+from __future__ import annotations
+
 import codecs
 import logging
 import re
 from datetime import datetime
-from typing import Optional
 
 import requests
 
 from georss_client.consts import ATTR_ATTRIBUTION, CUSTOM_ATTRIBUTE
 from georss_client.geo_rss_distance_helper import GeoRssDistanceHelper
 from georss_client.xml_parser import XmlParser
-from georss_client.xml_parser.geometry import Point, Polygon
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -167,7 +166,7 @@ class GeoRssFeed:
         return None
 
     @property
-    def last_timestamp(self) -> Optional[datetime]:
+    def last_timestamp(self) -> datetime | None:
         """Return the last timestamp extracted from this feed."""
         return self._last_timestamp
 
@@ -182,7 +181,7 @@ class FeedEntry:
 
     def __repr__(self):
         """Return string representation of this entry."""
-        return "<{}(id={})>".format(self.__class__.__name__, self.external_id)
+        return f"<{self.__class__.__name__}(id={self.external_id})>"
 
     @property
     def geometry(self):
@@ -199,7 +198,7 @@ class FeedEntry:
         return None
 
     @property
-    def external_id(self) -> Optional[str]:
+    def external_id(self) -> str | None:
         """Return the external id of this entry."""
         if self._rss_entry:
             external_id = self._rss_entry.guid
@@ -220,7 +219,7 @@ class FeedEntry:
         return None
 
     @property
-    def title(self) -> Optional[str]:
+    def title(self) -> str | None:
         """Return the title of this entry."""
         if self._rss_entry:
             return self._rss_entry.title
@@ -235,7 +234,7 @@ class FeedEntry:
         return None
 
     @property
-    def category(self) -> Optional[str]:
+    def category(self) -> str | None:
         """Return the category of this entry."""
         if (
             self._rss_entry
@@ -247,7 +246,7 @@ class FeedEntry:
         return None
 
     @property
-    def attribution(self) -> Optional[str]:
+    def attribution(self) -> str | None:
         """Return the attribution of this entry."""
         return None
 
@@ -259,21 +258,21 @@ class FeedEntry:
         )
 
     @property
-    def description(self) -> Optional[str]:
+    def description(self) -> str | None:
         """Return the description of this entry."""
         if self._rss_entry and self._rss_entry.description:
             return self._rss_entry.description
         return None
 
     @property
-    def published(self) -> Optional[datetime]:
+    def published(self) -> datetime | None:
         """Return the published date of this entry."""
         if self._rss_entry:
             return self._rss_entry.published_date
         return None
 
     @property
-    def updated(self) -> Optional[datetime]:
+    def updated(self) -> datetime | None:
         """Return the updated date of this entry."""
         if self._rss_entry:
             return self._rss_entry.updated_date
