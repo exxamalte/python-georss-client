@@ -123,7 +123,10 @@ class TestGeoRssFeed(unittest.TestCase):
 
         feed_entry = entries[2]
         assert feed_entry.external_id == "3456"
-        assert feed_entry.coordinates == (-29.962746645660683, 152.43090880416074)
+        assert feed_entry.coordinates == (
+            pytest.approx(-29.962746645660683),
+            pytest.approx(152.43090880416074),
+        )
         self.assertAlmostEqual(feed_entry.distance_to_home, 176.5, 1)
 
     @mock.patch("requests.Request")
