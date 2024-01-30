@@ -4,6 +4,7 @@ import unittest
 from unittest import mock
 from unittest.mock import MagicMock
 
+import pytest
 import requests
 
 from georss_client import (
@@ -109,7 +110,10 @@ class TestGeoRssFeed(unittest.TestCase):
 
         feed_entry = entries[0]
         assert feed_entry.external_id == "1234"
-        assert feed_entry.coordinates == (-34.93728111547821, 148.59710883878262)
+        assert feed_entry.coordinates == (
+            pytest.approx(-34.93728111547821),
+            pytest.approx(148.59710883878262),
+        )
         self.assertAlmostEqual(feed_entry.distance_to_home, 491.7, 1)
 
         feed_entry = entries[1]
