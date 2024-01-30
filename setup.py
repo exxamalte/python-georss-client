@@ -1,3 +1,4 @@
+"""Setup of georss_client library."""
 import os
 
 from setuptools import find_packages, setup
@@ -15,7 +16,7 @@ REQUIRES = [
     "dateparser>=0.7.0",
 ]
 
-with open("README.md", "r") as fh:
+with open("README.md") as fh:
     long_description = fh.read()
 
 HERE = os.path.abspath(os.path.dirname(__file__))
@@ -38,6 +39,7 @@ setup(
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
         "License :: OSI Approved :: Apache Software License",
         "Operating System :: OS Independent",
     ],
