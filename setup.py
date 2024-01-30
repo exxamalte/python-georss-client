@@ -11,7 +11,7 @@ URL = "https://github.com/exxamalte/python-georss-client"
 
 REQUIRES = [
     "haversine>=1.0.1",
-    "xmltodict>=0.11.0",
+    "xmltodict>=0.13.0",
     "requests>=2.20.0",
     "dateparser>=0.7.0",
 ]
