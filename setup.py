@@ -13,7 +13,7 @@ REQUIRES = [
     "haversine>=2.8.1",
     "xmltodict>=0.13.0",
     "requests>=2.20.0",
-    "dateparser>=0.7.0",
+    "dateparser>=1.2.0",
 ]
 
 with open("README.md") as fh:
