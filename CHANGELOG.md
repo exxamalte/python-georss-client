@@ -1,5 +1,17 @@
 # Changes
 
+## 0.16 (31/01/2024)
+* Removed Python 3.7 support.
+* Added Python 3.11 support.
+* Added Python 3.12 support.
+* Bumped requests to 2.31.0.
+* Bumped dateparser to 1.2.0.
+* Bumped haversine to 2.8.1.
+* Bumped xmltodict to 0.13.0.
+* Bumped library versions: black, flake8, isort.
+* Migrated to pytest.
+* Code quality improvements.
+
 ## 0.15 (16/02/2022)
 * No functional changes.
 * Migrated to github actions.
