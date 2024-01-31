@@ -7,7 +7,7 @@ from __future__ import annotations
 import logging
 from datetime import datetime
 
-from georss_client import UPDATE_OK, UPDATE_OK_NO_DATA
+from .consts import UPDATE_OK, UPDATE_OK_NO_DATA
 
 _LOGGER = logging.getLogger(__name__)
 

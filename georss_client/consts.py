@@ -2,6 +2,7 @@
 
 Constants for feeds and feed entries.
 """
+from __future__ import annotations
 
 ATTR_ATTRIBUTION = "attribution"
 CUSTOM_ATTRIBUTE = "custom_attribute"
@@ -57,3 +58,6 @@ XML_TAG_TTL = "ttl"
 XML_TAG_UPDATED = "updated"
 XML_TAG_URL = "url"
 XML_TAG_WIDTH = "width"
+UPDATE_OK = "OK"
+UPDATE_OK_NO_DATA = "OK_NO_DATA"
+UPDATE_ERROR = "ERROR"
