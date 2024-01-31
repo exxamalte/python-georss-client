@@ -1,5 +1,8 @@
 # Changes
 
+## 0.17 (31/01/2024)
+* Provide backwards compatibility with v0.15 by exposing constants.
+
 ## 0.16 (31/01/2024)
 * Removed Python 3.7 support.
 * Added Python 3.11 support.
