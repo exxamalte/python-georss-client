@@ -7,13 +7,10 @@ from unittest.mock import MagicMock
 import pytest
 import requests
 
-from georss_client import (
-    UPDATE_ERROR,
-    UPDATE_OK,
-    FeedEntry,
-    GeoRssDistanceHelper,
-    GeoRssFeed,
-)
+from georss_client.consts import UPDATE_ERROR, UPDATE_OK
+from georss_client.feed import GeoRssFeed
+from georss_client.feed_entry import FeedEntry
+from georss_client.geo_rss_distance_helper import GeoRssDistanceHelper
 from georss_client.xml_parser.geometry import Point, Polygon
 from tests import MockGeoRssFeed
 from tests.utils import load_fixture
