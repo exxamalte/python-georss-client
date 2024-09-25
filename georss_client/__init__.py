@@ -1,4 +1,5 @@
 """Base class for GeoRSS services."""
+
 from georss_client.consts import ATTR_ATTRIBUTION  # noqa: F401
 
 from .consts import (  # noqa: F401

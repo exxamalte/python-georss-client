@@ -1,4 +1,5 @@
 """Geometry models."""
+
 from __future__ import annotations
 
 
@@ -16,9 +17,7 @@ class Point(Geometry):
 
     def __repr__(self):
         """Return string representation of this point."""
-        return "<{}(latitude={}, longitude={})>".format(
-            self.__class__.__name__, self.latitude, self.longitude
-        )
+        return f"<{self.__class__.__name__}(latitude={self.latitude}, longitude={self.longitude})>"
 
     @property
     def latitude(self) -> float | None:

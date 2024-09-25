@@ -1,4 +1,5 @@
 """GeoRSS feed or feed item."""
+
 from __future__ import annotations
 
 import datetime
@@ -27,7 +28,7 @@ class FeedOrFeedItem(FeedDictSource):
         """Return the categories of this feed item."""
         category = self._attribute([XML_TAG_CATEGORY])
         if category:
-            if isinstance(category, str) or isinstance(category, dict):
+            if isinstance(category, (str, dict)):
                 # If it's a string or a dict, wrap in list.
                 category = [category]
             result = []
@@ -72,8 +73,7 @@ class FeedOrFeedItem(FeedDictSource):
         # </author>
         author = self._attribute([XML_TAG_AUTHOR, XML_TAG_CONTRIBUTOR])
         if author:
-            name = author.get(XML_TAG_NAME, None)
-            return name
+            return author.get(XML_TAG_NAME, None)
         return None
 
     @property

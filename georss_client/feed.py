@@ -1,9 +1,10 @@
 """GeoRSS Feed."""
+
 from __future__ import annotations
 
 import codecs
-import logging
 from datetime import datetime
+import logging
 
 import requests
 
@@ -29,60 +30,48 @@ class GeoRssFeed:
 
     def __repr__(self):
         """Return string representation of this feed."""
-        return "<{}(home={}, url={}, radius={}, categories={})>".format(
-            self.__class__.__name__,
-            self._home_coordinates,
-            self._url,
-            self._filter_radius,
-            self._filter_categories,
-        )
+        return f"<{self.__class__.__name__}(home={self._home_coordinates}, url={self._url}, radius={self._filter_radius}, categories={self._filter_categories})>"
 
     def _new_entry(self, home_coordinates, rss_entry, global_data):
         """Generate a new entry."""
-        pass
 
     def _additional_namespaces(self):
         """Provide additional namespaces, relevant for this feed."""
-        pass
 
     def update(self):
         """Update from external source and return filtered entries."""
         status, data = self._fetch()
         if status == UPDATE_OK:
             if data:
-                entries = []
                 global_data = self._extract_from_feed(data)
                 # Extract data from feed entries.
-                for rss_entry in data.entries:
-                    entries.append(
-                        self._new_entry(self._home_coordinates, rss_entry, global_data)
-                    )
+                entries = [
+                    self._new_entry(self._home_coordinates, rss_entry, global_data)
+                    for rss_entry in data.entries
+                ]
                 filtered_entries = self._filter_entries(entries)
                 self._last_timestamp = self._extract_last_timestamp(filtered_entries)
                 return UPDATE_OK, filtered_entries
-            else:
-                # Should not happen.
-                return UPDATE_OK, None
-        elif status == UPDATE_OK_NO_DATA:
+            # Should not happen.
+            return UPDATE_OK, None
+        if status == UPDATE_OK_NO_DATA:
             # Happens for example if the server returns 304
             return UPDATE_OK_NO_DATA, None
-        else:
-            # Error happened while fetching the feed.
-            return UPDATE_ERROR, None
+        # Error happened while fetching the feed.
+        return UPDATE_ERROR, None
 
     def _fetch(self):
         """Fetch GeoRSS data from external source."""
         try:
             with requests.Session() as session:
                 response = session.send(self._request, timeout=10)
-            if response.ok:
-                self._pre_process_response(response)
-                parser = XmlParser(self._additional_namespaces())
-                feed_data = parser.parse(response.text)
-                self.parser = parser
-                self.feed_data = feed_data
-                return UPDATE_OK, feed_data
-            else:
+                if response.ok:
+                    self._pre_process_response(response)
+                    parser = XmlParser(self._additional_namespaces())
+                    feed_data = parser.parse(response.text)
+                    self.parser = parser
+                    self.feed_data = feed_data
+                    return UPDATE_OK, feed_data
                 _LOGGER.warning(
                     "Fetching data from %s failed with status %s",
                     self._request.url,

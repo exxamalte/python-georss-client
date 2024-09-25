@@ -1,4 +1,5 @@
 """GeoRSS feed image."""
+
 from __future__ import annotations
 
 from georss_client.consts import XML_TAG_HEIGHT, XML_TAG_URL, XML_TAG_WIDTH

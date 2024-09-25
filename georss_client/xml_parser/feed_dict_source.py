@@ -1,4 +1,5 @@
 """GeoRSS feed dict source."""
+
 from __future__ import annotations
 
 from georss_client.consts import (
@@ -51,6 +52,7 @@ class FeedDictSource:
                 if keys
                 else obj[key]
             )
+        return None
 
     @property
     def title(self) -> str | None:

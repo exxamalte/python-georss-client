@@ -2,10 +2,11 @@
 
 This allows managing feeds and their entries throughout their life-cycle.
 """
+
 from __future__ import annotations
 
-import logging
 from datetime import datetime
+import logging
 
 from .consts import UPDATE_OK, UPDATE_OK_NO_DATA
 

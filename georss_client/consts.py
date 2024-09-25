@@ -2,6 +2,7 @@
 
 Constants for feeds and feed entries.
 """
+
 from __future__ import annotations
 
 ATTR_ATTRIBUTION = "attribution"

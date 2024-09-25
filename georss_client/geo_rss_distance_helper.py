@@ -1,4 +1,5 @@
 """GeoRSS Distance Helper."""
+
 import logging
 
 from haversine import haversine

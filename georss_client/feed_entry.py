@@ -1,8 +1,9 @@
 """Feed Entry."""
+
 from __future__ import annotations
 
-import re
 from datetime import datetime
+import re
 
 from .consts import CUSTOM_ATTRIBUTE
 from .geo_rss_distance_helper import GeoRssDistanceHelper
