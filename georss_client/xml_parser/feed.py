@@ -1,4 +1,5 @@
 """GeoRSS feed models."""
+
 from __future__ import annotations
 
 import logging
@@ -74,8 +75,7 @@ class Feed(FeedOrFeedItem):
         items = self._attribute([XML_TAG_ITEM, XML_TAG_ENTRY])
         entries = []
         if items and isinstance(items, list):
-            for item in items:
-                entries.append(FeedItem(item))
+            entries = [FeedItem(item) for item in items]
         else:
             # A single item in the feed is not represented as an array.
             entries.append(FeedItem(items))

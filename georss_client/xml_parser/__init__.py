@@ -1,4 +1,5 @@
 """XML Parser."""
+
 import logging
 
 import dateparser
@@ -74,9 +75,9 @@ class XmlParser:
                 # Turn white-space separated list of numbers into
                 # list of floats.
                 coordinate_values = value.split()
-                point_coordinates = []
-                for i in range(0, len(coordinate_values)):
-                    point_coordinates.append(float(coordinate_values[i]))
+                point_coordinates = [
+                    float(coordinate_values[i]) for i in range(len(coordinate_values))
+                ]
                 return key, point_coordinates
             if key in KEYS_INT and value:
                 return key, int(value)

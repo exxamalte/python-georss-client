@@ -1,4 +1,5 @@
 """GeoRSS feed item."""
+
 from __future__ import annotations
 
 from georss_client.consts import (
@@ -135,8 +136,9 @@ class FeedItem(FeedOrFeedItem):
             if len(coordinates) % 2 != 0:
                 # Not even number of coordinates - chop last entry.
                 coordinates = coordinates[0 : len(coordinates) - 1]
-            points = []
-            for i in range(0, len(coordinates), 2):
-                points.append(Point(coordinates[i], coordinates[i + 1]))
+            points = [
+                Point(coordinates[i], coordinates[i + 1])
+                for i in range(0, len(coordinates), 2)
+            ]
             return Polygon(points)
         return None

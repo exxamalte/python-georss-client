@@ -1,4 +1,5 @@
 """Tests for feed entry."""
+
 import datetime
 import unittest
 from unittest import mock
@@ -13,22 +14,22 @@ class TestFeedEntry(unittest.TestCase):
         """Test feed entry behaviour."""
         feed_entry = FeedEntry(None, None)
         assert repr(feed_entry) == "<FeedEntry(id=None)>"
-        self.assertIsNone(feed_entry.geometry)
-        self.assertIsNone(feed_entry.coordinates)
-        self.assertIsNone(feed_entry.title)
-        self.assertIsNone(feed_entry.category)
-        self.assertIsNone(feed_entry.attribution)
-        self.assertIsNone(feed_entry.description)
-        self.assertIsNone(feed_entry.published)
-        self.assertIsNone(feed_entry.updated)
-        self.assertIsNone(
-            feed_entry._search_in_external_id(r"External ID (?P<custom_attribute>.+)$")
+        assert feed_entry.geometry is None
+        assert feed_entry.coordinates is None
+        assert feed_entry.title is None
+        assert feed_entry.category is None
+        assert feed_entry.attribution is None
+        assert feed_entry.description is None
+        assert feed_entry.published is None
+        assert feed_entry.updated is None
+        assert (
+            feed_entry._search_in_external_id(r"External ID (?P<custom_attribute>.+)$")  # noqa: SLF001
+            is None
         )
-        self.assertIsNone(
-            feed_entry._search_in_title(r"Title (?P<custom_attribute>.+)$")
-        )
-        self.assertIsNone(
-            feed_entry._search_in_description(r"Description (?P<custom_attribute>.+)$")
+        assert feed_entry._search_in_title(r"Title (?P<custom_attribute>.+)$") is None  # noqa: SLF001
+        assert (
+            feed_entry._search_in_description(r"Description (?P<custom_attribute>.+)$")  # noqa: SLF001
+            is None
         )
 
     def test_feed_entry_search_in_attributes(self):
@@ -47,12 +48,12 @@ class TestFeedEntry(unittest.TestCase):
         assert repr(feed_entry) == "<FeedEntry(id=Test 123)>"
 
         assert (
-            feed_entry._search_in_external_id(r"Test (?P<custom_attribute>.+)$")
+            feed_entry._search_in_external_id(r"Test (?P<custom_attribute>.+)$")  # noqa: SLF001
             == "123"
         )
-        assert feed_entry._search_in_title(r"Title (?P<custom_attribute>.+)$") == "123"
+        assert feed_entry._search_in_title(r"Title (?P<custom_attribute>.+)$") == "123"  # noqa: SLF001
         assert (
-            feed_entry._search_in_description(r"Description (?P<custom_attribute>.+)$")
+            feed_entry._search_in_description(r"Description (?P<custom_attribute>.+)$")  # noqa: SLF001
             == "123"
         )
         assert feed_entry.category == "Category 1"

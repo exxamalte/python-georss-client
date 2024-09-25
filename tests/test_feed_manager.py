@@ -1,7 +1,10 @@
 """Test for the Feed Manager."""
+
 import datetime
 import unittest
 from unittest import mock
+
+import pytest
 
 from georss_client.feed_manager import FeedManagerBase
 from tests import MockGeoRssFeed
@@ -53,9 +56,9 @@ class TestFeedManager(unittest.TestCase):
         )
         feed_manager.update()
         entries = feed_manager.feed_entries
-        self.assertIsNotNone(entries)
+        assert entries is not None
         assert len(entries) == 5
-        self.assertIsNotNone(feed_manager.last_update)
+        assert feed_manager.last_update is not None
         assert feed_manager.last_timestamp == datetime.datetime(2018, 9, 23, 9, 10)
         assert len(generated_entity_external_ids) == 5
         assert len(updated_entity_external_ids) == 0
@@ -65,7 +68,7 @@ class TestFeedManager(unittest.TestCase):
         assert feed_entry.title == "Title 1"
         assert feed_entry.external_id == "1234"
         assert feed_entry.coordinates == (-37.2345, 149.1234)
-        self.assertAlmostEqual(feed_entry.distance_to_home, 714.4, 1)
+        assert feed_entry.distance_to_home == pytest.approx(714.4, 0.1)
         assert repr(feed_entry) == "<FeedEntry(id=1234)>"
 
         feed_entry = entries.get("2345")
@@ -78,7 +81,7 @@ class TestFeedManager(unittest.TestCase):
 
         external_id = hash((-37.8901, 149.7890))
         feed_entry = entries.get(external_id)
-        self.assertIsNone(feed_entry.title)
+        assert feed_entry.title is None
         assert feed_entry.external_id == external_id
 
         feed_entry = entries.get("5678")
@@ -96,7 +99,7 @@ class TestFeedManager(unittest.TestCase):
 
         feed_manager.update()
         entries = feed_manager.feed_entries
-        self.assertIsNotNone(entries)
+        assert entries is not None
         assert len(entries) == 3
         assert len(generated_entity_external_ids) == 1
         assert len(updated_entity_external_ids) == 2
@@ -165,6 +168,6 @@ class TestFeedManager(unittest.TestCase):
         )
         feed_manager.update()
         entries = feed_manager.feed_entries
-        self.assertIsNotNone(entries)
+        assert entries is not None
         assert len(entries) == 1
-        self.assertIsNone(feed_manager.last_timestamp)
+        assert feed_manager.last_timestamp is None
