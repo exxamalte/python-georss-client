@@ -1,8 +1,10 @@
 """Tests for XML parser."""
+
 import datetime
+from pyexpat import ExpatError
 import unittest
 
-from pyexpat import ExpatError
+import pytest
 
 from georss_client.xml_parser import XmlParser
 from georss_client.xml_parser.geometry import Point, Polygon
@@ -17,8 +19,8 @@ class TestXmlParser(unittest.TestCase):
         xml_parser = XmlParser()
         xml = load_fixture("xml_parser_simple_1.xml")
         feed = xml_parser.parse(xml)
-        self.assertIsNotNone(feed)
-        self.assertIsNotNone(feed.entries)
+        assert feed is not None
+        assert feed.entries is not None
         assert len(feed.entries) == 1
 
     def test_simple_2(self):
@@ -26,8 +28,8 @@ class TestXmlParser(unittest.TestCase):
         xml_parser = XmlParser()
         xml = load_fixture("xml_parser_simple_2.xml")
         feed = xml_parser.parse(xml)
-        self.assertIsNotNone(feed)
-        self.assertIsNotNone(feed.entries)
+        assert feed is not None
+        assert feed.entries is not None
         assert len(feed.entries) == 1
 
     def test_simple_3(self):
@@ -35,14 +37,14 @@ class TestXmlParser(unittest.TestCase):
         xml_parser = XmlParser()
         xml = load_fixture("xml_parser_simple_3.xml")
         feed = xml_parser.parse(xml)
-        self.assertIsNone(feed)
+        assert feed is None
 
     def test_complex_1(self):
         """Test parsing various actual XML files."""
         xml_parser = XmlParser()
         xml = load_fixture("xml_parser_complex_1.xml")
         feed = xml_parser.parse(xml)
-        self.assertIsNotNone(feed)
+        assert feed is not None
 
         assert feed.title == "Feed Title 1"
         assert feed.subtitle == "Feed Subtitle 1"
@@ -72,7 +74,7 @@ class TestXmlParser(unittest.TestCase):
         assert feed.contributor == "Feed Author 1"
         assert feed.managing_editor == "Feed Author 1"
         assert feed.category == ["Feed Category 1"]
-        self.assertIsNotNone(feed.image)
+        assert feed.image is not None
         assert feed.image.title == "Image Title 1"
         assert feed.image.url == "http://image.url/image.png"
         assert feed.image.link == "http://feed.link/feed.rss"
@@ -82,7 +84,7 @@ class TestXmlParser(unittest.TestCase):
         assert feed.get_additional_attribute("random") == "Feed Random 1"
         assert repr(feed) == "<Feed(Feed Link 1)>"
 
-        self.assertIsNotNone(feed.entries)
+        assert feed.entries is not None
         assert len(feed.entries) == 6
 
         feed_entry = feed.entries[0]
@@ -99,7 +101,7 @@ class TestXmlParser(unittest.TestCase):
         assert feed_entry.id == "GUID 1"
         assert feed_entry.source == "Source 1"
         assert feed_entry.category == ["Category 1"]
-        self.assertIsInstance(feed_entry.geometry, Point)
+        assert isinstance(feed_entry.geometry, Point)
         assert feed_entry.geometry.latitude == -37.4567
         assert feed_entry.geometry.longitude == 149.3456
         assert feed_entry.get_additional_attribute("random") == "Random 1"
@@ -117,7 +119,7 @@ class TestXmlParser(unittest.TestCase):
         )
         assert feed_entry.guid == "GUID 2"
         assert feed_entry.category == ["Category 2"]
-        self.assertIsInstance(feed_entry.geometry, Point)
+        assert isinstance(feed_entry.geometry, Point)
         assert feed_entry.geometry.latitude == -37.5678
         assert feed_entry.geometry.longitude == 149.4567
 
@@ -132,7 +134,7 @@ class TestXmlParser(unittest.TestCase):
         )
         assert feed_entry.guid == "GUID 3"
         assert feed_entry.category == ["Category 3A", "Category 3B", "Category 3C"]
-        self.assertIsInstance(feed_entry.geometry, Point)
+        assert isinstance(feed_entry.geometry, Point)
         assert feed_entry.geometry.latitude == -37.6789
         assert feed_entry.geometry.longitude == 149.5678
 
@@ -151,7 +153,7 @@ class TestXmlParser(unittest.TestCase):
             48,
             tzinfo=datetime.timezone(datetime.timedelta(hours=10), "AEST"),
         )
-        self.assertIsInstance(feed_entry.geometry, Point)
+        assert isinstance(feed_entry.geometry, Point)
         assert feed_entry.geometry.latitude == -37.789
         assert feed_entry.geometry.longitude == 149.6789
 
@@ -167,7 +169,7 @@ class TestXmlParser(unittest.TestCase):
             55,
             tzinfo=datetime.timezone(datetime.timedelta(hours=2), "CEST"),
         )
-        self.assertIsInstance(feed_entry.geometry, Polygon)
+        assert isinstance(feed_entry.geometry, Polygon)
         assert feed_entry.geometry.centroid.latitude == -30.32
         assert feed_entry.geometry.centroid.longitude == 150.32
 
@@ -182,7 +184,7 @@ class TestXmlParser(unittest.TestCase):
             52,
             tzinfo=datetime.timezone(datetime.timedelta(hours=-7), "PDT"),
         )
-        self.assertIsInstance(feed_entry.geometry, Polygon)
+        assert isinstance(feed_entry.geometry, Polygon)
         assert feed_entry.geometry.centroid.latitude == -30.32
         assert feed_entry.geometry.centroid.longitude == 150.32
 
@@ -191,7 +193,7 @@ class TestXmlParser(unittest.TestCase):
         xml_parser = XmlParser()
         xml = load_fixture("xml_parser_complex_2.xml")
         feed = xml_parser.parse(xml)
-        self.assertIsNotNone(feed)
+        assert feed is not None
 
         assert feed.title == "Feed Title 1"
         assert feed.subtitle == "Feed Subtitle 1"
@@ -206,50 +208,50 @@ class TestXmlParser(unittest.TestCase):
         assert feed.copyright == "Feed Rights 1"
         assert feed.rights == "Feed Rights 1"
         assert feed.generator == "Feed Generator 1"
-        self.assertIsNotNone(feed.image)
+        assert feed.image is not None
         assert feed.image.title == "Image Title 1"
         assert feed.image.url == "http://image.url/image.png"
         assert feed.image.link == "http://feed.link/feed.rss"
-        self.assertIsNone(feed.image.description)
-        self.assertIsNone(feed.image.width)
-        self.assertIsNone(feed.image.height)
-        self.assertIsNone(feed.docs)
+        assert feed.image.description is None
+        assert feed.image.width is None
+        assert feed.image.height is None
+        assert feed.docs is None
 
-        self.assertIsNotNone(feed.entries)
+        assert feed.entries is not None
         assert len(feed.entries) == 1
 
         feed_entry = feed.entries[0]
         assert feed_entry.title == "Title 6"
-        self.assertIsNone(feed_entry.published_date)
+        assert feed_entry.published_date is None
 
     def test_complex_3(self):
         """Test parsing various actual XML files."""
         xml_parser = XmlParser()
         xml = load_fixture("xml_parser_complex_3.xml")
         feed = xml_parser.parse(xml)
-        self.assertIsNotNone(feed)
+        assert feed is not None
 
-        self.assertIsNone(feed.title)
-        self.assertIsNone(feed.subtitle)
-        self.assertIsNone(feed.description)
-        self.assertIsNone(feed.language)
-        self.assertIsNone(feed.published_date)
-        self.assertIsNone(feed.last_build_date)
-        self.assertIsNone(feed.ttl)
+        assert feed.title is None
+        assert feed.subtitle is None
+        assert feed.description is None
+        assert feed.language is None
+        assert feed.published_date is None
+        assert feed.last_build_date is None
+        assert feed.ttl is None
         assert feed.rights == "Feed Rights 1"
-        self.assertIsNone(feed.image)
+        assert feed.image is None
 
-        self.assertIsNotNone(feed.entries)
+        assert feed.entries is not None
         assert len(feed.entries) == 2
 
         feed_entry = feed.entries[0]
-        self.assertIsNone(feed_entry.title)
-        self.assertIsNone(feed_entry.published_date)
-        self.assertIsNone(feed_entry.geometry)
+        assert feed_entry.title is None
+        assert feed_entry.published_date is None
+        assert feed_entry.geometry is None
 
         feed_entry = feed.entries[1]
-        self.assertIsNone(feed_entry.title)
-        self.assertIsNone(feed_entry.geometry)
+        assert feed_entry.title is None
+        assert feed_entry.geometry is None
 
     def test_byte_order_mark(self):
         """Test parsing an XML file with byte order mark."""
@@ -261,7 +263,7 @@ class TestXmlParser(unittest.TestCase):
             "</item></channel></rss>"
         )
         # This will raise an error because the parser can't handle
-        with self.assertRaises(ExpatError):
+        with pytest.raises(ExpatError):
             xml_parser.parse(xml)
 
 

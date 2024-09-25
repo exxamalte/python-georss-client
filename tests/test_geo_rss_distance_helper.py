@@ -1,6 +1,9 @@
 """Tests for georss distance helper."""
+
 import unittest
 from unittest.mock import MagicMock
+
+import pytest
 
 from georss_client.geo_rss_distance_helper import GeoRssDistanceHelper
 from georss_client.xml_parser.geometry import Point, Polygon
@@ -28,8 +31,8 @@ class TestGeoRssDistanceHelper(unittest.TestCase):
             ]
         )
         latitude, longitude = GeoRssDistanceHelper.extract_coordinates(mock_polygon)
-        self.assertAlmostEqual(latitude, -30.2, 1)
-        self.assertAlmostEqual(longitude, 151.2, 1)
+        assert latitude == pytest.approx(-30.2, 0.1)
+        assert longitude == pytest.approx(151.2, 0.1)
 
     def test_extract_coordinates_from_unsupported_geometry(self):
         """Test extracting coordinates from unsupported geometry."""
@@ -37,8 +40,8 @@ class TestGeoRssDistanceHelper(unittest.TestCase):
         latitude, longitude = GeoRssDistanceHelper.extract_coordinates(
             mock_unsupported_geometry
         )
-        self.assertIsNone(latitude)
-        self.assertIsNone(longitude)
+        assert latitude is None
+        assert longitude is None
 
     def test_distance_to_point(self):
         """Test calculating distance to point."""
@@ -47,7 +50,7 @@ class TestGeoRssDistanceHelper(unittest.TestCase):
         distance = GeoRssDistanceHelper.distance_to_geometry(
             home_coordinates, mock_point
         )
-        self.assertAlmostEqual(distance, 146.8, 1)
+        assert distance == pytest.approx(146.8, 0.1)
 
     def test_distance_to_polygon(self):
         """Test calculating distance to point."""
@@ -64,7 +67,7 @@ class TestGeoRssDistanceHelper(unittest.TestCase):
         distance = GeoRssDistanceHelper.distance_to_geometry(
             home_coordinates, mock_polygon
         )
-        self.assertAlmostEqual(distance, 110.6, 1)
+        assert distance == pytest.approx(110.6, 0.1)
 
     def test_distance_to_unsupported_geometry(self):
         """Test calculating distance to unsupported geometry."""
