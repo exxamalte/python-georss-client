@@ -1,6 +1,6 @@
 # python-georss-client
 
-[![Build Status](https://github.com/exxamalte/python-georss-client/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/exxamalte/python-georss-client/actions?workflow=ci)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/exxamalte/python-georss-client/ci.yaml)](https://github.com/exxamalte/python-georss-client/actions/workflows/ci.yaml)
 [![codecov](https://codecov.io/gh/exxamalte/python-georss-client/branch/master/graph/badge.svg?token=8L93XZYRJK)](https://codecov.io/gh/exxamalte/python-georss-client)
 [![PyPi](https://img.shields.io/pypi/v/georss-client.svg)](https://pypi.python.org/pypi/georss-client)
 [![Version](https://img.shields.io/pypi/pyversions/georss-client.svg)](https://pypi.python.org/pypi/georss-client)
