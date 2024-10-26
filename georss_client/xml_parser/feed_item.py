@@ -46,13 +46,47 @@ class FeedItem(FeedOrFeedItem):
         return self._attribute([XML_TAG_SOURCE])
 
     @property
-    def geometry(self) -> Geometry | None:
-        """Return the geometry of this feed item."""
+    def geometries(self) -> list[Geometry] | None:
+        """Return all geometries of this feed item."""
+        geometries = []
+        for entry in [
+            self._geometry_georss_point(),
+            self._geometry_georss_where(),
+            self._geometry_geo_point(),
+            self._geometry_geo_long_lat(),
+            self._geometry_georss_polygon(),
+        ]:
+            if entry:
+                geometries.extend(entry)
+        # Filter out any duplicates.
+        unique_geometries = []
+        for i in geometries:
+            if i not in unique_geometries:
+                unique_geometries.append(i)
+        return unique_geometries
+
+    def _geometry_georss_point(self) -> list[Point] | None:
+        """Check for georss:point tag."""
         # <georss:point>-0.5 119.8</georss:point>
         point = self._attribute([XML_TAG_GEORSS_POINT])
         if point:
-            return Point(point[0], point[1])
-        # GML
+            if isinstance(point, tuple):
+                return FeedItem._create_georss_point_single(point)
+            return FeedItem._create_georss_point_multiple(point)
+        return None
+
+    @staticmethod
+    def _create_georss_point_single(point: tuple) -> list[Point]:
+        """Create single point from provided coordinates."""
+        return [Point(point[0], point[1])]
+
+    @staticmethod
+    def _create_georss_point_multiple(point: list) -> list[Point]:
+        """Create multiple points from provided coordinates."""
+        return [Point(entry[0], entry[1]) for entry in point]
+
+    def _geometry_georss_where(self) -> list[Geometry] | None:
+        """Check for georss:where tag."""
         where = self._attribute([XML_TAG_GEORSS_WHERE])
         if where:
             # Point:
@@ -65,7 +99,7 @@ class FeedItem(FeedOrFeedItem):
                 where, [XML_TAG_GML_POINT, XML_TAG_GML_POS]
             )
             if pos:
-                return Point(pos[0], pos[1])
+                return [Point(pos[0], pos[1])]
             # Polygon:
             # <georss:where>
             #   <gml:Polygon>
@@ -96,6 +130,10 @@ class FeedItem(FeedOrFeedItem):
             )
             if pos_list:
                 return self._create_polygon(pos_list)
+        return None
+
+    def _geometry_geo_point(self) -> list[Point] | None:
+        """Check for geo:Point tag."""
         # <geo:Point xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#">
         #   <geo:lat>38.3728</geo:lat>
         #   <geo:long>15.7213</geo:long>
@@ -105,13 +143,21 @@ class FeedItem(FeedOrFeedItem):
             lat = point.get(XML_TAG_GEO_LAT)
             long = point.get(XML_TAG_GEO_LONG)
             if long and lat:
-                return Point(lat, long)
+                return [Point(lat, long)]
+        return None
+
+    def _geometry_geo_long_lat(self) -> list[Point] | None:
+        """Check for geo:long and geo:lat tags."""
         # <geo:long>119.948006</geo:long>
         # <geo:lat>-23.126413</geo:lat>
         lat = self._attribute([XML_TAG_GEO_LAT])
         long = self._attribute([XML_TAG_GEO_LONG])
         if long and lat:
-            return Point(lat, long)
+            return [Point(lat, long)]
+        return None
+
+    def _geometry_georss_polygon(self) -> list[Polygon] | None:
+        """Check for georss:polygon tag."""
         # <georss:polygon>
         #   -34.937663524 148.597260613
         #   -34.9377026399999 148.597169138
@@ -122,23 +168,43 @@ class FeedItem(FeedOrFeedItem):
         # </georss:polygon>
         polygon = self._attribute([XML_TAG_GEORSS_POLYGON])
         if polygon:
-            # For now, only supporting the first polygon.
-            if isinstance(polygon, list) and isinstance(polygon[0], list):
-                polygon = polygon[0]
             return self._create_polygon(polygon)
-        # None of the above
         return None
 
     @staticmethod
-    def _create_polygon(coordinates) -> Polygon | None:
+    def _create_polygon(polygon_data) -> list[Polygon] | None:
         """Create a polygon from the provided coordinates."""
-        if coordinates:
-            if len(coordinates) % 2 != 0:
-                # Not even number of coordinates - chop last entry.
-                coordinates = coordinates[0 : len(coordinates) - 1]
-            points = [
-                Point(coordinates[i], coordinates[i + 1])
-                for i in range(0, len(coordinates), 2)
-            ]
-            return Polygon(points)
+        if polygon_data:
+            # Either tuple or an array of tuples.
+            if isinstance(polygon_data, tuple):
+                return FeedItem._create_polygon_single(polygon_data)
+            return FeedItem._create_polygon_multiple(polygon_data)
         return None
+
+    @staticmethod
+    def _create_polygon_single(polygon_data: tuple) -> list[Polygon]:
+        """Create polygon from provided tuple of coordinates."""
+        if len(polygon_data) % 2 != 0:
+            # Not even number of coordinates - chop last entry.
+            polygon_data = polygon_data[0 : len(polygon_data) - 1]
+        return [
+            Polygon(
+                [
+                    Point(polygon_data[i], polygon_data[i + 1])
+                    for i in range(0, len(polygon_data), 2)
+                ]
+            )
+        ]
+
+    @staticmethod
+    def _create_polygon_multiple(polygon_data: list) -> list[Polygon]:
+        """Create polygon from provided list of coordinates."""
+        polygons = []
+        for entry in polygon_data:
+            polygons.extend(FeedItem._create_polygon(entry))
+        return polygons
+
+    @property
+    def geometry(self) -> Geometry | None:
+        """Return the first geometry of this feed item for backwards compatibility reasons."""
+        return self.geometries[0] if self.geometries else None

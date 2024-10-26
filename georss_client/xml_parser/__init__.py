@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from datetime import datetime
 import logging
 
 import dateparser
@@ -68,7 +69,7 @@ class XmlParser:
     @staticmethod
     def postprocessor(
         path: list[str], key: str, value: str
-    ) -> tuple[str, str | float | int | tuple]:
+    ) -> tuple[str, str | float | int | datetime | tuple]:
         """Conduct type conversion for selected keys."""
         try:
             if key in KEYS_DATE and value:
@@ -79,10 +80,10 @@ class XmlParser:
                 # Turn white-space separated list of numbers into
                 # list of floats.
                 coordinate_values = value.split()
-                point_coordinates = [
+                point_coordinates: list[float] = [
                     float(coordinate_values[i]) for i in range(len(coordinate_values))
                 ]
-                return key, point_coordinates
+                return key, tuple(point_coordinates)
             if key in KEYS_INT and value:
                 return key, int(value)
         except (ValueError, TypeError) as error:

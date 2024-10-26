@@ -49,9 +49,9 @@ class Polygon(Geometry):
     @property
     def centroid(self) -> Point:
         """Find the polygon's centroid as a best approximation."""
-        longitudes_list = [point.longitude for point in self.points]
-        latitudes_list = [point.latitude for point in self.points]
-        number_of_points = len(self.points)
-        longitude = sum(longitudes_list) / number_of_points
-        latitude = sum(latitudes_list) / number_of_points
+        longitudes_list: list[float] = [point.longitude for point in self.points]
+        latitudes_list: list[float] = [point.latitude for point in self.points]
+        number_of_points: int = len(self.points)
+        longitude: float = sum(longitudes_list) / number_of_points
+        latitude: float = sum(latitudes_list) / number_of_points
         return Point(latitude, longitude)
