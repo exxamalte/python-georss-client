@@ -9,7 +9,8 @@ import logging
 import requests
 
 from .consts import ATTR_ATTRIBUTION, UPDATE_ERROR, UPDATE_OK, UPDATE_OK_NO_DATA
-from .xml_parser import XmlParser
+from .xml_parser import Feed, XmlParser
+from .xml_parser.feed_item import FeedItem
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -18,21 +19,30 @@ class GeoRssFeed:
     """GeoRSS feed base class."""
 
     def __init__(
-        self, home_coordinates, url, filter_radius=None, filter_categories=None
+        self,
+        home_coordinates: tuple[float, float],
+        url: str,
+        filter_radius: float | None = None,
+        filter_categories: list[str] | None = None,
     ):
         """Initialise this service."""
-        self._home_coordinates = home_coordinates
-        self._filter_radius = filter_radius
-        self._filter_categories = filter_categories
-        self._url = url
+        self._home_coordinates: tuple[float, float] = home_coordinates
+        self._filter_radius: float | None = filter_radius
+        self._filter_categories: list[str] | None = filter_categories
+        self._url: str = url
         self._request = requests.Request(method="GET", url=url).prepare()
-        self._last_timestamp = None
+        self._last_timestamp: datetime | None = None
 
     def __repr__(self):
         """Return string representation of this feed."""
         return f"<{self.__class__.__name__}(home={self._home_coordinates}, url={self._url}, radius={self._filter_radius}, categories={self._filter_categories})>"
 
-    def _new_entry(self, home_coordinates, rss_entry, global_data):
+    def _new_entry(
+        self,
+        home_coordinates: tuple[float, float],
+        rss_entry: FeedItem,
+        global_data: dict,
+    ):
         """Generate a new entry."""
 
     def _additional_namespaces(self):
@@ -45,7 +55,7 @@ class GeoRssFeed:
             if data:
                 global_data = self._extract_from_feed(data)
                 # Extract data from feed entries.
-                entries = [
+                entries: list = [
                     self._new_entry(self._home_coordinates, rss_entry, global_data)
                     for rss_entry in data.entries
                 ]
@@ -58,9 +68,10 @@ class GeoRssFeed:
             # Happens for example if the server returns 304
             return UPDATE_OK_NO_DATA, None
         # Error happened while fetching the feed.
+        self._last_timestamp = None
         return UPDATE_ERROR, None
 
-    def _fetch(self):
+    def _fetch(self) -> tuple[str, Feed | None]:
         """Fetch GeoRSS data from external source."""
         try:
             with requests.Session() as session:
@@ -124,23 +135,23 @@ class GeoRssFeed:
         _LOGGER.debug("Entries after filtering %s", filtered_entries)
         return filtered_entries
 
-    def _extract_from_feed(self, feed):
+    def _extract_from_feed(self, feed: Feed) -> dict:
         """Extract global metadata from feed."""
-        global_data = {}
-        author = feed.author
+        global_data: dict = {}
+        author: str | None = feed.author
         if author:
             global_data[ATTR_ATTRIBUTION] = author
         return global_data
 
-    def _extract_last_timestamp(self, feed_entries):
+    def _extract_last_timestamp(self, feed_entries) -> datetime | None:
         """Determine latest (newest) entry from the filtered feed."""
         if feed_entries:
-            dates = sorted(
+            dates: list[datetime] = sorted(
                 [entry.published for entry in feed_entries if entry.published],
                 reverse=True,
             )
             if dates:
-                last_timestamp = dates[0]
+                last_timestamp: datetime = dates[0]
                 _LOGGER.debug("Last timestamp: %s", last_timestamp)
                 return last_timestamp
         return None

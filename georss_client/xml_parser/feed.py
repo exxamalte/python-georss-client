@@ -62,7 +62,7 @@ class Feed(FeedOrFeedItem):
         return self._attribute([XML_TAG_TTL])
 
     @property
-    def image(self):
+    def image(self) -> FeedImage | None:
         """Return the image of this feed."""
         image = self._attribute([XML_TAG_IMAGE])
         if image:
@@ -70,7 +70,7 @@ class Feed(FeedOrFeedItem):
         return None
 
     @property
-    def entries(self):
+    def entries(self) -> list[FeedItem]:
         """Return the entries of this feed."""
         items = self._attribute([XML_TAG_ITEM, XML_TAG_ENTRY])
         entries = []

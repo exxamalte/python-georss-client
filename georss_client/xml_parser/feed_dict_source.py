@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Optional
+
 from georss_client.consts import (
     XML_ATTR_HREF,
     XML_CDATA,
@@ -16,15 +18,15 @@ from georss_client.consts import (
 class FeedDictSource:
     """Represents a subset of a feed based on a dict."""
 
-    def __init__(self, source):
+    def __init__(self, source: dict):
         """Initialise feed."""
-        self._source = source
+        self._source: dict = source
 
     def __repr__(self):
         """Return string representation of this feed item."""
         return f"<{self.__class__.__name__}({self.link})>"
 
-    def _attribute(self, names):
+    def _attribute(self, names: list[str]) -> Optional:
         """Get an attribute from this feed or feed item."""
         if self._source and names:
             # Try each name, and return the first value that is not None.
@@ -34,7 +36,7 @@ class FeedDictSource:
                     return value
         return None
 
-    def _attribute_with_text(self, names):
+    def _attribute_with_text(self, names: list[str]) -> Optional:
         """Get an attribute with text from this feed or feed item."""
         value = self._attribute(names)
         if value and isinstance(value, dict) and XML_CDATA in value:
@@ -43,7 +45,7 @@ class FeedDictSource:
         return value
 
     @staticmethod
-    def _attribute_in_structure(obj, keys):
+    def _attribute_in_structure(obj, keys: list[str]) -> Optional:
         """Return the attribute found under the chain of keys."""
         key = keys.pop(0)
         if key in obj:
@@ -84,6 +86,6 @@ class FeedDictSource:
             link = link.get(XML_ATTR_HREF)
         return link
 
-    def get_additional_attribute(self, name):
+    def get_additional_attribute(self, name: str) -> Optional:
         """Get an additional attribute not provided as property."""
         return self._attribute([name])
