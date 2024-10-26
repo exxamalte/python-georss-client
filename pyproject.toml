@@ -1,3 +1,55 @@
+[build-system]
+requires = [
+    "setuptools",
+    "wheel"
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "georss_client"
+version  = "0.17"
+requires-python = ">= 3.9"
+authors = [
+  {name = "Malte Franken", email = "coding@subspace.de"},
+]
+description = "A GeoRSS client library."
+readme = "README.md"
+license = {file = "LICENSE"}
+keywords = ["homeassistant", "georss"]
+classifiers = [
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "License :: OSI Approved :: Apache Software License",
+  "Operating System :: OS Independent",
+  "Development Status :: 5 - Production/Stable",
+]
+dependencies = [
+    "haversine>=2.8.1",
+    "xmltodict>=0.13.0",
+    "requests>=2.31.0",
+    "dateparser>=1.2.0",
+]
+
+[project.optional-dependencies]
+tests = [
+    "pytest",
+    "pytest-timeout",
+    "pytest-xdist",
+    "pytest-cov",
+    "coverage",
+    "mock",
+]
+
+[project.urls]
+Repository = "https://github.com/exxamalte/python-georss-client"
+Issues = "https://github.com/exxamalte/python-georss-client/issues"
+Changelog = "https://github.com/exxamalte/python-georss-client/blob/main/CHANGELOG.md"
+
+[tool.setuptools.packages.find]
+include = ["georss_client*"]
+
 [tool.ruff.lint]
 select = [
     "A001", # Variable {name} is shadowing a Python builtin
