@@ -130,7 +130,7 @@ class FeedItem(FeedOrFeedItem):
         return None
 
     @staticmethod
-    def _create_polygon(coordinates):
+    def _create_polygon(coordinates) -> Polygon | None:
         """Create a polygon from the provided coordinates."""
         if coordinates:
             if len(coordinates) % 2 != 0:

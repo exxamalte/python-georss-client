@@ -33,16 +33,16 @@ class Point(Geometry):
 class Polygon(Geometry):
     """Represents a polygon."""
 
-    def __init__(self, points):
+    def __init__(self, points: list[Point]):
         """Initialise polygon."""
-        self._points = points
+        self._points: list[Point] = points
 
     def __repr__(self):
         """Return string representation of this polygon."""
         return f"<{self.__class__.__name__}(centroid={self.centroid})>"
 
     @property
-    def points(self) -> list | None:
+    def points(self) -> list[Point] | None:
         """Return the points of this polygon."""
         return self._points
 
