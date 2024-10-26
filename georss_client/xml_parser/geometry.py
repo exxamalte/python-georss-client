@@ -19,6 +19,18 @@ class Point(Geometry):
         """Return string representation of this point."""
         return f"<{self.__class__.__name__}(latitude={self.latitude}, longitude={self.longitude})>"
 
+    def __hash__(self) -> int:
+        """Return unique hash of this geometry."""
+        return hash((self.latitude, self.longitude))
+
+    def __eq__(self, other: object) -> bool:
+        """Return if this object is equal to other object."""
+        return (
+            self.__class__ == other.__class__
+            and self.latitude == other.latitude
+            and self.longitude == other.longitude
+        )
+
     @property
     def latitude(self) -> float | None:
         """Return the latitude of this point."""
@@ -40,6 +52,14 @@ class Polygon(Geometry):
     def __repr__(self):
         """Return string representation of this polygon."""
         return f"<{self.__class__.__name__}(centroid={self.centroid})>"
+
+    def __hash__(self) -> int:
+        """Return unique hash of this geometry."""
+        return hash(self.points)
+
+    def __eq__(self, other: object) -> bool:
+        """Return if this object is equal to other object."""
+        return self.__class__ == other.__class__ and self.points == other.points
 
     @property
     def points(self) -> list[Point] | None:
