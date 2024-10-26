@@ -1,10 +1,12 @@
 """GeoRSS Distance Helper."""
 
+from __future__ import annotations
+
 import logging
 
 from haversine import haversine
 
-from georss_client.xml_parser.geometry import Point, Polygon
+from .xml_parser.geometry import Geometry, Point, Polygon
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -13,7 +15,7 @@ class GeoRssDistanceHelper:
     """Helper to calculate distances between GeoRSS geometries."""
 
     @staticmethod
-    def extract_coordinates(geometry):
+    def extract_coordinates(geometry: Geometry) -> tuple[float, float] | None:
         """Extract the best coordinates from the feature for display."""
         latitude = longitude = None
         if isinstance(geometry, Point):
@@ -28,9 +30,11 @@ class GeoRssDistanceHelper:
         return latitude, longitude
 
     @staticmethod
-    def distance_to_geometry(home_coordinates, geometry):
+    def distance_to_geometry(
+        home_coordinates: tuple[float, float], geometry: Geometry
+    ) -> float:
         """Calculate the distance between home coordinates and geometry."""
-        distance = float("inf")
+        distance: float = float("inf")
         if isinstance(geometry, Point):
             distance = GeoRssDistanceHelper._distance_to_point(
                 home_coordinates, geometry
@@ -44,7 +48,9 @@ class GeoRssDistanceHelper:
         return distance
 
     @staticmethod
-    def _distance_to_point(home_coordinates, point):
+    def _distance_to_point(
+        home_coordinates: tuple[float, float], point: Point
+    ) -> float:
         """Calculate the distance between home coordinates and the point."""
         # Swap coordinates to match: (latitude, longitude).
         return GeoRssDistanceHelper._distance_to_coordinates(
@@ -52,7 +58,9 @@ class GeoRssDistanceHelper:
         )
 
     @staticmethod
-    def _distance_to_polygon(home_coordinates, polygon):
+    def _distance_to_polygon(
+        home_coordinates: tuple[float, float], polygon: Polygon
+    ) -> float:
         """Calculate the distance between home coordinates and the polygon."""
         distance = float("inf")
         # Calculate distance from polygon by calculating the distance
@@ -68,7 +76,9 @@ class GeoRssDistanceHelper:
         return distance
 
     @staticmethod
-    def _distance_to_coordinates(home_coordinates, coordinates):
+    def _distance_to_coordinates(
+        home_coordinates: tuple[float, float], coordinates: tuple[float, float]
+    ) -> float:
         """Calculate the distance between home coordinates and the coordinates."""
         # Expecting coordinates in format: (latitude, longitude).
         return haversine(coordinates, home_coordinates)
