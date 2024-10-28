@@ -5,7 +5,7 @@ from __future__ import annotations
 from datetime import datetime
 import logging
 
-import dateparser
+import dateutil
 import xmltodict
 
 from georss_client.consts import (
@@ -73,7 +73,7 @@ class XmlParser:
         """Conduct type conversion for selected keys."""
         try:
             if key in KEYS_DATE and value:
-                return key, dateparser.parse(value)
+                return key, dateutil.parser.parse(value)
             if key in KEYS_FLOAT and value:
                 return key, float(value)
             if key in KEYS_FLOAT_LIST and value:

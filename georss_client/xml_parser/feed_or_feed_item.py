@@ -43,7 +43,10 @@ class FeedOrFeedItem(FeedDictSource):
     @property
     def published_date(self) -> datetime.datetime | None:
         """Return the published date of this feed or feed item."""
-        return self._attribute([XML_TAG_PUB_DATE, XML_TAG_PUBLISHED, XML_TAG_DC_DATE])
+        parsed_date = self._attribute(
+            [XML_TAG_PUB_DATE, XML_TAG_PUBLISHED, XML_TAG_DC_DATE]
+        )
+        return parsed_date if isinstance(parsed_date, datetime.datetime) else None
 
     @property
     def pub_date(self) -> datetime.datetime | None:
@@ -53,7 +56,8 @@ class FeedOrFeedItem(FeedDictSource):
     @property
     def updated_date(self) -> datetime.datetime | None:
         """Return the updated date of this feed or feed item."""
-        return self._attribute([XML_TAG_LAST_BUILD_DATE, XML_TAG_UPDATED])
+        parsed_date = self._attribute([XML_TAG_LAST_BUILD_DATE, XML_TAG_UPDATED])
+        return parsed_date if isinstance(parsed_date, datetime.datetime) else None
 
     @property
     def last_build_date(self) -> datetime.datetime | None:
