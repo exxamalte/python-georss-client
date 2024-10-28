@@ -97,7 +97,7 @@
         <item>
             <title>Title 6</title>
             <content type="text">Description 6</content>
-            <published>Sun, 7 Oct 2018 19:52:00 PDT</published>
+            <published>Sun, 7 Oct 2018 19:52:00 -0200</published>
             <georss:where>
                 <gml:Polygon>
                     <gml:exterior>
