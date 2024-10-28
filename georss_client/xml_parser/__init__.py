@@ -1,5 +1,8 @@
 """XML Parser."""
 
+from __future__ import annotations
+
+from datetime import datetime
 import logging
 
 import dateparser
@@ -57,14 +60,16 @@ KEYS_INT = [XML_TAG_HEIGHT, XML_TAG_TTL, XML_TAG_WIDTH]
 class XmlParser:
     """Built-in XML parser."""
 
-    def __init__(self, additional_namespaces=None):
+    def __init__(self, additional_namespaces: dict | None = None):
         """Initialise the XML parser."""
         self._namespaces = DEFAULT_NAMESPACES
         if additional_namespaces:
             self._namespaces.update(additional_namespaces)
 
     @staticmethod
-    def postprocessor(path, key, value):
+    def postprocessor(
+        path: list[str], key: str, value: str
+    ) -> tuple[str, str | float | int | datetime | tuple]:
         """Conduct type conversion for selected keys."""
         try:
             if key in KEYS_DATE and value:
@@ -75,17 +80,17 @@ class XmlParser:
                 # Turn white-space separated list of numbers into
                 # list of floats.
                 coordinate_values = value.split()
-                point_coordinates = [
+                point_coordinates: list[float] = [
                     float(coordinate_values[i]) for i in range(len(coordinate_values))
                 ]
-                return key, point_coordinates
+                return key, tuple(point_coordinates)
             if key in KEYS_INT and value:
                 return key, int(value)
         except (ValueError, TypeError) as error:
             _LOGGER.warning("Unable to process (%s/%s): %s", key, value, error)
         return key, value
 
-    def parse(self, xml):
+    def parse(self, xml: str) -> Feed | None:
         """Parse the provided xml."""
         if xml:
             parsed_dict = xmltodict.parse(
@@ -94,14 +99,10 @@ class XmlParser:
                 namespaces=self._namespaces,
                 postprocessor=XmlParser.postprocessor,
             )
-
             if XML_TAG_RSS in parsed_dict:
                 rss = parsed_dict.get(XML_TAG_RSS)
                 if XML_TAG_CHANNEL in rss:
-                    channel = rss.get(XML_TAG_CHANNEL)
-                    return Feed(channel)
+                    return Feed(rss.get(XML_TAG_CHANNEL))
             if XML_TAG_FEED in parsed_dict:
-                feed = parsed_dict.get(XML_TAG_FEED)
-                return Feed(feed)
-
+                return Feed(parsed_dict.get(XML_TAG_FEED))
         return None

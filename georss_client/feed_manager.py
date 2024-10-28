@@ -7,7 +7,9 @@ from __future__ import annotations
 
 from datetime import datetime
 import logging
+from typing import Callable
 
+from . import GeoRssFeed
 from .consts import UPDATE_OK, UPDATE_OK_NO_DATA
 
 _LOGGER = logging.getLogger(__name__)
@@ -16,15 +18,21 @@ _LOGGER = logging.getLogger(__name__)
 class FeedManagerBase:
     """Generic Feed manager."""
 
-    def __init__(self, feed, generate_callback, update_callback, remove_callback):
+    def __init__(
+        self,
+        feed: GeoRssFeed,
+        generate_callback: Callable[[str], None],
+        update_callback: Callable[[str], None],
+        remove_callback: Callable[[str], None],
+    ):
         """Initialise feed manager."""
-        self._feed = feed
-        self.feed_entries = {}
+        self._feed: GeoRssFeed = feed
+        self.feed_entries: dict = {}
         self._managed_external_ids = set()
-        self._last_update = None
-        self._generate_callback = generate_callback
-        self._update_callback = update_callback
-        self._remove_callback = remove_callback
+        self._last_update: datetime | None = None
+        self._generate_callback: Callable[[str], None] = generate_callback
+        self._update_callback: Callable[[str], None] = update_callback
+        self._remove_callback: Callable[[str], None] = remove_callback
 
     def __repr__(self):
         """Return string representation of this feed."""
