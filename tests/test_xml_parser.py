@@ -255,6 +255,58 @@ def test_complex_3():
     assert feed_entry.geometry is None
 
 
+def test_geometries():
+    """Test parsing various geometries in entries."""
+    xml_parser = XmlParser()
+    xml = load_fixture("xml_parser_geometries_1.xml")
+    feed = xml_parser.parse(xml)
+    assert feed is not None
+
+    assert feed.title == "Feed Title 1"
+    assert feed.entries is not None
+    assert len(feed.entries) == 8
+
+    feed_entry = feed.entries[0]
+    assert feed_entry.title == "Title 1"
+    assert feed_entry.geometries is not None
+    assert len(feed_entry.geometries) == 3
+
+    feed_entry = feed.entries[1]
+    assert feed_entry.title == "Title 2"
+    assert feed_entry.geometries is not None
+    assert len(feed_entry.geometries) == 3
+
+    feed_entry = feed.entries[2]
+    assert feed_entry.title == "Title 3"
+    assert feed_entry.geometries is not None
+    assert len(feed_entry.geometries) == 2
+
+    feed_entry = feed.entries[3]
+    assert feed_entry.title == "Title 4"
+    assert feed_entry.geometries is not None
+    assert len(feed_entry.geometries) == 2
+
+    feed_entry = feed.entries[4]
+    assert feed_entry.title == "Title 5"
+    assert feed_entry.geometries is not None
+    assert len(feed_entry.geometries) == 3
+
+    feed_entry = feed.entries[5]
+    assert feed_entry.title == "Title 6"
+    assert feed_entry.geometries is not None
+    assert len(feed_entry.geometries) == 2
+
+    feed_entry = feed.entries[6]
+    assert feed_entry.title == "Title 7"
+    assert feed_entry.geometries is not None
+    assert len(feed_entry.geometries) == 2
+
+    feed_entry = feed.entries[7]
+    assert feed_entry.title == "Title 8"
+    assert feed_entry.geometries is not None
+    assert len(feed_entry.geometries) == 1
+
+
 def test_byte_order_mark():
     """Test parsing an XML file with byte order mark."""
     xml_parser = XmlParser()

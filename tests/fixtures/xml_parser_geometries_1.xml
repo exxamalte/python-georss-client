@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:georss="http://www.georss.org/georss"
+     xmlns:gml='http://www.opengis.net/gml'
+     xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+     xmlns:gdacs="http://www.gdacs.org"
+     version="2.0">
+    <channel>
+        <title>Feed Title 1</title>
+        <item>
+            <title>Title 1</title>
+            <georss:point>-37.4567 149.3456</georss:point>
+            <georss:point>-37.5678 149.4567</georss:point>
+            <georss:point>-37.6789 149.5678</georss:point>
+        </item>
+        <item>
+            <title>Title 2</title>
+            <georss:point>-37.4567 149.3456</georss:point>
+            <georss:where>
+                <gml:Point>
+                    <gml:pos>-37.5678 149.4567</gml:pos>
+                </gml:Point>
+            </georss:where>
+            <georss:point>-37.6789 149.5678</georss:point>
+        </item>
+        <item>
+            <title>Title 3</title>
+            <georss:point>-37.4567 149.3456</georss:point>
+            <geo:Point>
+                <geo:lat>-37.6789</geo:lat>
+                <geo:long>149.5678</geo:long>
+            </geo:Point>
+        </item>
+        <item>
+            <title>Title 4</title>
+            <georss:point>-37.4567 149.3456</georss:point>
+            <geo:lat>-37.7890</geo:lat>
+            <geo:long>149.6789</geo:long>
+        </item>
+        <item>
+            <title>Title 5</title>
+            <georss:point>-37.4567 149.3456</georss:point>
+            <georss:polygon>
+                -30.1 150.1
+                -30.2 150.2
+                -30.4 150.4
+                -30.8 150.8
+                -30.1 150.1
+            </georss:polygon>
+            <georss:polygon>
+                -30.1 150.1
+                -30.3 150.3
+                -30.5 150.5
+                -30.9 150.9
+                -30.1 150.1
+            </georss:polygon>
+        </item>
+        <item>
+            <title>Title 6</title>
+            <georss:point>-37.4567 149.3456</georss:point>
+            <georss:where>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                -30.1 150.1
+                                -30.2 150.2
+                                -30.4 150.4
+                                -30.8 150.8
+                                -30.1 150.1
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+            </georss:where>
+        </item>
+        <item>
+            <title>Title 7</title>
+            <gdacs:bbox>164.1234 172.2345 -24.9876 -16.8765</gdacs:bbox>
+            <gdacs:bbox>164.2345 172.3456 -24.8765 -16.7654</gdacs:bbox>
+        </item>
+        <item>
+            <title>Title 8</title>
+            <gdacs:bbox>164.1234 172.2345 -24.9876 -16.8765</gdacs:bbox>
+            <gdacs:bbox>164.2345 172.3456 -24.8765</gdacs:bbox>
+        </item>
+    </channel>
+</rss>
