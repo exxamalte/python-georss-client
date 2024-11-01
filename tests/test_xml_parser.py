@@ -255,6 +255,48 @@ def test_complex_3():
     assert feed_entry.geometry is None
 
 
+def test_geometries():
+    """Test parsing various geometries in entries."""
+    xml_parser = XmlParser()
+    xml = load_fixture("xml_parser_geometries_1.xml")
+    feed = xml_parser.parse(xml)
+    assert feed is not None
+
+    assert feed.title == "Feed Title 1"
+    assert feed.entries is not None
+    assert len(feed.entries) == 6
+
+    feed_entry = feed.entries[0]
+    assert feed_entry.title == "Title 1"
+    assert feed_entry.geometries is not None
+    assert len(feed_entry.geometries) == 3
+
+    feed_entry = feed.entries[1]
+    assert feed_entry.title == "Title 2"
+    assert feed_entry.geometries is not None
+    assert len(feed_entry.geometries) == 3
+
+    feed_entry = feed.entries[2]
+    assert feed_entry.title == "Title 3"
+    assert feed_entry.geometries is not None
+    assert len(feed_entry.geometries) == 2
+
+    feed_entry = feed.entries[3]
+    assert feed_entry.title == "Title 4"
+    assert feed_entry.geometries is not None
+    assert len(feed_entry.geometries) == 2
+
+    feed_entry = feed.entries[4]
+    assert feed_entry.title == "Title 5"
+    assert feed_entry.geometries is not None
+    assert len(feed_entry.geometries) == 3
+
+    feed_entry = feed.entries[5]
+    assert feed_entry.title == "Title 6"
+    assert feed_entry.geometries is not None
+    assert len(feed_entry.geometries) == 2
+
+
 def test_byte_order_mark():
     """Test parsing an XML file with byte order mark."""
     xml_parser = XmlParser()
@@ -267,31 +309,3 @@ def test_byte_order_mark():
     # This will raise an error because the parser can't handle
     with pytest.raises(ExpatError):
         xml_parser.parse(xml)
-
-
-def test_point():
-    """Test point."""
-    point = Point(-37.1234, 149.2345)
-    assert point.latitude == -37.1234
-    assert point.longitude == 149.2345
-    assert repr(point) == "<Point(latitude=-37.1234, longitude=149.2345)>"
-
-
-def test_polygon():
-    """Test polygon."""
-    polygon = Polygon(
-        [
-            Point(-30.1, 150.1),
-            Point(-30.2, 150.2),
-            Point(-30.4, 150.4),
-            Point(-30.8, 150.8),
-            Point(-30.1, 150.1),
-        ]
-    )
-    assert len(polygon.points) == 5
-    assert polygon.centroid.latitude == -30.32
-    assert polygon.centroid.longitude == 150.32
-    assert (
-        repr(polygon) == "<Polygon(centroid="
-        "<Point(latitude=-30.32, longitude=150.32)>)>"
-    )
