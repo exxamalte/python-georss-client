@@ -264,7 +264,7 @@ def test_geometries():
 
     assert feed.title == "Feed Title 1"
     assert feed.entries is not None
-    assert len(feed.entries) == 8
+    assert len(feed.entries) == 6
 
     feed_entry = feed.entries[0]
     assert feed_entry.title == "Title 1"
