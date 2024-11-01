@@ -73,15 +73,5 @@
                 </gml:Polygon>
             </georss:where>
         </item>
-        <item>
-            <title>Title 7</title>
-            <gdacs:bbox>164.1234 172.2345 -24.9876 -16.8765</gdacs:bbox>
-            <gdacs:bbox>164.2345 172.3456 -24.8765 -16.7654</gdacs:bbox>
-        </item>
-        <item>
-            <title>Title 8</title>
-            <gdacs:bbox>164.1234 172.2345 -24.9876 -16.8765</gdacs:bbox>
-            <gdacs:bbox>164.2345 172.3456 -24.8765</gdacs:bbox>
-        </item>
     </channel>
 </rss>

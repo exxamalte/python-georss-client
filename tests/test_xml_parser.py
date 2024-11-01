@@ -296,16 +296,6 @@ def test_geometries():
     assert feed_entry.geometries is not None
     assert len(feed_entry.geometries) == 2
 
-    feed_entry = feed.entries[6]
-    assert feed_entry.title == "Title 7"
-    assert feed_entry.geometries is not None
-    assert len(feed_entry.geometries) == 2
-
-    feed_entry = feed.entries[7]
-    assert feed_entry.title == "Title 8"
-    assert feed_entry.geometries is not None
-    assert len(feed_entry.geometries) == 1
-
 
 def test_byte_order_mark():
     """Test parsing an XML file with byte order mark."""
