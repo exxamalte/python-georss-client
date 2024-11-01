@@ -181,7 +181,7 @@ def test_complex_1():
         7,
         19,
         52,
-        tzinfo=datetime.timezone(datetime.timedelta(hours=-7), "PDT"),
+        tzinfo=datetime.timezone(datetime.timedelta(hours=-2)),
     )
     assert isinstance(feed_entry.geometry, Polygon)
     assert feed_entry.geometry.centroid.latitude == -30.32
