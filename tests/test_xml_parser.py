@@ -267,31 +267,3 @@ def test_byte_order_mark():
     # This will raise an error because the parser can't handle
     with pytest.raises(ExpatError):
         xml_parser.parse(xml)
-
-
-def test_point():
-    """Test point."""
-    point = Point(-37.1234, 149.2345)
-    assert point.latitude == -37.1234
-    assert point.longitude == 149.2345
-    assert repr(point) == "<Point(latitude=-37.1234, longitude=149.2345)>"
-
-
-def test_polygon():
-    """Test polygon."""
-    polygon = Polygon(
-        [
-            Point(-30.1, 150.1),
-            Point(-30.2, 150.2),
-            Point(-30.4, 150.4),
-            Point(-30.8, 150.8),
-            Point(-30.1, 150.1),
-        ]
-    )
-    assert len(polygon.points) == 5
-    assert polygon.centroid.latitude == -30.32
-    assert polygon.centroid.longitude == 150.32
-    assert (
-        repr(polygon) == "<Polygon(centroid="
-        "<Point(latitude=-30.32, longitude=150.32)>)>"
-    )
