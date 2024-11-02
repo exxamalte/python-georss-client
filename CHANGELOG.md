@@ -1,5 +1,12 @@
 # Changes
 
+## 0.18 (02/11/2024)
+* Removed Python 3.8 support.
+* Removed dateparser and replaced with python-dateutil.
+* Bumped xmltodict to 0.14.2.
+* Bumped ruff to 0.7.1.
+* Code quality improvements.
+
 ## 0.17 (31/01/2024)
 * Provide backwards compatibility with v0.15 by exposing constants.
 
