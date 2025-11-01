@@ -33,12 +33,21 @@ _LOGGER = logging.getLogger(__name__)
 
 DEFAULT_NAMESPACES = {
     "http://www.w3.org/2005/Atom": None,
+    "https://www.w3.org/2005/Atom": None,
     "http://purl.org/dc/elements/1.1/": "dc",
+    "https://purl.org/dc/elements/1.1/": "dc",
     "http://www.georss.org/georss": "georss",
+    "https://www.georss.org/georss": "georss",
+    "http://www.ogc.org/standard/georss/": "georss",
+    "https://www.ogc.org/standard/georss/": "georss",
     "http://www.w3.org/2003/01/geo/wgs84_pos#": "geo",
+    "https://www.w3.org/2003/01/geo/wgs84_pos#": "geo",
     "http://www.w3.org/2003/01/geo/": "geo",
+    "https://www.w3.org/2003/01/geo/": "geo",
     "http://www.opengis.net/gml": "gml",
+    "https://www.opengis.net/gml": "gml",
     "http://www.gdacs.org/": "gdacs",
+    "https://www.gdacs.org/": "gdacs",
 }
 KEYS_DATE = [
     XML_TAG_DC_DATE,
