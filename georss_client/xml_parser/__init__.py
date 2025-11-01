@@ -86,6 +86,9 @@ class XmlParser:
             if key in KEYS_FLOAT and value:
                 return key, float(value)
             if key in KEYS_FLOAT_LIST and value:
+                # Check if value is a dict -> need to extract #text attribute
+                if isinstance(value, dict):
+                    value = value["#text"]
                 # Turn white-space separated list of numbers into
                 # list of floats.
                 coordinate_values = value.split()
