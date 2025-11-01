@@ -255,10 +255,52 @@ def test_complex_3():
     assert feed_entry.geometry is None
 
 
-def test_geometries():
+def test_geometries_1():
     """Test parsing various geometries in entries."""
     xml_parser = XmlParser()
     xml = load_fixture("xml_parser_geometries_1.xml")
+    feed = xml_parser.parse(xml)
+    assert feed is not None
+
+    assert feed.title == "Feed Title 1"
+    assert feed.entries is not None
+    assert len(feed.entries) == 6
+
+    feed_entry = feed.entries[0]
+    assert feed_entry.title == "Title 1"
+    assert feed_entry.geometries is not None
+    assert len(feed_entry.geometries) == 3
+
+    feed_entry = feed.entries[1]
+    assert feed_entry.title == "Title 2"
+    assert feed_entry.geometries is not None
+    assert len(feed_entry.geometries) == 3
+
+    feed_entry = feed.entries[2]
+    assert feed_entry.title == "Title 3"
+    assert feed_entry.geometries is not None
+    assert len(feed_entry.geometries) == 2
+
+    feed_entry = feed.entries[3]
+    assert feed_entry.title == "Title 4"
+    assert feed_entry.geometries is not None
+    assert len(feed_entry.geometries) == 2
+
+    feed_entry = feed.entries[4]
+    assert feed_entry.title == "Title 5"
+    assert feed_entry.geometries is not None
+    assert len(feed_entry.geometries) == 3
+
+    feed_entry = feed.entries[5]
+    assert feed_entry.title == "Title 6"
+    assert feed_entry.geometries is not None
+    assert len(feed_entry.geometries) == 2
+
+
+def test_geometries_2():
+    """Test parsing various geometries in entries."""
+    xml_parser = XmlParser()
+    xml = load_fixture("xml_parser_geometries_2.xml")
     feed = xml_parser.parse(xml)
     assert feed is not None
 
