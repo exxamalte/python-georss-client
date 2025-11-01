@@ -23,7 +23,6 @@ to [GeoRSS](http://www.georss.org/) Feeds.
 | [python-georss-ingv-centro-nazionale-terremoti-client](https://github.com/exxamalte/python-georss-ingv-centro-nazionale-terremoti-client) | INGV Centro Nazionale Terremoti | Earthquakes |
 | [python-georss-nrcan-earthquakes-client](https://github.com/exxamalte/python-georss-nrcan-earthquakes-client) | Natural Resources Canada | Earthquakes |
 | [python-georss-qld-bushfire-alert-client](https://github.com/exxamalte/python-georss-qld-bushfire-alert-client) | Queensland Bushfire Alert | Fires |
-| [python-georss-tfs-incidents-client](https://github.com/exxamalte/python-georss-tfs-incidents-client) | Tasmania Fire Service Incidents | Fires |
 | [python-georss-wa-dfes-client](https://github.com/exxamalte/python-georss-wa-dfes-client) | Western Australia Department of Fire and Emergency Services | Fires |
 
 
