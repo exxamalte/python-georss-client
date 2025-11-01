@@ -1,5 +1,12 @@
 # Changes
 
+## 0.19 (02/11/2025)
+* Added mappings for XML namespaces using a URL starting with `https://...` which can be found in some GeoRSS feeds.
+* Removed Python 3.9 support.
+* Removed Python 3.10 support.
+* Added Python 3.13 support.
+* Added Python 3.14 support.
+
 ## 0.18 (02/11/2024)
 * Removed Python 3.8 support.
 * Removed dateparser and replaced with python-dateutil.
