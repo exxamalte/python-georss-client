@@ -1,5 +1,11 @@
 # Changes
 
+## 2026.6.0 (24/06/2026)
+* Bump requests to 2.34.2
+* Bump xmltodict to 1.0.4
+* Bump ruff to 0.15.18
+* Changing to date-based versioning
+
 ## 0.19 (02/11/2025)
 * Added mappings for XML namespaces using a URL starting with `https://...` which can be found in some GeoRSS feeds.
 * Removed Python 3.9 support.
