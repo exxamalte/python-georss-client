@@ -27,7 +27,7 @@ classifiers = [
 ]
 dependencies = [
     "haversine>=2.9.0",
-    "xmltodict>=1.0.2",
+    "xmltodict>=1.0.4",
     "requests>=2.32.5",
     "python-dateutil>=2.9.0",
 ]
