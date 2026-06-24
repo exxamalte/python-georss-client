@@ -57,7 +57,7 @@
         <item>
             <title>Title 3</title>
             <content>Description 3</content>
-            <dc:date>Sun, 09 Dec 2018 07:40:00 GMT</dc:date>
+            <dc:date xmlns:dc="http://purl.org/dc/elements/1.1/">Sun, 09 Dec 2018 07:40:00 GMT</dc:date>
             <updated>2018-12-09T07:55:00+00:00</updated>
             <guid isPermaLink="false">
                 GUID 3
