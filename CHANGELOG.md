@@ -1,5 +1,8 @@
 # Changes
 
+## 2026.6.1 (25/06/2026)
+* Fix date parsing if it comes with a local namespace definition.
+
 ## 2026.6.0 (24/06/2026)
 * Bump requests to 2.34.2
 * Bump xmltodict to 1.0.4
