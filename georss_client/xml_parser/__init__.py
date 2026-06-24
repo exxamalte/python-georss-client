@@ -82,6 +82,9 @@ class XmlParser:
         """Conduct type conversion for selected keys."""
         try:
             if key in KEYS_DATE and value:
+                # Check if value is a dict -> need to extract #text attribute
+                if isinstance(value, dict):
+                    value = value["#text"]
                 return key, dateutil.parser.parse(value)
             if key in KEYS_FLOAT and value:
                 return key, float(value)
